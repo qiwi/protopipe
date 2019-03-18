@@ -1,0 +1,89 @@
+{
+  "name": "protopipe",
+  "version": "1.0.0",
+  "description": "Lambda-based data pipeliner",
+  "main": "dist/es5/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antongolub/protopipe.git"
+  },
+  "keywords": [
+    "protopipe",
+    "lambda"
+  ],
+  "author": "Anton Golub <mailbox@antongolub.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antongolub/protopipe/issues"
+  },
+  "homepage": "https://github.com/antongolub/protopipe#readme",
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/github": "^5.2.10",
+    "@semantic-release/npm": "^5.1.4",
+    "@types/jest": "^24.0.6",
+    "@types/jest-json-schema": "^1.2.1",
+    "coveralls": "^3.0.2",
+    "dts-generator": "^3.0.0",
+    "eslint-plugin-typescript": "^0.14.0",
+    "esm": "^3.2.5",
+    "flowgen": "1.5.8",
+    "jest": "^24.5.0",
+    "lodash": "^4.17.11",
+    "semantic-release": "^15.13.3",
+    "replace-in-file": "^3.4.3",
+    "ts-jest": "^24.0.0",
+    "tslib": "^1.9.3",
+    "tslint": "^5.12.1",
+    "tslint-config-standard": "^8.0.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3",
+    "typescript-eslint-parser": "^22.0.0"
+  },
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
+  },
+  "standard": {
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+      "typescript"
+    ],
+    "globals": [
+      "jest",
+      "it",
+      "expect",
+      "describe",
+      "before",
+      "beforeAll",
+      "beforeEach",
+      "afterAll",
+      "after",
+      "afterEach",
+      "xdescribe",
+      "xit"
+    ],
+    "rules": {
+      "use-flow-type": 1
+    },
+    "ignore": [],
+    "settings": {}
+  }
+}
