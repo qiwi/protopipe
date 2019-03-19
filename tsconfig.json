@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/main",
+    "rootDir": "./src/main/ts/",
+    "baseUrl": "./src/main/ts/",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
