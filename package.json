@@ -15,7 +15,7 @@
     "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix protopipe/lib/es5 --name protopipe --main protopipe/lib/es5/index --moduleResolution node",
     "flowgen": "flowgen typings/index.d.ts --output-file typings/index.flow.js",
     "libdef": "yarn dtsgen && yarn libdeffix && yarn flowgen",
-    "libdeffix": "node -r esm ./src/gen/libdef-import-fix.js --dts=./typings/index.d.ts",
+    "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
     "test_with_report": "yarn test && yarn coveralls_push",
     "coveralls_push": "cat ./coverage/lcov.info | coveralls",
     "docs": "typedoc src/main --ignoreCompilerErrors || exit 0"
