@@ -20,5 +20,5 @@ const pipeline = new Pipeline({
   }
 })
 
-const result = pipeline({data: 'foo'}) // 'FOO'
+const result = pipeline.exec({data: 'foo'}) // 'FOO'
 ```
