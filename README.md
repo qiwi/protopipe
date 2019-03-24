@@ -12,12 +12,21 @@ Not universal, not high-performance. But dumb and clear.
 * Typings for both worlds — TS and flow
 
 ##### Limitations
-* The lib does not solve the declaration problem (you know, _adjacency matrix_, _adjacency list_, DSL).
+* The lib does not solve the declaration problem (you know, _adjacency/incidence matrix_, _adjacency list_, DSL).
 * No consistency checks out of box: _graph_ is being executed as is. But you're able to add custom assertion through `verify` opt (for example, BFS-based check)
 
-## Contract
-* `handler` — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface: gets only argument and
-* `pipe` is an executable segment of pipeline, edge joining two vertices.
+## Definitions and contracts
+* Vertex is a graph atom.
+* Edge — bond connecting two vertices.
+* Arrow — directed edge.
+* Sequence — any possible transition.
+    * Walk: vertices may repeat, edges may repeat (Closed or Open)
+    * Trail: vertices may repeat, edges cannot repeat (Open)
+    * Circuit: vertices may repeat, edges cannot repeat (Closed)
+    * Path: vertices cannot repeat, edges cannot repeat (Open)
+    * Cycle : vertices cannot repeat, edges cannot repeat (Closed)
+* Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)
+* Handler — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface.
 
 ## Install
 ```bash
