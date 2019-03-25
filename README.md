@@ -29,6 +29,7 @@ Not universal, not high-performance. But dumb and clear.
     * Cycle : vertices cannot repeat, edges cannot repeat (closed)
 * Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)
 * Handler — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface.
+* Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and arrows collections.
 
 ## Install
 ```bash

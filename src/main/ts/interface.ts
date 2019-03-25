@@ -6,22 +6,38 @@ export type IAnyMap = {
 
 export type IData = IAny
 
-export type IMeta = IAnyMap
+export type ISequence = Array<IVertex>
+
+export type IMeta = {
+  sequence: ISequence
+  [key: string]: IAny
+}
 
 export type IOpts = IAny
 
 export type IInput = {
-  data: IData,
-  meta: IMeta,
+  data: IData
+  meta: IMeta
   opts: IOpts
 }
 
 export type IOutput = {
-  data: IData,
+  data: IData
   meta?: IMeta
+  opts?: IOpts
 }
 
 export type IHandler = (input: IInput) => IOutput
+
+export type IProtopipe = {
+  params: any
+  graph: IGraph
+  move: () => any
+  transitions: [{
+    condition: (sequence: ISequence) => boolean
+    handler: IHandler
+  }]
+}
 
 export type IPipe = {
   handler: IHandler
@@ -31,15 +47,23 @@ export type IPipelineParams = {}
 
 export type IVertexId = string
 
-export type IVertex = {
-  id: IVertexId,
-  handler: IHandler
+export type IVertex = string
+
+export type IEdge = [IVertexId, IVertexId]
+
+export type IArrow = {
+  head: IVertex
+  tail: IVertex
 }
 
-export type IGraph = {
-  vertexes: {
-    [key: string]: IVertex
-  }
+export type IGraphParams = {
+  vertexes: Array<IVertex>
+  arrows: Array<IArrow>
+}
+
+export interface IGraph {
+  vertexes: Array<IVertex>
+  arrows: Array<IArrow>
 }
 
 export interface IPipeline {
