@@ -7,15 +7,16 @@ Not universal, not high-performance. But dumb and clear.
 
 ##### Features
 * Sync / async execution modes.
-* Sequence parser customization (a strange thing that produces graphs).
+* Traverser customization (a strange thing that walks through graphs).
 * Configurable `Promise`.
 * Typings for both worlds — TS and flow.
 
 ##### Limitations
 * Protopipe supports digraphs only.
+* Graphs are immutable.
 * Graph has only one `source` and one `target` vertexes.
 * The lib does not solve the declaration problem (you know, _adjacency/incidence matrix_, _adjacency list_, DSL).
-* No consistency checks out of box: _graph_ is being executed as is. But you're able to add custom assertion through `verify` opt (for example, BFS-based check).
+* No consistency checks out of box: _graph_ is being traversed as is. But you're able to add custom assertions through `verify` opt (for example, BFS-based check).
 
 ## Definitions and contracts
 * Vertex is a graph atom.
@@ -30,6 +31,28 @@ Not universal, not high-performance. But dumb and clear.
 * Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)
 * Handler — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface.
 * Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and arrows collections.
+
+### Protopipe
+The fundamental goal of Protopipe is data processing.
+```javascript
+export interface IIProtopipe {
+  graph: IGraph
+  handler: IHandler
+  traverser: ITraverser
+  process: (input: IInput) => IOutput
+}
+```
+
+`graph` defines the all variety of available states.  
+`traverseur` interprets graph rules to build possible path, step by step.  
+`handler` is invoked each time when vertex transition occurs (`meta.sequence` change).  
+`process` binds it all together, moves data from `source` to `target`.
+
+### State
+Everything _should_ be stateless.
+
+### Sync / async
+Both. If handler returns a Promise then executor awaits until it will be resolved.
 
 ## Install
 ```bash
