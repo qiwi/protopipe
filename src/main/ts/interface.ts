@@ -89,12 +89,18 @@ export type IProtopipeOpts = {
   graph: IGraph
   handler: IHandler,
   traverser: ITraverser,
+  executor?: IExecutor,
 }
+
+export type IExecutorContext = IProtopipeOpts & IInput
+
+export type IExecutor = (executorContext: IExecutorContext) => IOutput | INil | Promise<IOutput | INil>
 
 export interface IProtopipe {
   graph: IGraph
   handler: IHandler,
   traverser: ITraverser,
+  executor: IExecutor,
   process: (input: IInput) => IOutput
 }
 

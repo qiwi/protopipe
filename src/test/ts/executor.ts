@@ -1,4 +1,4 @@
-import Executor from '../../main/ts/executor'
+import executor from '../../main/ts/executor'
 import Graph from '../../main/ts/graph'
 import {
   IMode,
@@ -33,65 +33,52 @@ describe('executor', () => {
 
     return {meta: {...meta, sequence: [...meta.sequence, next.tail]}}
   }
-  const executor = new Executor()
 
-  describe('constructor', () => {
-    it('returns proper instance', () => {
-      expect(executor).toBeInstanceOf(Executor)
+  describe('SYNC', () => {
+    it('transits data from `source` to `target` vertex', () => {
+      const res = executor({graph, handler, traverser, ...input})
+
+      expect(res).toEqual({
+          opts: {},
+          data: {
+            count: 2
+          },
+          meta: {
+            sequence: [
+              'A',
+              'B',
+              'C'
+            ]
+          }
+        }
+      )
     })
   })
 
-  describe('proto', () => {})
-
-  describe('static', () => {
-    describe('#process', () => {
-      describe('SYNC', () => {
-        it('transits data from `source` to `target` vertex', () => {
-          const res = Executor.process({graph, handler, traverser, ...input})
-
-          expect(res).toEqual({
-              opts: {},
-              data: {
-                count: 2
-              },
-              meta: {
-                sequence: [
-                  'A',
-                  'B',
-                  'C'
-                ]
-              }
-            }
-          )
-        })
+  describe('ASYNC', () => {
+    it('transits data from `source` to `target` vertex', async () => {
+      const mode: IMode = 'async'
+      const input = {data: 'foo', meta: {sequence: [], mode}, opts: {}}
+      const handler: IHandler = ({data, meta}: IInput) => new Promise((resolve) => {
+        setTimeout(() => resolve({data: {path: (data.path || '') + meta.sequence.slice(-1)}}), 100)
       })
+      const res = executor({graph, handler, traverser, ...input})
 
-      describe('ASYNC', () => {
-        it('transits data from `source` to `target` vertex', async () => {
-          const mode: IMode = 'async'
-          const input = {data: 'foo', meta: {sequence: [], mode}, opts: {}}
-          const handler: IHandler = ({data, meta}: IInput) => new Promise((resolve) => {
-            setTimeout(() => resolve({data: {path: (data.path || '') + meta.sequence.slice(-1)}}), 100)
-          })
-          const res = Executor.process({graph, handler, traverser, ...input})
-
-          await expect(res).resolves.toEqual({
-              opts: {},
-              data: {
-                path: 'ABC'
-              },
-              meta: {
-                mode: 'async',
-                sequence: [
-                  'A',
-                  'B',
-                  'C'
-                ]
-              }
-            }
-          )
-        })
-      })
+      await expect(res).resolves.toEqual({
+          opts: {},
+          data: {
+            path: 'ABC'
+          },
+          meta: {
+            mode: 'async',
+            sequence: [
+              'A',
+              'B',
+              'C'
+            ]
+          }
+        }
+      )
     })
   })
 })
