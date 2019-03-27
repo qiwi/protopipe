@@ -7,8 +7,7 @@ Not universal, not high-performance. But dumb and clear.
 
 ##### Features
 * Sync / async execution modes.
-* Traverser customization (a strange thing that walks through graphs).
-* Configurable `Promise`.
+* Deep flow customization.
 * Typings for both worlds — TS and flow.
 
 ##### Limitations
@@ -35,7 +34,7 @@ Not universal, not high-performance. But dumb and clear.
 ### Protopipe
 The fundamental goal of Protopipe is data processing.
 ```javascript
-export interface IIProtopipe {
+export interface IProtopipe {
   graph: IGraph
   handler: IHandler
   traverser: ITraverser

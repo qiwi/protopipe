@@ -8,8 +8,13 @@ export type IData = IAny
 
 export type ISequence = Array<IVertex>
 
+export type INil = null | undefined
+
+export type IMode = 'sync' | 'async' | undefined | null
+
 export type IMeta = {
   sequence: ISequence
+  mode?: IMode,
   [key: string]: IAny
 }
 
@@ -27,7 +32,7 @@ export type IOutput = {
   opts?: IOpts
 }
 
-export type IHandler = (input: IInput) => IOutput
+export type IHandler = (input: IInput) => IOutput | Promise<IOutput>
 
 /*
 export type IProtopipe = {
