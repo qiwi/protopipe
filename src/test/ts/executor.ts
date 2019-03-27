@@ -39,19 +39,18 @@ describe('executor', () => {
       const res = executor({graph, handler, traverser, ...input})
 
       expect(res).toEqual({
-          opts: {},
-          data: {
-            count: 2
-          },
-          meta: {
-            sequence: [
-              'A',
-              'B',
-              'C'
-            ]
-          }
+        opts: {},
+        data: {
+          count: 2
+        },
+        meta: {
+          sequence: [
+            'A',
+            'B',
+            'C'
+          ]
         }
-      )
+      })
     })
   })
 
@@ -65,20 +64,19 @@ describe('executor', () => {
       const res = executor({graph, handler, traverser, ...input})
 
       await expect(res).resolves.toEqual({
-          opts: {},
-          data: {
-            path: 'ABC'
-          },
-          meta: {
-            mode: 'async',
-            sequence: [
-              'A',
-              'B',
-              'C'
-            ]
-          }
+        opts: {},
+        data: {
+          path: 'ABC'
+        },
+        meta: {
+          mode: 'async',
+          sequence: [
+            'A',
+            'B',
+            'C'
+          ]
         }
-      )
+      })
     })
   })
 })

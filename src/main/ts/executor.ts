@@ -1,13 +1,11 @@
 import {
-  IProtopipeOpts,
   IInput,
   IOutput,
   ITraverserOutput,
   INil,
-  IExecutor
+  IExecutor,
+  IExecutorContext
 } from './interface'
-
-type IExecutorContext = IProtopipeOpts & IInput
 
 export const ASYNC = 'async'
 
