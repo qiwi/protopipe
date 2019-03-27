@@ -39,6 +39,7 @@ export interface IIProtopipe {
   graph: IGraph
   handler: IHandler
   traverser: ITraverser
+  executor: IExecutor
   process: (input: IInput) => IOutput
 }
 ```
@@ -46,7 +47,8 @@ export interface IIProtopipe {
 `graph` defines the all variety of available states.  
 `traverseur` interprets graph rules to build possible path, step by step.  
 `handler` is invoked each time when vertex transition occurs (`meta.sequence` change).  
-`process` binds it all together, moves data from `source` to `target`.
+`executor` binds it all together.
+`process` — the data processing starting point.
 
 ### State
 Everything _should_ be stateless.
