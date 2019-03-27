@@ -29,6 +29,7 @@ export type IOutput = {
 
 export type IHandler = (input: IInput) => IOutput
 
+/*
 export type IProtopipe = {
   params: any
   graph: IGraph
@@ -38,6 +39,7 @@ export type IProtopipe = {
     handler: IHandler
   }]
 }
+*/
 
 export type IPipe = {
   handler: IHandler
@@ -66,9 +68,32 @@ export interface IGraph {
   arrows: Array<IArrow>
 }
 
+export type ITraverserInput = IInput & {
+  graph: IGraph
+}
+
+export type ITraverserOutput = {
+  meta: IMeta,
+  data?: IData,
+  opts?: IOpts
+}
+
+export type ITraverser = (input: ITraverserInput ) => ITraverserOutput | null
+
+export type IProtopipeOpts = {
+  graph: IGraph
+  handler: IHandler,
+  traverser: ITraverser,
+}
+
+export interface IProtopipe {
+  graph: IGraph
+  handler: IHandler,
+  traverser: ITraverser,
+  process: (input: IInput) => IOutput
+}
+
 export interface IPipeline {
   graph: IGraph
   params: IPipelineParams
-  push(pipe: IPipe): this
-  exec(): IData
 }
