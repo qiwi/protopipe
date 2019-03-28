@@ -6,30 +6,32 @@ import {
   IExecutorOutput,
   IProtopipe,
   IProtopipeOpts,
-  IExecutor
+  IExecutor,
 } from './interface'
 
 import _executor from './executor'
 
 export default class Protopipe implements IProtopipe {
+
   graph: IGraph
   handler: IHandler
   traverser: ITraverser
   executor: IExecutor
 
-  constructor({ traverser, graph, handler, executor }: IProtopipeOpts) {
+  constructor({traverser, graph, handler, executor}: IProtopipeOpts) {
     this.graph = graph
     this.handler = handler
     this.traverser = traverser
     this.executor = executor || _executor
   }
 
-  process (input: IInput): IExecutorOutput {
+  process(input: IInput): IExecutorOutput {
     return this.executor({
       graph: this.graph,
       handler: this.handler,
       traverser: this.traverser,
-      ...input
+      ...input,
     })
   }
+
 }

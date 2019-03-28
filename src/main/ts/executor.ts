@@ -4,18 +4,20 @@ import {
   ITraverserOutput,
   INil,
   IExecutor,
-  IExecutorContext
+  IExecutorContext,
 } from './interface'
 
 export const ASYNC = 'async'
 
-function promisify<T> (result: T): Promise<T> { return  Promise.resolve(result) }
+function promisify<T>(result: T): Promise<T> {
+  return Promise.resolve(result)
+}
 
 export const processSync = ({meta, data, opts, graph, handler, traverser}: IExecutorContext): IOutput | INil => {
   let hasNext = true
   let next: ITraverserOutput | INil
   let res: IOutput | INil = null
-  let input: IInput = { opts, data, meta }
+  let input: IInput = {opts, data, meta}
 
   while (hasNext) {
     next = traverser({graph, ...input, ...(res || {})})
@@ -29,11 +31,11 @@ export const processSync = ({meta, data, opts, graph, handler, traverser}: IExec
   }
 }
 
-export const processAsync = async ({meta, data, opts, graph, handler, traverser}: IExecutorContext): Promise<IOutput | INil> => {
+export const processAsync = async({meta, data, opts, graph, handler, traverser}: IExecutorContext): Promise<IOutput | INil> => {
   let hasNext = true
   let next: ITraverserOutput | INil
   let res: IOutput | INil = null
-  let input: IInput = { opts, data, meta }
+  let input: IInput = {opts, data, meta}
 
   while (hasNext) {
     next = await promisify(traverser({graph, ...input, ...(res || {})}))

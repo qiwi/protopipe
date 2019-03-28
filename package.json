@@ -5,7 +5,7 @@
   "main": "dist/es5/index.js",
   "scripts": {
     "jest": "jest -w 2 --config=jest.config.json",
-    "lint": "tslint src/**/*.ts --fix",
+    "lint": "tslint -p tsconfig.json src/**/*.ts --fix",
     "test": "yarn lint && yarn jest",
     "clean": "rm -rf lib typings",
     "build": "yarn clean && yarn build_es5 && yarn build_es6 && yarn build_ts && yarn libdef",
@@ -54,7 +54,6 @@
     "ts-jest": "^24.0.0",
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",
-    "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3",
     "typescript-eslint-parser": "^22.0.0"
@@ -97,5 +96,8 @@
     ],
     "ignore": [],
     "settings": {}
+  },
+  "dependencies": {
+    "tslint-config-qiwi": "^1.0.1"
   }
 }

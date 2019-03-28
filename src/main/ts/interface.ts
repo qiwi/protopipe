@@ -71,13 +71,13 @@ export type ITraverserOutput = {
   opts?: IOpts
 }
 
-export type ITraverser = (input: ITraverserInput ) => ITraverserOutput | null
+export type ITraverser = (input: ITraverserInput) => ITraverserOutput | null
 
 export type IProtopipeOpts = {
   graph: IGraph
   handler: IHandler,
   traverser: ITraverser,
-  executor?: IExecutor,
+  executor?: IExecutor
 }
 
 export type IExecutorContext = IProtopipeOpts & IInput

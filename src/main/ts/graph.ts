@@ -2,10 +2,11 @@ import {
   IArrow,
   IGraphParams,
   IGraph,
-  IVertex
+  IVertex,
 } from './interface'
 
 export default class Graph implements IGraph {
+
   arrows: Array<IArrow>
   vertexes: Array<IVertex>
 
@@ -13,10 +14,11 @@ export default class Graph implements IGraph {
     this.vertexes = vertexes
     this.arrows = arrows
   }
+
 }
 
 export {
   Graph,
   IGraph,
-  IGraphParams
+  IGraphParams,
 }

@@ -1,12 +1,12 @@
 import {
   Graph,
   IGraph,
-  IGraphParams
+  IGraphParams,
 } from '../../main/ts/graph'
 
 import {
   IArrow,
-  IVertex
+  IVertex,
 } from '../../main/ts/interface'
 
 describe('graph', () => {
@@ -16,7 +16,7 @@ describe('graph', () => {
       const arrows: Array<IArrow> = []
       const graphParams: IGraphParams = {
         vertexes,
-        arrows
+        arrows,
       }
       const graph: IGraph = new Graph(graphParams)
 
@@ -25,8 +25,4 @@ describe('graph', () => {
       expect(graph.arrows).toBe(arrows)
     })
   })
-
-  describe('proto', () => {})
-
-  describe('static', () => {})
 })

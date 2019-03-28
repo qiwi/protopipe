@@ -6,7 +6,7 @@ import {
   IInput,
   IOutput,
   ITraverserInput,
-  ITraverserOutput, IHandler
+  ITraverserOutput, IHandler,
 } from '../../main/ts/interface'
 
 describe('executor', () => {
@@ -16,7 +16,7 @@ describe('executor', () => {
     arrows: [
       {head: 'A', tail: 'B'},
       {head: 'B', tail: 'C'},
-    ]
+    ],
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
   const traverser = ({meta, graph}: ITraverserInput): ITraverserOutput | null => {
@@ -25,7 +25,7 @@ describe('executor', () => {
     }
 
     const prev = meta.sequence[meta.sequence.length - 1]
-    const next: IArrow | null  = graph.arrows.find(({head}) => head === prev) || null
+    const next: IArrow | null = graph.arrows.find(({head}) => head === prev) || null
 
     if (next === null) {
       return null
@@ -41,21 +41,21 @@ describe('executor', () => {
       expect(res).toEqual({
         opts: {},
         data: {
-          count: 2
+          count: 2,
         },
         meta: {
           sequence: [
             'A',
             'B',
-            'C'
-          ]
-        }
+            'C',
+          ],
+        },
       })
     })
   })
 
   describe('ASYNC', () => {
-    it('transits data from `source` to `target` vertex', async () => {
+    it('transits data from `source` to `target` vertex', async() => {
       const mode: IMode = 'async'
       const input = {data: 'foo', meta: {sequence: [], mode}, opts: {}}
       const handler: IHandler = ({data, meta}: IInput) => new Promise((resolve) => {
@@ -66,16 +66,16 @@ describe('executor', () => {
       await expect(res).resolves.toEqual({
         opts: {},
         data: {
-          path: 'ABC'
+          path: 'ABC',
         },
         meta: {
           mode: 'async',
           sequence: [
             'A',
             'B',
-            'C'
-          ]
-        }
+            'C',
+          ],
+        },
       })
     })
   })

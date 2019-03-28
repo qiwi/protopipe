@@ -3,7 +3,7 @@ import {
   IInput,
   IOutput,
   ITraverserInput,
-  ITraverserOutput
+  ITraverserOutput,
 } from '../../main/ts/interface'
 
 import Graph from '../../main/ts/graph'
@@ -17,7 +17,7 @@ describe('protopipe', () => {
     arrows: [
       {head: 'A', tail: 'B'},
       {head: 'B', tail: 'C'},
-    ]
+    ],
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
   const traverser = ({meta, graph}: ITraverserInput): ITraverserOutput | null => {
@@ -26,7 +26,7 @@ describe('protopipe', () => {
     }
 
     const prev = meta.sequence[meta.sequence.length - 1]
-    const next: IArrow | null  = graph.arrows.find(({head}) => head === prev) || null
+    const next: IArrow | null = graph.arrows.find(({head}) => head === prev) || null
 
     if (next === null) {
       return null
@@ -38,7 +38,7 @@ describe('protopipe', () => {
   const protopipe = new Protopipe({
     graph,
     traverser,
-    handler
+    handler,
   })
 
   describe('constructor', () => {
@@ -57,18 +57,16 @@ describe('protopipe', () => {
       expect(res).toEqual({
         opts: {},
         data: {
-          count: 2
+          count: 2,
         },
         meta: {
           sequence: [
             'A',
             'B',
-            'C'
-          ]
-        }
+            'C',
+          ],
+        },
       })
     })
   })
-
-  describe('static', () => {})
 })
