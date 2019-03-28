@@ -34,18 +34,6 @@ export type IOutput = {
 
 export type IHandler = (input: IInput) => IOutput | Promise<IOutput>
 
-/*
-export type IProtopipe = {
-  params: any
-  graph: IGraph
-  move: () => any
-  transitions: [{
-    condition: (sequence: ISequence) => boolean
-    handler: IHandler
-  }]
-}
-*/
-
 export type IPipe = {
   handler: IHandler
 }
@@ -104,9 +92,4 @@ export interface IProtopipe {
   traverser: ITraverser,
   executor: IExecutor,
   process: (input: IInput) => IExecutorOutput
-}
-
-export interface IPipeline {
-  graph: IGraph
-  params: IPipelineParams
 }
