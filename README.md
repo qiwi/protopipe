@@ -13,19 +13,24 @@ Not universal, not high-performance. But dumb and clear.
 
 #### Usage
 ```javascript
-import { Pipeline } from 'protopipe'
+import { Protopipe } from 'protopipe'
 
-const handler = ({data, meta, opts}) => ({data: data[opts.method]()})
-
-const pipeline = new Pipeline({
-  pipeline: [handler],
-  meta: {},
-  opts: {
-    method: 'toUpperCase'
-  }
+const input = {data: 'foo', meta: {sequence: []}, opts: {}}
+const graph = new Graph({
+  vertexes: ['A', 'B', 'C'],
+  arrows: [
+   {head: 'A', tail: 'B'},
+    {head: 'B', tail: 'C'},
+  ],
+})
+const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
+const protopipe = new Protopipe({
+  graph,
+  traverser,
+  handler,
 })
 
-const result = pipeline.exec({data: 'foo'}) // 'FOO'
+const result = protopipe.process({data: 'foo'}).data.count // 2
 ```
 
 ##### Features
@@ -38,7 +43,7 @@ const result = pipeline.exec({data: 'foo'}) // 'FOO'
 * Graphs are immutable.
 * Graph has only one `source` and one `target` vertexes.
 * The lib does not solve the declaration problem (you know, _adjacency/incidence matrix_, _adjacency list_, DSL).
-* No consistency checks out of box: _graph_ is being traversed as is. But you're able to add custom assertions (for example, BFS-based check).
+* No consistency checks out of box: graph is traversed as is. But you're able to add custom assertions (for example, BFS-based check).
 
 ## Definitions and contracts
 * Vertex is a graph atom.
