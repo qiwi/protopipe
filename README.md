@@ -2,20 +2,43 @@
 Graph-based data processor.
 
 ## Idea
-We often come across the problem of atomic data processing ([logwrap](https://github.com/qiwi/logwrap), [uniconfig](https://github.com/qiwi/uniconfig), [cyclone](https://github.com/qiwi/cyclone), etc), it seems to be useful to make the _one pipeline to rule them all_.
-Not universal, not high-performance. But dumb and clear.  
+We often come across the problem of atomic data processing ([logwrap](https://github.com/qiwi/logwrap), [uniconfig](https://github.com/qiwi/uniconfig), [cyclone](https://github.com/qiwi/cyclone), etc), and it seems to be useful to make the _one pipeline to rule them all_.
+Not universal, not high-performance. But dumb and clear.
+
+## TL;DR
+#### Install
+```bash
+  yarn add protopipe
+```
+
+#### Usage
+```javascript
+import { Pipeline } from 'protopipe'
+
+const handler = ({data, meta, opts}) => ({data: data[opts.method]()})
+
+const pipeline = new Pipeline({
+  pipeline: [handler],
+  meta: {},
+  opts: {
+    method: 'toUpperCase'
+  }
+})
+
+const result = pipeline.exec({data: 'foo'}) // 'FOO'
+```
 
 ##### Features
 * Sync / async execution modes.
-* Deep flow customization.
+* Deep customization.
 * Typings for both worlds — TS and flow.
 
-##### Limitations
+##### Limitations (of default executor, traverser, etc)
 * Protopipe supports digraphs only.
 * Graphs are immutable.
 * Graph has only one `source` and one `target` vertexes.
 * The lib does not solve the declaration problem (you know, _adjacency/incidence matrix_, _adjacency list_, DSL).
-* No consistency checks out of box: _graph_ is being traversed as is. But you're able to add custom assertions through `verify` opt (for example, BFS-based check).
+* No consistency checks out of box: _graph_ is being traversed as is. But you're able to add custom assertions (for example, BFS-based check).
 
 ## Definitions and contracts
 * Vertex is a graph atom.
@@ -46,33 +69,28 @@ export interface IProtopipe {
 `graph` defines the all variety of available states.  
 `traverseur` interprets graph rules to build possible path, step by step.  
 `handler` is invoked each time when vertex transition occurs (`meta.sequence` change).  
-`executor` binds it all together.
+`executor` binds it all together.  
 `process` — the data processing starting point.
 
-### State
-Everything _should_ be stateless.
+The `executor` gets an `input`, then triggers `traverser` to resolve next over the `graph` processing step, after invokes the `handler(input)` and passes its result to further iteration. Once `traverser` returns null the process stops.
+
+Everything _should_ be stateless and immutable, but it is up to you.
+
+### Single argument contract
+
+
+##### Meta
+Contains any reasonable execution directives such as `mode`, `sequence`
+```javascript
+{
+  sequence: ISequence
+  mode?: IMode,
+  [key: string]: IAny
+}
+```
 
 ### Sync / async
 Both. If handler returns a Promise then executor awaits until it will be resolved.
 
-## Install
-```bash
-  yarn add protopipe
-```
-
-## Usage
-```javascript
-import { Pipeline } from 'protopipe'
-
-const handler = ({data, meta, opts}) => ({data: data[opts.method]()})
-
-const pipeline = new Pipeline({
-  pipeline: [handler],
-  meta: {},
-  opts: {
-    method: 'toUpperCase'
-  }
-})
-
-const result = pipeline.exec({data: 'foo'}) // 'FOO'
-```
+### Customization
+You're able to override everything.
