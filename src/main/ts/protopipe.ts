@@ -18,7 +18,9 @@ export default class Protopipe implements IProtopipe {
   traverser: ITraverser
   executor: IExecutor
 
-  constructor({traverser, graph, handler, executor}: IProtopipeOpts) {
+  constructor(opts: IProtopipeOpts) {
+    const {traverser, graph, handler, executor} = opts
+
     this.graph = graph
     this.handler = handler
     this.traverser = traverser

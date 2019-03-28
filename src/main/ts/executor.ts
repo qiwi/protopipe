@@ -1,4 +1,5 @@
 import {
+  IMode,
   IInput,
   IOutput,
   ITraverserOutput,
@@ -7,13 +8,15 @@ import {
   IExecutorContext,
 } from './interface'
 
-export const ASYNC = 'async'
+export const ASYNC: IMode = 'async'
 
 function promisify<T>(result: T): Promise<T> {
   return Promise.resolve(result)
 }
 
-export const processSync = ({meta, data, opts, graph, handler, traverser}: IExecutorContext): IOutput | INil => {
+export const processSync = (context: IExecutorContext): IOutput | INil => {
+  const {meta, data, opts, graph, handler, traverser} = context
+
   let hasNext = true
   let next: ITraverserOutput | INil
   let res: IOutput | INil = null
@@ -31,7 +34,9 @@ export const processSync = ({meta, data, opts, graph, handler, traverser}: IExec
   }
 }
 
-export const processAsync = async({meta, data, opts, graph, handler, traverser}: IExecutorContext): Promise<IOutput | INil> => {
+export const processAsync = async(context: IExecutorContext): Promise<IOutput | INil> => {
+  const {meta, data, opts, graph, handler, traverser} = context
+
   let hasNext = true
   let next: ITraverserOutput | INil
   let res: IOutput | INil = null

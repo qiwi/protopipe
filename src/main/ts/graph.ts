@@ -10,7 +10,9 @@ export default class Graph implements IGraph {
   arrows: Array<IArrow>
   vertexes: Array<IVertex>
 
-  constructor({vertexes, arrows}: IGraphParams) {
+  constructor(params: IGraphParams) {
+    const {vertexes, arrows} = params
+
     this.vertexes = vertexes
     this.arrows = arrows
   }
