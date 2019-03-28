@@ -78,9 +78,29 @@ Everything _should_ be stateless and immutable, but it is up to you.
 
 ### Single argument contract
 
+```javascript
+export type IInput = {
+  data: IData
+  meta: IMeta
+  opts: IOpts
+}
+```
+##### data
+Anything to be processed.
+```javascript
+export type IData = IAny
+```
 
-##### Meta
-Contains any reasonable execution directives such as `mode`, `sequence`
+##### opts
+Declares optional parameters about how to handle data.
+```javascript
+export type IOpts = {
+  [key: string]: IAny
+}
+```
+
+##### meta
+Contains any reasonable execution directives (such as `mode`, `sequence`, etc).
 ```javascript
 {
   sequence: ISequence
