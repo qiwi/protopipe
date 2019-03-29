@@ -1,7 +1,7 @@
 {
   "name": "protopipe",
   "version": "1.0.0",
-  "description": "Lambda-based data pipeliner",
+  "description": "Graph-based data processor",
   "main": "dist/es5/index.js",
   "scripts": {
     "jest": "jest -w 2 --config=jest.config.json",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antongolub/protopipe.git"
+    "url": "git+https://github.com/qiwi/protopipe.git"
   },
   "keywords": [
     "protopipe",
@@ -31,9 +31,9 @@
   "author": "Anton Golub <mailbox@antongolub.ru>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/antongolub/protopipe/issues"
+    "url": "https://github.com/qiwi/protopipe/issues"
   },
-  "homepage": "https://github.com/antongolub/protopipe#readme",
+  "homepage": "https://github.com/qiwi/protopipe#readme",
   "devDependencies": {
     "@qiwi/substrate": "^1.4.0",
     "@semantic-release/changelog": "^3.0.2",
