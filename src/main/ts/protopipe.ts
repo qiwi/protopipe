@@ -21,7 +21,7 @@ export class Protopipe implements IProtopipe {
   executor: IExecutor
 
   constructor(...params: any[]) {
-    const {traverser, graph, handler, executor} = Protopipe.parseParams(...params)
+    const {traverser, graph, handler, executor} = Protopipe.parser(...params)
 
     this.graph = graph
     this.handler = handler
@@ -38,8 +38,12 @@ export class Protopipe implements IProtopipe {
     })
   }
 
-  static parseParams(...params: any[]): IProtopipeOptsNormalized {
+  static parser(...params: any[]): IProtopipeOptsNormalized {
     const opts: IProtopipeOpts = params[0]
+
+    if (opts && typeof opts.parser === 'function') {
+      return opts.parser(...params)
+    }
 
     return {
       executor: this.executor,
@@ -85,7 +89,7 @@ export class Protopipe implements IProtopipe {
 }
 
 export const protopipe = (...params: any[]) => (input: IInput): IExecutorOutput => {
-  const opts = Protopipe.parseParams(...params)
+  const opts = Protopipe.parser(...params)
   const context = {...opts, ...input}
 
   return opts.executor(context)

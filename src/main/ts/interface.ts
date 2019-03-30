@@ -78,6 +78,8 @@ export type IProtopipeOpts = {
   handler: IHandler,
   traverser: ITraverser,
   executor?: IExecutor
+  parser?: IParser
+  [key: string]: IAny
 }
 
 export type IProtopipeOptsNormalized = IProtopipeOpts & {
@@ -93,3 +95,5 @@ export type IExecutor = (executorContext: IExecutorContext) => IExecutorOutput
 export interface IProtopipe extends IProtopipeOpts{
   process: (input: IInput) => IExecutorOutput
 }
+
+export type IParser = (...params: Array<IAny>) => IProtopipeOptsNormalized

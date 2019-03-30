@@ -145,7 +145,7 @@ describe('Protopipe', () => {
       })
     })
 
-    describe('#parseParams', () => {
+    describe('#parser', () => {
       it('extracts protopipe opt from params', () => {
         const handler: IHandler = (input: IInput): IOutput => input
         const graph: IGraph = new Graph({
@@ -160,19 +160,41 @@ describe('Protopipe', () => {
           traverser,
           executor,
         }
-        const opts = Protopipe.parseParams(params)
+        const opts = Protopipe.parser(params)
 
         expect(opts).toEqual(params)
       })
 
       it('injects default values otherwise', () => {
-        const opts = Protopipe.parseParams({})
+        const opts = Protopipe.parser({})
 
         expect(opts).toEqual({
           graph: Protopipe.graph,
           handler: Protopipe.handler,
           traverser: Protopipe.traverser,
           executor: Protopipe.executor,
+        })
+      })
+
+      it('supports parser impl override', () => {
+        const opts = Protopipe.parser({
+          parser() {
+            return {
+              graph: Protopipe.graph,
+              handler: Protopipe.handler,
+              traverser: Protopipe.traverser,
+              executor: Protopipe.executor,
+              foo: 'bar',
+            }
+          },
+        })
+
+        expect(opts).toEqual({
+          graph: Protopipe.graph,
+          handler: Protopipe.handler,
+          traverser: Protopipe.traverser,
+          executor: Protopipe.executor,
+          foo: 'bar',
         })
       })
     })
