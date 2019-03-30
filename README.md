@@ -19,7 +19,7 @@ const input = {data: 'foo', meta: {sequence: []}, opts: {}}
 const graph = new Graph({
   vertexes: ['A', 'B', 'C'],
   arrows: [
-   {head: 'A', tail: 'B'},
+    {head: 'A', tail: 'B'},
     {head: 'B', tail: 'C'},
   ],
 })

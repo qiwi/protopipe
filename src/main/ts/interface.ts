@@ -80,16 +80,16 @@ export type IProtopipeOpts = {
   executor?: IExecutor
 }
 
+export type IProtopipeOptsNormalized = IProtopipeOpts & {
+  executor: IExecutor
+}
+
 export type IExecutorContext = IProtopipeOpts & IInput
 
 export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>
 
 export type IExecutor = (executorContext: IExecutorContext) => IExecutorOutput
 
-export interface IProtopipe {
-  graph: IGraph
-  handler: IHandler,
-  traverser: ITraverser,
-  executor: IExecutor,
+export interface IProtopipe extends IProtopipeOpts{
   process: (input: IInput) => IExecutorOutput
 }
