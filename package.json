@@ -34,6 +34,9 @@
     "url": "https://github.com/qiwi/protopipe/issues"
   },
   "homepage": "https://github.com/qiwi/protopipe#readme",
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
   "devDependencies": {
     "@qiwi/substrate": "^1.4.0",
     "@semantic-release/changelog": "^3.0.2",
@@ -47,16 +50,16 @@
     "eslint-plugin-typescript": "^0.14.0",
     "esm": "^3.2.22",
     "flowgen": "1.8.0",
-    "jest": "^24.5.0",
+    "jest": "^24.7.0",
     "lodash": "^4.17.11",
     "replace-in-file": "^3.4.4",
     "semantic-release": "^15.13.3",
     "ts-jest": "^24.0.1",
-    "tslib": "^1.9.3",
-    "tslint": "^5.14.0",
+    "tslint": "^5.15.0",
     "typedoc": "^0.14.2",
     "typescript": "^3.4.1",
-    "typescript-eslint-parser": "^22.0.0"
+    "typescript-eslint-parser": "^22.0.0",
+    "tslint-config-qiwi": "^1.0.1"
   },
   "release": {
     "branch": "master",
@@ -96,8 +99,5 @@
     ],
     "ignore": [],
     "settings": {}
-  },
-  "dependencies": {
-    "tslint-config-qiwi": "^1.0.1"
   }
 }
