@@ -87,7 +87,9 @@ export type IGraphIncidentor = {
 
 export type IEdgeListIncidentor = IGraphIncidentor & {
   type: 'EDGE_LIST',
-  representation: Array<[IVertex, IVertex]>
+  representation: {
+    [key: string]: [IVertex, IVertex]
+  }
 }
 
 export interface IGraph {

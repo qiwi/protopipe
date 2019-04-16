@@ -17,14 +17,14 @@ import executor from '../../main/ts/executor'
 describe('Protopipe', () => {
   const input = {data: 'foo', meta: {sequence: []}, opts: {}}
   const graph = new Graph({
-    edges: [],
+    edges: ['AB', 'BC'],
     vertexes: ['A', 'B', 'C'],
     incidentor: {
       type: 'EDGE_LIST',
-      representation: [
-        ['A', 'B'],
-        ['B', 'C'],
-      ],
+      representation: {
+        'AB': ['A', 'B'],
+        'BC': ['B', 'C']
+      },
     },
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
@@ -33,9 +33,9 @@ describe('Protopipe', () => {
       return {meta: {...meta, sequence: ['A']}}
     }
 
-    const representation: Array<[IVertex, IVertex]> = graph.incidentor.representation
+    const arcs: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
     const prev = meta.sequence[meta.sequence.length - 1]
-    const next: IVertex | null = (representation.find(([head]) => head === prev) || [])[1] || null
+    const next: IVertex | null = (arcs.find(([head]) => head === prev) || [])[1] || null
 
     if (next === null) {
       return null
@@ -96,14 +96,14 @@ describe('Protopipe', () => {
         const _input = {
           data: {},
           graph: {
-            edges: [],
+            edges: ['AB', 'BC'],
             vertexes: ['A', 'B', 'C'],
             incidentor: {
               type: 'EDGE_LIST',
-              representation: [
-                ['A', 'B'],
-                ['B', 'C'],
-              ],
+              representation: {
+                'AB': ['A', 'B'],
+                'BC': ['B', 'C']
+              },
             },
           },
           meta: {
@@ -157,7 +157,7 @@ describe('Protopipe', () => {
             edges: [],
             incidentor: {
               type: 'EDGE_LIST',
-              representation: [],
+              representation: {},
             },
           })
         })
@@ -171,7 +171,7 @@ describe('Protopipe', () => {
             vertexes: [],
             incidentor: {
               type: 'EDGE_LIST',
-              representation: [],
+              representation: {},
             },
           })
           const traverser: ITraverser = (input: ITraverserInput): ITraverserOutput => input

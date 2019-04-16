@@ -13,14 +13,14 @@ import {
 describe('executor', () => {
   const input = {data: 'foo', meta: {sequence: []}, opts: {}}
   const graph = new Graph({
-    edges: [],
+    edges: ['AB', 'BC'],
     vertexes: ['A', 'B', 'C'],
     incidentor: {
       type: 'EDGE_LIST',
-      representation: [
-        ['A', 'B'],
-        ['B', 'C'],
-      ],
+      representation: {
+        'AB': ['A', 'B'],
+        'BC': ['B', 'C']
+      },
     },
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
@@ -29,7 +29,7 @@ describe('executor', () => {
       return {meta: {...meta, sequence: ['A']}}
     }
 
-    const representation: Array<[IVertex, IVertex]> = graph.incidentor.representation
+    const representation: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
     const prev = meta.sequence[meta.sequence.length - 1]
     const next: IVertex | null = (representation.find(([head]) => head === prev) || [])[1] || null
 

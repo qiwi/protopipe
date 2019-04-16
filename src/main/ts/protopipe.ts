@@ -70,7 +70,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     edges: [],
     incidentor: {
       type: 'EDGE_LIST',
-      representation: [],
+      representation: {},
     } as IEdgeListIncidentor,
   }
 
@@ -85,9 +85,9 @@ export class Protopipe implements IProtopipe, IGraphOperator {
       }
     }
 
-    const representation: Array<[IVertex, IVertex]> = graph.incidentor.representation
+    const arcs: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
     const prev = sequence[sequence.length - 1]
-    const next: IVertex | null = (representation.find(([head]) => head === prev) || [])[1] || null
+    const next: IVertex | null = (arcs.find(([head]) => head === prev) || [])[1] || null
 
     if (next) {
       return {
