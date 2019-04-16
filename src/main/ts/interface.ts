@@ -51,10 +51,7 @@ export type IArrow = {
   tail: IVertex
 }
 
-export type IGraphParams = {
-  vertexes: Array<IVertex>
-  arrows: Array<IArrow>
-}
+export type IGraphParams = IGraph
 
 export type IGraphIncidentorType = string
 
@@ -88,15 +85,15 @@ export type IGraphIncidentor = {
   representation: IGraphRepresentation
 }
 
-export type IGraph2 = {
-  vertexes: Array<IVertex>,
-  edges: Array<IEdge>,
-  incidentor: IGraphIncidentor
+export type IEdgeListIncidentor = IGraphIncidentor & {
+  type: 'EDGE_LIST',
+  representation: Array<[IVertex, IVertex]>
 }
 
 export interface IGraph {
-  vertexes: Array<IVertex>
-  arrows: Array<IArrow>
+  vertexes: Array<IVertex>,
+  edges: Array<IEdge>,
+  incidentor: IGraphIncidentor
 }
 
 export type ITraverserInput = IInput & {

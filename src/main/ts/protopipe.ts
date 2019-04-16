@@ -8,9 +8,10 @@ import {
   IProtopipeOpts,
   IProtopipeOptsNormalized,
   IExecutor,
-  IArrow,
   IGraphOperator,
   IGraphOperationMap,
+  IVertex,
+  IEdgeListIncidentor,
 } from './interface'
 
 import _executor from './executor'
@@ -31,7 +32,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     this.traverser = traverser
     this.executor = executor
     this.operations = {
-      process: this.process
+      process: this.process,
     }
   }
 
@@ -66,7 +67,11 @@ export class Protopipe implements IProtopipe, IGraphOperator {
 
   static graph: IGraph = {
     vertexes: [],
-    arrows: [],
+    edges: [],
+    incidentor: {
+      type: 'EDGE_LIST',
+      representation: [],
+    } as IEdgeListIncidentor,
   }
 
   static traverser: ITraverser = ({meta, graph}) => {
@@ -80,12 +85,13 @@ export class Protopipe implements IProtopipe, IGraphOperator {
       }
     }
 
+    const representation: Array<[IVertex, IVertex]> = graph.incidentor.representation
     const prev = sequence[sequence.length - 1]
-    const next: IArrow | null = graph.arrows.find(({head}) => head === prev) || null
+    const next: IVertex | null = (representation.find(([head]) => head === prev) || [])[1] || null
 
     if (next) {
       return {
-        meta: {...meta, sequence: [...meta.sequence, next.tail]},
+        meta: {...meta, sequence: [...meta.sequence, next]},
       }
     }
 

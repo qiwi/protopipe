@@ -1,20 +1,23 @@
 import {
-  IArrow,
+  IEdge,
   IGraphParams,
   IGraph,
   IVertex,
+  IGraphIncidentor,
 } from './interface'
 
 export default class Graph implements IGraph {
 
-  arrows: Array<IArrow>
+  edges: Array<IEdge>
   vertexes: Array<IVertex>
+  incidentor: IGraphIncidentor
 
   constructor(params: IGraphParams) {
-    const {vertexes, arrows} = params
+    const {vertexes, edges, incidentor} = params
 
     this.vertexes = vertexes
-    this.arrows = arrows
+    this.edges = edges
+    this.incidentor = incidentor
   }
 
 }
