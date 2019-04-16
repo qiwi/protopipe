@@ -5,6 +5,7 @@ Graph-based data processor.
 We often come across the problem of atomic data processing ([logwrap](https://github.com/qiwi/logwrap), [uniconfig](https://github.com/qiwi/uniconfig), [cyclone](https://github.com/qiwi/cyclone), etc), and it seems to be useful to make the _one pipeline to rule them all_.
 Not universal, not high-performance. But dumb and clear.
 
+
 ## TL;DR
 #### Install
 ```bash
@@ -48,7 +49,6 @@ const result = protopipe.process({data: 'foo'}).data.count // 2
 ## Definitions and contracts
 * Vertex is a graph atom.
 * Edge — bond connecting two vertices.
-* Arrow — directed edge.
 * Sequence — any possible transition.
     * Walk: vertices may repeat, edges may repeat (closed / open)
     * Trail: vertices may repeat, edges cannot repeat (open)
@@ -58,6 +58,33 @@ const result = protopipe.process({data: 'foo'}).data.count // 2
 * Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)
 * Handler — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface.
 * Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and arrows collections.
+
+### IGraph
+```javascript
+export type IGraph2 = {
+  vertexes: Array<IVertex>,
+  edges: Array<IEdge>,
+  incidentor: IGraphIncidentor
+}
+
+export type IGraphRepresentation = any
+
+export type IGraphIncidentor = {
+  type: IGraphIncidentorType,
+  representation: IGraphRepresentation
+}
+```
+
+### IGraphOperator
+Graph API facade. Something that assembles `graph`, its `features` and `operations`.
+```javascript
+export interface IGraphOperator {
+  graph: IGraph,
+  operations?: IGraphOperationMap,
+  features?: IGraphFeatures,
+  [key: string]: any
+}
+```
 
 ### Protopipe
 The fundamental goal of Protopipe is data processing.

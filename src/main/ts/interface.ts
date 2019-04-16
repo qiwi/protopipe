@@ -44,7 +44,7 @@ export type IVertexId = string
 
 export type IVertex = string
 
-export type IEdge = [IVertexId, IVertexId]
+export type IEdge = string
 
 export type IArrow = {
   head: IVertex
@@ -54,6 +54,44 @@ export type IArrow = {
 export type IGraphParams = {
   vertexes: Array<IVertex>
   arrows: Array<IArrow>
+}
+
+export type IGraphIncidentorType = string
+
+export type IGraphRepresentation = any
+
+export type IGraphFeatures = {
+  [key: string]: string | number | boolean | null
+}
+
+export type IGraphFeatureDetector = (graph: IGraph) => IGraphFeatures
+
+export interface IGraphOperationContext {
+  [key: string]: IAny
+}
+
+export type IGraphOperation = (context: any) => any
+
+export type IGraphOperationMap = {
+  [key: string]: IGraphOperation
+}
+
+export interface IGraphOperator {
+  graph: IGraph,
+  operations?: IGraphOperationMap,
+  features?: IGraphFeatures,
+  [key: string]: any
+}
+
+export type IGraphIncidentor = {
+  type: IGraphIncidentorType,
+  representation: IGraphRepresentation
+}
+
+export type IGraph2 = {
+  vertexes: Array<IVertex>,
+  edges: Array<IEdge>,
+  incidentor: IGraphIncidentor
 }
 
 export interface IGraph {
@@ -73,7 +111,7 @@ export type ITraverserOutput = {
 
 export type ITraverser = (input: ITraverserInput) => ITraverserOutput | null
 
-export type IProtopipeOpts = {
+export interface IProtopipeOpts {
   graph: IGraph
   handler: IHandler,
   traverser: ITraverser,
@@ -86,7 +124,7 @@ export type IProtopipeOptsNormalized = IProtopipeOpts & {
   executor: IExecutor
 }
 
-export type IExecutorContext = IProtopipeOpts & IInput
+export interface IExecutorContext extends IProtopipeOpts, IInput {}
 
 export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>
 

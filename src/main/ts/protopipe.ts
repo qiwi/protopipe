@@ -9,16 +9,19 @@ import {
   IProtopipeOptsNormalized,
   IExecutor,
   IArrow,
+  IGraphOperator,
+  IGraphOperationMap,
 } from './interface'
 
 import _executor from './executor'
 
-export class Protopipe implements IProtopipe {
+export class Protopipe implements IProtopipe, IGraphOperator {
 
   graph: IGraph
   handler: IHandler
   traverser: ITraverser
   executor: IExecutor
+  operations: IGraphOperationMap
 
   constructor(...params: any[]) {
     const {traverser, graph, handler, executor} = Protopipe.parser(...params)
@@ -27,6 +30,9 @@ export class Protopipe implements IProtopipe {
     this.handler = handler
     this.traverser = traverser
     this.executor = executor
+    this.operations = {
+      process: this.process
+    }
   }
 
   process(input: IInput): IExecutorOutput {
