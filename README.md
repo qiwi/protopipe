@@ -18,11 +18,15 @@ import { Protopipe } from 'protopipe'
 
 const input = {data: 'foo', meta: {sequence: []}, opts: {}}
 const graph = new Graph({
+  edges: ['AB', 'BC'],
   vertexes: ['A', 'B', 'C'],
-  arrows: [
-    {head: 'A', tail: 'B'},
-    {head: 'B', tail: 'C'},
-  ],
+  incidentor: {
+    type: 'EDGE_LIST',
+    representation: {
+      'AB': ['A', 'B'],
+      'BC': ['B', 'C']
+    },
+  },
 })
 const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
 const protopipe = new Protopipe({
@@ -57,7 +61,7 @@ const result = protopipe.process({data: 'foo'}).data.count // 2
     * Cycle : vertices cannot repeat, edges cannot repeat (closed)
 * Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)
 * Handler — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface.
-* Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and arrows collections.
+* Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and edges collections.
 
 ### IGraph
 ```javascript
