@@ -78,27 +78,5 @@
       "@semantic-release/npm",
       "@semantic-release/github"
     ]
-  },
-  "standard": {
-    "parser": "typescript-eslint-parser",
-    "plugins": [
-      "typescript"
-    ],
-    "globals": [
-      "jest",
-      "it",
-      "expect",
-      "describe",
-      "before",
-      "beforeAll",
-      "beforeEach",
-      "afterAll",
-      "after",
-      "afterEach",
-      "xdescribe",
-      "xit"
-    ],
-    "ignore": [],
-    "settings": {}
   }
 }
