@@ -1,4 +1,4 @@
-import {Graph, Protopipe} from '../../main/ts'
+const {Graph, Protopipe} = require('../../../lib/es5')
 
 describe('index', () => {
   it('exposes lib inners', () => {

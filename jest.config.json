@@ -8,7 +8,8 @@
     "<rootDir>/src/main/ts/**/*.ts"
   ],
   "testMatch": [
-    "<rootDir>/src/test/ts/*.ts"
+    "<rootDir>/src/test/ts/*.ts",
+    "<rootDir>/src/test/js/*.js"
   ],
   "testPathIgnorePatterns": [
     "/node_modules/",
