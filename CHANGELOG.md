@@ -1,0 +1,18 @@
+# 1.0.0 (2019-04-17)
+
+
+### Bug Fixes
+
+* **package:** add missed tslib ([a810770](https://github.com/qiwi/protopipe/commit/a810770))
+
+
+### Features
+
+* **executor:** support both sync / async execution modes ([36a4912](https://github.com/qiwi/protopipe/commit/36a4912)), closes [#10](https://github.com/qiwi/protopipe/issues/10)
+* **protopipe:** add default traverser, handler & parser impls ([43c977a](https://github.com/qiwi/protopipe/commit/43c977a))
+* add configurable parser ([77217a6](https://github.com/qiwi/protopipe/commit/77217a6)), closes [#15](https://github.com/qiwi/protopipe/issues/15)
+* add default executor ([dbd8a92](https://github.com/qiwi/protopipe/commit/dbd8a92))
+* add Graph class ([068220f](https://github.com/qiwi/protopipe/commit/068220f)), closes [#9](https://github.com/qiwi/protopipe/issues/9)
+* add Protopipe class 🎉 ([e2b02a5](https://github.com/qiwi/protopipe/commit/e2b02a5))
+* expose graph features ([18a5620](https://github.com/qiwi/protopipe/commit/18a5620)), closes [#17](https://github.com/qiwi/protopipe/issues/17)
+* introduce IGraphOperator iface ([f872196](https://github.com/qiwi/protopipe/commit/f872196))
