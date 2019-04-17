@@ -4,6 +4,7 @@ import {
   IGraph,
   IVertex,
   IGraphIncidentor,
+  IGraphFeatures,
 } from './interface'
 
 export default class Graph implements IGraph {
@@ -11,13 +12,21 @@ export default class Graph implements IGraph {
   edges: Array<IEdge>
   vertexes: Array<IVertex>
   incidentor: IGraphIncidentor
+  features: IGraphFeatures
 
   constructor(params: IGraphParams) {
-    const {vertexes, edges, incidentor} = params
+    const {vertexes, edges, incidentor, features} = params
 
     this.vertexes = vertexes
     this.edges = edges
     this.incidentor = incidentor
+    this.features = features || Graph.featureDetector(params)
+  }
+
+  static featureDetector(graph: IGraph | IGraphParams): IGraphFeatures {
+    return {
+      empty: graph.edges.length === 0,
+    }
   }
 
 }

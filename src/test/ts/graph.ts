@@ -8,6 +8,7 @@ import {
   IVertex,
   IEdge,
   IEdgeListIncidentor,
+  IGraphFeatures,
 } from '../../main/ts/interface'
 
 describe('graph', () => {
@@ -15,14 +16,16 @@ describe('graph', () => {
     it('returns proper instance', () => {
       const vertexes: Array<IVertex> = []
       const edges: Array<IEdge> = []
+      const features: IGraphFeatures = {}
       const incidentor: IEdgeListIncidentor = {
         type: 'EDGE_LIST',
-        representation: [],
+        representation: {},
       }
       const graphParams: IGraphParams = {
         vertexes,
         edges,
         incidentor,
+        features,
       }
       const graph: IGraph = new Graph(graphParams)
 
@@ -30,6 +33,7 @@ describe('graph', () => {
       expect(graph.vertexes).toBe(vertexes)
       expect(graph.edges).toBe(edges)
       expect(graph.incidentor).toBe(incidentor)
+      expect(graph.features).toBe(features)
     })
   })
 })

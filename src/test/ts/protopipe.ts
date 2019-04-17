@@ -23,7 +23,7 @@ describe('Protopipe', () => {
       type: 'EDGE_LIST',
       representation: {
         'AB': ['A', 'B'],
-        'BC': ['B', 'C']
+        'BC': ['B', 'C'],
       },
     },
   })
@@ -102,7 +102,7 @@ describe('Protopipe', () => {
               type: 'EDGE_LIST',
               representation: {
                 'AB': ['A', 'B'],
-                'BC': ['B', 'C']
+                'BC': ['B', 'C'],
               },
             },
           },

@@ -51,7 +51,16 @@ export type IArrow = {
   tail: IVertex
 }
 
-export type IGraphParams = IGraph
+export type IGraphParams = {
+  vertexes: Array<IVertex>,
+  edges: Array<IEdge>,
+  incidentor: IGraphIncidentor,
+  features?: IGraphFeatures
+}
+
+export type IGraph = IGraphParams & {
+  features?: IGraphFeatures // TODO make required
+}
 
 export type IGraphIncidentorType = string
 
@@ -90,12 +99,6 @@ export type IEdgeListIncidentor = IGraphIncidentor & {
   representation: {
     [key: string]: [IVertex, IVertex]
   }
-}
-
-export interface IGraph {
-  vertexes: Array<IVertex>,
-  edges: Array<IEdge>,
-  incidentor: IGraphIncidentor
 }
 
 export type ITraverserInput = IInput & {
