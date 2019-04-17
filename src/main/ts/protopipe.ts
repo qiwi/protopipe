@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 import {
   IGraph,
   IHandler,
@@ -16,6 +18,10 @@ import {
 
 import _executor from './executor'
 
+/**
+ * Basic IGraphOperator, IProtopipe implementation for data processing.
+ * @class Protopipe
+ */
 export class Protopipe implements IProtopipe, IGraphOperator {
 
   graph: IGraph

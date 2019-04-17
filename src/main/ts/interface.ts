@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 export type IAny = any
 
 export type IAnyMap = {

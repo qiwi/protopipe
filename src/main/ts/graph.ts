@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 import {
   IEdge,
   IGraphParams,
@@ -7,6 +9,10 @@ import {
   IGraphFeatures,
 } from './interface'
 
+/**
+ * Basic Graph constructor. Stores vertexes, edges collections, features and incidentor.
+ * @class Graph
+ */
 export default class Graph implements IGraph {
 
   edges: Array<IEdge>

@@ -18,7 +18,7 @@
     "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
     "test_with_report": "yarn test && yarn coveralls_push",
     "coveralls_push": "cat ./coverage/lcov.info | coveralls",
-    "docs": "typedoc src/main --ignoreCompilerErrors || exit 0"
+    "docs": "typedoc --readme README.md --tsconfig tsconfig.build.json src/main --ignoreCompilerErrors || exit 0"
   },
   "repository": {
     "type": "git",
@@ -56,10 +56,11 @@
     "semantic-release": "^15.13.3",
     "ts-jest": "^24.0.2",
     "tslint": "^5.15.0",
+    "tslint-config-qiwi": "^1.0.1",
     "typedoc": "^0.14.2",
+    "typedoc-plugin-external-module-name": "^2.0.0",
     "typescript": "^3.4.3",
-    "typescript-eslint-parser": "^22.0.0",
-    "tslint-config-qiwi": "^1.0.1"
+    "typescript-eslint-parser": "^22.0.0"
   },
   "release": {
     "branch": "master",
