@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/qiwi/protopipe/compare/v1.0.0...v1.0.1) (2019-04-17)
+
+
+### Performance Improvements
+
+* **package:** exclude src from published package ([4ad1977](https://github.com/qiwi/protopipe/commit/4ad1977))
+
 # 1.0.0 (2019-04-17)
 
 
