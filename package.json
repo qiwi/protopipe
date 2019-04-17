@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "Graph-based data processor",
   "main": "lib/es5/index.js",
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "lib",
+    "typings"
+  ],
   "scripts": {
     "jest": "jest -w 2 --config=jest.config.json",
     "lint": "tslint -p tsconfig.json src/**/*.ts --fix",
     "test": "yarn lint && yarn jest",
     "clean": "rm -rf lib typings",
-    "build": "yarn clean && yarn build_es5 && yarn build_es6 && yarn build_ts && yarn libdef",
+    "build": "yarn clean && yarn build_es5 && yarn build_es6 && yarn build_ts && yarn libdef && yarn docs",
     "build_es5": "mkdir -p lib/es5 && tsc -p tsconfig.build.json --target ES5 --outDir lib/es5",
     "build_es6": "mkdir -p lib/es6 && tsc -p tsconfig.build.json --target ES6 --outDir lib/es6",
     "build_ts": "cp -r src/main/ts/ lib/ts/",
@@ -38,6 +44,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@qiwi/semantic-release-gh-pages-plugin": "^1.6.2",
     "@qiwi/substrate": "^1.9.1",
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
@@ -67,7 +74,8 @@
     "verifyConditions": [
       "@semantic-release/changelog",
       "@semantic-release/npm",
-      "@semantic-release/git"
+      "@semantic-release/git",
+      "@qiwi/semantic-release-gh-pages-plugin"
     ],
     "prepare": [
       "@semantic-release/changelog",
@@ -76,7 +84,8 @@
     ],
     "publish": [
       "@semantic-release/npm",
-      "@semantic-release/github"
+      "@semantic-release/github",
+      "@qiwi/semantic-release-gh-pages-plugin"
     ]
   }
 }
