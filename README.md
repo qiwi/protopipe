@@ -52,7 +52,9 @@ const result = protopipe.process({data: 'foo'}).data.count // 2
 
 ## Definitions and contracts
 * Vertex is a graph atom.
-* Edge — bond connecting two vertices.
+* Edge — bond.
+* Incidentor — the _rule_ of connecting vertexes and edges.
+* Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and edges collections, features and incidentor.
 * Sequence — any possible transition.
     * Walk: vertices may repeat, edges may repeat (closed / open)
     * Trail: vertices may repeat, edges cannot repeat (open)
@@ -61,11 +63,10 @@ const result = protopipe.process({data: 'foo'}).data.count // 2
     * Cycle : vertices cannot repeat, edges cannot repeat (closed)
 * Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)
 * Handler — lambda-function, which implements [`IHandler`](./src/main/ts/interface.ts) iface.
-* Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and edges collections.
 
 ### IGraph
 ```javascript
-export type IGraph2 = {
+export type IGraph = {
   vertexes: Array<IVertex>,
   edges: Array<IEdge>,
   incidentor: IGraphIncidentor
