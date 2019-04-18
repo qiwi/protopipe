@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/qiwi/protopipe/compare/v1.0.1...v1.1.0) (2019-04-18)
+
+
+### Features
+
+* allow executor to split and merge data streams ([4dfc9f0](https://github.com/qiwi/protopipe/commit/4dfc9f0)), closes [#4](https://github.com/qiwi/protopipe/issues/4) [#5](https://github.com/qiwi/protopipe/issues/5)
+
 ## [1.0.1](https://github.com/qiwi/protopipe/compare/v1.0.0...v1.0.1) (2019-04-17)
 
 
