@@ -8,14 +8,33 @@ export type IAnyMap = {
 
 export type IData = IAny
 
-export type ISequence = Array<IVertex>
+export type IPath = Array<IVertex | IPathArray>
+
+interface IPathArray extends Array<IPath> {}
+
+export type ISequence<N, T> = {
+  type: N,
+  data: T
+}
+
+export type IVertexSequence = ISequence<'VERTEX_SEQUENCE', Array<IVertex>>
+export type IEdgeSequence = ISequence<'EDGE_SEQUENCE', Array<IVertex>>
+
+export type ITraverserInput = {
+  sequence: ISequence<any, any>,
+  graph: IGraph
+}
+
+export type ITraverserOutput = Array<ISequence<any, any>> | null
+
+export type ITraverser = (input: ITraverserInput) => ITraverserOutput
 
 export type INil = null | undefined
 
 export type IMode = 'sync' | 'async' | undefined | null
 
 export type IMeta = {
-  sequence: ISequence
+  sequence: ISequence<any, any>
   mode?: IMode,
   [key: string]: IAny
 }
@@ -102,19 +121,6 @@ export type IEdgeListIncidentor = IGraphIncidentor & {
     [key: string]: [IVertex, IVertex]
   }
 }
-
-export type ITraverserInput = {
-  input: IInput,
-  graph: IGraph
-}
-
-export type ITraverserOutput = {
-  meta: IMeta,
-  data?: IData,
-  opts?: IOpts
-}
-
-export type ITraverser = (input: ITraverserInput) => ITraverserOutput | null
 
 export interface IProtopipeOpts {
   graph: IGraph

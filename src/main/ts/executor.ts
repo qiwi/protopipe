@@ -3,53 +3,51 @@
 import {
   IMode,
   IOutput,
-  ITraverserOutput,
   INil,
   IExecutor,
-  IExecutorContext, IInput,
+  IExecutorContext,
+  ISequence, IInput,
 } from './interface'
 
 export const ASYNC: IMode = 'async'
 
-function promisify<T>(result: T): Promise<T> {
-  return Promise.resolve(result)
-}
+export const promisify = (result: any): Promise<any> => Promise.resolve(result)
 
 export const processSync = (context: IExecutorContext): IOutput | INil => {
   const {input, graph, handler, traverser} = context
+  const paths = traverser({graph, sequence: input.meta.sequence})
 
-  let mixin: ITraverserOutput | INil
-  let next: IInput = input
+  if (paths === null) {
+    return input
+  }
 
-  while (true) {
-    mixin = traverser({graph, input: next})
-
-    if (mixin === null) {
-      return next
-    }
-
-    next = {...next, ...mixin}
+  return paths.map((sequence: ISequence<any, any>) => {
+    let next
+    next = {...input, meta: {...input.meta, sequence}}
     next = {...next, ...handler(next)}
 
-  }
+    return processSync({...context, input: next})
+  }).find((result) => result !== null)
+
 }
 
-export const processAsync = async(context: IExecutorContext): Promise<IOutput | INil> => {
+export const processAsync = (context: IExecutorContext): Promise<IOutput | INil> => {
+
   const {input, graph, handler, traverser} = context
+  const paths = traverser({graph, sequence: input.meta.sequence})
 
-  let mixin: ITraverserOutput | INil
-  let next: IInput = input
-
-  while (true) {
-    mixin = await promisify(traverser({graph, input: next}))
-
-    if (mixin === null) {
-      return next
-    }
-
-    next = {...next, ...mixin}
-    next = {...next, ...await promisify(handler(next))}
+  if (paths === null) {
+    return promisify(input)
   }
+
+  return Promise.all(paths.map((sequence: ISequence<any, any>) => {
+
+    const next: IInput = {...input, meta: {...input.meta, sequence}}
+
+    return promisify(handler(next))
+      .then(res => processAsync({...context, input: {...next, ...res}}))
+  }))
+    .then((results) => results.find((result) => result !== null))
 }
 
 export const process: IExecutor = (context) => {

@@ -11,7 +11,7 @@ import {
 } from '../../main/ts/interface'
 
 describe('executor', () => {
-  const input = {data: 'foo', meta: {sequence: []}, opts: {}}
+  const input: IInput = {data: 'foo', meta: {sequence: {type: 'chain', data: []}}, opts: {}}
   const graph = new Graph({
     edges: ['AB', 'BC'],
     vertexes: ['A', 'B', 'C'],
@@ -24,20 +24,20 @@ describe('executor', () => {
     },
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
-  const traverser = ({input: {meta}, graph}: ITraverserInput): ITraverserOutput | null => {
-    if (meta.sequence.length === 0) {
-      return {meta: {...meta, sequence: ['A']}}
+  const traverser = ({sequence, graph}: ITraverserInput): ITraverserOutput | null => {
+    if (sequence.data.length === 0) {
+      return [{type: 'chain', data: ['A']}]
     }
 
     const representation: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
-    const prev = meta.sequence[meta.sequence.length - 1]
+    const prev = sequence.data[sequence.data.length - 1]
     const next: IVertex | null = (representation.find(([head]) => head === prev) || [])[1] || null
 
     if (next === null) {
       return null
     }
 
-    return {meta: {...meta, sequence: [...meta.sequence, next]}}
+    return [{type: 'chain', data: [...sequence.data, next]}]
   }
 
   describe('SYNC', () => {
@@ -50,11 +50,14 @@ describe('executor', () => {
           count: 2,
         },
         meta: {
-          sequence: [
-            'A',
-            'B',
-            'C',
-          ],
+          sequence: {
+            type: 'chain',
+            data: [
+              'A',
+              'B',
+              'C',
+            ],
+          },
         },
       })
     })
@@ -63,9 +66,9 @@ describe('executor', () => {
   describe('ASYNC', () => {
     it('transits data from `source` to `target` vertex', async() => {
       const mode: IMode = 'async'
-      const input = {data: 'foo', meta: {sequence: [], mode}, opts: {}}
+      const input: IInput = {data: 'foo', meta: {sequence: {type: 'chain', data: []}, mode}, opts: {}}
       const handler: IHandler = ({data, meta}: IInput) => new Promise((resolve) => {
-        setTimeout(() => resolve({data: {path: (data.path || '') + meta.sequence.slice(-1)}}), 100)
+        setTimeout(() => resolve({data: {path: (data.path || '') + meta.sequence.data.slice(-1)}}), 100)
       })
       const res = executor({graph, handler, traverser, input})
 
@@ -76,11 +79,14 @@ describe('executor', () => {
         },
         meta: {
           mode: 'async',
-          sequence: [
-            'A',
-            'B',
-            'C',
-          ],
+          sequence: {
+            type: 'chain',
+            data: [
+              'A',
+              'B',
+              'C',
+            ],
+          },
         },
       })
     })

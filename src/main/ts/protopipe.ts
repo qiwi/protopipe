@@ -80,25 +80,26 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     } as IEdgeListIncidentor,
   }
 
-  static traverser: ITraverser = ({input: {meta}, graph}) => {
-    const {sequence} = meta
+  static traverser: ITraverser = ({sequence, graph}) => {
 
-    if (sequence.length === 0) {
+    if (sequence.data.length === 0) {
       if (graph.vertexes.length !== 0) {
-        return {
-          meta: {...meta, sequence: [graph.vertexes[0]]},
-        }
+        return [{
+          type: 'chain',
+          data: [graph.vertexes[0]],
+        }]
       }
     }
 
     const arcs: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
-    const prev = sequence[sequence.length - 1]
+    const prev = sequence.data[sequence.data.length - 1]
     const next: IVertex | null = (arcs.find(([head]) => head === prev) || [])[1] || null
 
     if (next) {
-      return {
-        meta: {...meta, sequence: [...meta.sequence, next]},
-      }
+      return [{
+        type: 'chain',
+        data: [...sequence.data, next],
+      }]
     }
 
     return null
