@@ -47,7 +47,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
       graph: this.graph,
       handler: this.handler,
       traverser: this.traverser,
-      ...input,
+      input,
     })
   }
 
@@ -80,7 +80,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     } as IEdgeListIncidentor,
   }
 
-  static traverser: ITraverser = ({meta, graph}) => {
+  static traverser: ITraverser = ({input: {meta}, graph}) => {
     const {sequence} = meta
 
     if (sequence.length === 0) {
@@ -108,7 +108,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
 
 export const protopipe = (...params: any[]) => (input: IInput): IExecutorOutput => {
   const opts = Protopipe.parser(...params)
-  const context = {...opts, ...input}
+  const context = {...opts, input}
 
   return opts.executor(context)
 }

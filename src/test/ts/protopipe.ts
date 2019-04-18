@@ -1,4 +1,5 @@
 import {
+  IEdgeListIncidentor,
   IExecutor,
   IExecutorContext,
   IExecutorOutput,
@@ -16,19 +17,21 @@ import executor from '../../main/ts/executor'
 
 describe('Protopipe', () => {
   const input = {data: 'foo', meta: {sequence: []}, opts: {}}
+  const edges = ['AB', 'BC']
+  const vertexes = ['A', 'B', 'C']
   const graph = new Graph({
-    edges: ['AB', 'BC'],
-    vertexes: ['A', 'B', 'C'],
+    edges,
+    vertexes,
     incidentor: {
       type: 'EDGE_LIST',
       representation: {
         'AB': ['A', 'B'],
         'BC': ['B', 'C'],
       },
-    },
+    } as IEdgeListIncidentor,
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
-  const traverser = ({meta, graph}: ITraverserInput): ITraverserOutput | null => {
+  const traverser = ({input: {meta}, graph}: ITraverserInput): ITraverserOutput | null => {
     if (meta.sequence.length === 0) {
       return {meta: {...meta, sequence: ['A']}}
     }
@@ -93,19 +96,19 @@ describe('Protopipe', () => {
       })
 
       describe('#traverser', () => {
-        const _input = {
-          data: {},
-          graph: {
-            edges: ['AB', 'BC'],
-            vertexes: ['A', 'B', 'C'],
-            incidentor: {
-              type: 'EDGE_LIST',
-              representation: {
-                'AB': ['A', 'B'],
-                'BC': ['B', 'C'],
-              },
+        const graph = {
+          edges: ['AB', 'BC'],
+          vertexes: ['A', 'B', 'C'],
+          incidentor: {
+            type: 'EDGE_LIST',
+            representation: {
+              'AB': ['A', 'B'],
+              'BC': ['B', 'C'],
             },
           },
+        }
+        const _input = {
+          data: {},
           meta: {
             sequence: [],
           },
@@ -114,10 +117,14 @@ describe('Protopipe', () => {
 
         it('resolves the first graph vertex as entry point (empty sequence)', () => {
           const input: ITraverserInput = {
-            ..._input,
-            meta: {
-              sequence: [],
+            graph,
+            input: {
+              ..._input,
+              meta: {
+                sequence: [],
+              },
             },
+
           }
 
           expect(Protopipe.traverser(input)).toEqual({
@@ -129,9 +136,12 @@ describe('Protopipe', () => {
 
         it('resolves next vertex by prev meta.sequence and graph declaration', () => {
           expect(Protopipe.traverser({
-            ..._input,
-            meta: {
-              sequence: ['B'],
+            graph,
+            input: {
+              ..._input,
+              meta: {
+                sequence: ['B'],
+              },
             },
           })).toEqual({
             meta: {
@@ -142,9 +152,12 @@ describe('Protopipe', () => {
 
         it('returns null if path is not found', () => {
           expect(Protopipe.traverser({
-            ..._input,
-            meta: {
-              sequence: ['D'],
+            graph,
+            input: {
+              ..._input,
+              meta: {
+                sequence: ['D'],
+              },
             },
           })).toEqual(null)
         })
@@ -174,8 +187,8 @@ describe('Protopipe', () => {
               representation: {},
             },
           })
-          const traverser: ITraverser = (input: ITraverserInput): ITraverserOutput => input
-          const executor: IExecutor = (context: IExecutorContext): IExecutorOutput => context
+          const traverser: ITraverser = (input: ITraverserInput): ITraverserOutput => input.input
+          const executor: IExecutor = (context: IExecutorContext): IExecutorOutput => context.input
           const params = {
             graph,
             handler,

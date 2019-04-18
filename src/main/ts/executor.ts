@@ -2,12 +2,11 @@
 
 import {
   IMode,
-  IInput,
   IOutput,
   ITraverserOutput,
   INil,
   IExecutor,
-  IExecutorContext,
+  IExecutorContext, IInput,
 } from './interface'
 
 export const ASYNC: IMode = 'async'
@@ -17,47 +16,44 @@ function promisify<T>(result: T): Promise<T> {
 }
 
 export const processSync = (context: IExecutorContext): IOutput | INil => {
-  const {meta, data, opts, graph, handler, traverser} = context
+  const {input, graph, handler, traverser} = context
 
-  let hasNext = true
-  let next: ITraverserOutput | INil
-  let res: IOutput | INil = null
-  let input: IInput = {opts, data, meta}
+  let mixin: ITraverserOutput | INil
+  let next: IInput = input
 
-  while (hasNext) {
-    next = traverser({graph, ...input, ...(res || {})})
+  while (true) {
+    mixin = traverser({graph, input: next})
 
-    if (next === null) {
-      hasNext = false
-      return res
+    if (mixin === null) {
+      return next
     }
 
-    res = {...input, ...next, ...handler({...input, ...(res || {}), ...next})}
+    next = {...next, ...mixin}
+    next = {...next, ...handler(next)}
+
   }
 }
 
 export const processAsync = async(context: IExecutorContext): Promise<IOutput | INil> => {
-  const {meta, data, opts, graph, handler, traverser} = context
+  const {input, graph, handler, traverser} = context
 
-  let hasNext = true
-  let next: ITraverserOutput | INil
-  let res: IOutput | INil = null
-  let input: IInput = {opts, data, meta}
+  let mixin: ITraverserOutput | INil
+  let next: IInput = input
 
-  while (hasNext) {
-    next = await promisify(traverser({graph, ...input, ...(res || {})}))
-    if (next === null) {
-      hasNext = false
-      return res
+  while (true) {
+    mixin = await promisify(traverser({graph, input: next}))
+
+    if (mixin === null) {
+      return next
     }
-    const _res: IOutput = await promisify(handler({...input, ...(res || {}), ...next}))
 
-    res = {...input, ...next, ..._res}
+    next = {...next, ...mixin}
+    next = {...next, ...await promisify(handler(next))}
   }
 }
 
 export const process: IExecutor = (context) => {
-  if (context.meta.mode === ASYNC) {
+  if (context.input.meta.mode === ASYNC) {
     return processAsync(context)
   }
 

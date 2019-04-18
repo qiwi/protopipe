@@ -24,7 +24,7 @@ describe('executor', () => {
     },
   })
   const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
-  const traverser = ({meta, graph}: ITraverserInput): ITraverserOutput | null => {
+  const traverser = ({input: {meta}, graph}: ITraverserInput): ITraverserOutput | null => {
     if (meta.sequence.length === 0) {
       return {meta: {...meta, sequence: ['A']}}
     }
@@ -42,7 +42,7 @@ describe('executor', () => {
 
   describe('SYNC', () => {
     it('transits data from `source` to `target` vertex', () => {
-      const res = executor({graph, handler, traverser, ...input})
+      const res = executor({graph, handler, traverser, input})
 
       expect(res).toEqual({
         opts: {},
@@ -67,7 +67,7 @@ describe('executor', () => {
       const handler: IHandler = ({data, meta}: IInput) => new Promise((resolve) => {
         setTimeout(() => resolve({data: {path: (data.path || '') + meta.sequence.slice(-1)}}), 100)
       })
-      const res = executor({graph, handler, traverser, ...input})
+      const res = executor({graph, handler, traverser, input})
 
       await expect(res).resolves.toEqual({
         opts: {},

@@ -103,7 +103,8 @@ export type IEdgeListIncidentor = IGraphIncidentor & {
   }
 }
 
-export type ITraverserInput = IInput & {
+export type ITraverserInput = {
+  input: IInput,
   graph: IGraph
 }
 
@@ -128,7 +129,9 @@ export type IProtopipeOptsNormalized = IProtopipeOpts & {
   executor: IExecutor
 }
 
-export interface IExecutorContext extends IProtopipeOpts, IInput {}
+export interface IExecutorContext extends IProtopipeOpts {
+  input: IInput
+}
 
 export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>
 
