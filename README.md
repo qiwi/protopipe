@@ -13,7 +13,6 @@ Graph-based data processor. [qiwi.github.io/protopipe](https://qiwi.github.io/pr
 We often come across the problem of atomic data processing ([logwrap](https://github.com/qiwi/logwrap), [uniconfig](https://github.com/qiwi/uniconfig), [cyclone](https://github.com/qiwi/cyclone), etc), and it seems to be useful to make the _one pipeline to rule them all_.
 Not universal, not high-performance. But dumb and clear.
 
-
 ## TL;DR
 #### Install
 ```bash
@@ -24,7 +23,7 @@ Not universal, not high-performance. But dumb and clear.
 ```javascript
 import { Protopipe } from 'protopipe'
 
-const input = {data: 'foo', meta: {sequence: []}, opts: {}}
+const input = {data: 'foo', meta: {sequence: {type: 'chain', data: []}}, opts: {}}
 const graph = new Graph({
   edges: ['AB', 'BC'],
   vertexes: ['A', 'B', 'C'],
@@ -43,7 +42,7 @@ const protopipe = new Protopipe({
   handler,
 })
 
-const result = protopipe.process({data: 'foo'}).data.count // 2
+const result = protopipe.process(input).data.count // 2
 ```
 
 ##### Features
@@ -155,7 +154,17 @@ Contains any reasonable execution directives (such as `mode`, `sequence`, etc).
 ```
 
 ### Sync / async
-Both. If handler returns a Promise then executor awaits until it will be resolved.
+Both. Pass `mode` flag as a part of `input.meta`. If handler returns a Promise then executor awaits until it will be resolved.
+```javascript
+const input = {
+  data: 'foo',
+  meta: {
+    sequence: {type: 'chain', data: []},
+    mode: 'ASYNC'
+  },
+  opts: {}
+}
+```
 
 ### Customization
 You're able to override everything.
