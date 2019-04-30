@@ -2,8 +2,6 @@
 
 import {
   IMode,
-  IOutput,
-  INil,
   IExecutor,
   IExecutorContext,
   ISequence,
@@ -16,7 +14,7 @@ import Stack from './stack'
 export const ASYNC: IMode = 'async'
 
 export const promisify = (result: any): Promise<any> => Promise.resolve(result)
-export const findResult = (results: Array<IOutput | INil>): any => results.find((result) => result !== null)
+export const findResult = (results: Array<any>): any => results.find((result) => result !== null)
 export const getStack = (context: IExecutorContext): IStack => context.stack || new Stack()
 
 export const process: IExecutor = (context) => {
@@ -26,6 +24,8 @@ export const process: IExecutor = (context) => {
   const paths = traverser({graph, sequence: input.meta.sequence})
 
   let next: IInput
+
+  stack.push(input)
 
   if (isAsyncMode) {
     if (paths === null) {
@@ -37,7 +37,6 @@ export const process: IExecutor = (context) => {
       next = {...input, meta: {...input.meta, sequence}}
 
       return promisify(handler(next))
-        .then(stack.push.bind(stack))
         .then(res => process({...context, stack, input: {...next, ...res}}))
     }))
       .then(findResult)
@@ -51,7 +50,7 @@ export const process: IExecutor = (context) => {
     next = {...input, meta: {...input.meta, sequence}}
     next = {...next, ...handler(next)}
 
-    return stack.push(process({...context, stack, input: next}))
+    return process({...context, stack, input: next})
   }))
 }
 
