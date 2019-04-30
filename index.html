@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@qiwi/cyclone</title>
+	<title>protopipe</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@qiwi/cyclone</a>
+					<a href="index.html" class="title">protopipe</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @qiwi/cyclone</h1>
+			<h1> protopipe</h1>
 		</div>
 	</div>
 </header>
@@ -79,7 +79,7 @@
 				<h4 id="usage">Usage</h4>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Protopipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'protopipe'</span>
 
-<span class="hljs-keyword">const</span> input = {<span class="hljs-attr">data</span>: <span class="hljs-string">'foo'</span>, <span class="hljs-attr">meta</span>: {<span class="hljs-attr">sequence</span>: []}, <span class="hljs-attr">opts</span>: {}}
+<span class="hljs-keyword">const</span> input = {<span class="hljs-attr">data</span>: <span class="hljs-string">'foo'</span>, <span class="hljs-attr">meta</span>: {<span class="hljs-attr">sequence</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'chain'</span>, <span class="hljs-attr">data</span>: []}}, <span class="hljs-attr">opts</span>: {}}
 <span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph({
   <span class="hljs-attr">edges</span>: [<span class="hljs-string">'AB'</span>, <span class="hljs-string">'BC'</span>],
   <span class="hljs-attr">vertexes</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>],
@@ -98,7 +98,7 @@
   handler,
 })
 
-<span class="hljs-keyword">const</span> result = protopipe.process({<span class="hljs-attr">data</span>: <span class="hljs-string">'foo'</span>}).data.count <span class="hljs-comment">// 2</span></code></pre>
+<span class="hljs-keyword">const</span> result = protopipe.process(input).data.count <span class="hljs-comment">// 2</span></code></pre>
 				<h5 id="features">Features</h5>
 				<ul>
 					<li>Sync / async execution modes.</li>
@@ -185,7 +185,15 @@
   [key: string]: IAny
 }</code></pre>
 				<h3 id="sync-async">Sync / async</h3>
-				<p>Both. If handler returns a Promise then executor awaits until it will be resolved.</p>
+				<p>Both. Pass <code>mode</code> flag as a part of <code>input.meta</code>. If handler returns a Promise then executor awaits until it will be resolved.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> input = {
+  <span class="hljs-attr">data</span>: <span class="hljs-string">'foo'</span>,
+  <span class="hljs-attr">meta</span>: {
+    <span class="hljs-attr">sequence</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'chain'</span>, <span class="hljs-attr">data</span>: []},
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">'ASYNC'</span>
+  },
+  <span class="hljs-attr">opts</span>: {}
+}</code></pre>
 				<h3 id="customization">Customization</h3>
 				<p>You&#39;re able to override everything.</p>
 			</div>
