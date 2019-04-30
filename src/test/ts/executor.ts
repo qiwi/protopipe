@@ -59,6 +59,21 @@ describe('executor', () => {
             ],
           },
         },
+        stack: {
+          _storage: [{
+            data: 'foo',
+            meta: {sequence: {type: 'chain', data: []}},
+            'opts': {},
+          }, {
+            data: {count: 0},
+            meta: {sequence: {type: 'chain', data: ['A']}},
+            opts: {},
+          }, {
+            data: {count: 1},
+            meta: {sequence: {type: 'chain', data: ['A', 'B']}},
+            opts: {},
+          }],
+        },
       })
     })
   })
@@ -87,6 +102,21 @@ describe('executor', () => {
               'C',
             ],
           },
+        },
+        stack: {
+          _storage: [{
+            data: 'foo',
+            meta: {mode: 'async', sequence: {type: 'chain', data: []}},
+            'opts': {},
+          }, {
+            data: {path: 'A'},
+            meta: {mode: 'async', sequence: {type: 'chain', data: ['A']}},
+            opts: {},
+          }, {
+            data: {path: 'AB'},
+            meta: {mode: 'async', sequence: {type: 'chain', data: ['A', 'B']}},
+            opts: {},
+          }],
         },
       })
     })

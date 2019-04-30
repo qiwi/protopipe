@@ -84,6 +84,21 @@ describe('Protopipe', () => {
               ],
             },
           },
+          stack: {
+            _storage: [{
+              data: 'foo',
+              meta: {sequence: {type: 'chain', data: []}},
+              'opts': {},
+            }, {
+              data: {count: 0},
+              meta: {sequence: {type: 'chain', data: ['A']}},
+              opts: {},
+            }, {
+              data: {count: 1},
+              meta: {sequence: {type: 'chain', data: ['A', 'B']}},
+              opts: {},
+            }],
+          },
         })
       })
     })
@@ -238,6 +253,21 @@ describe('Protopipe', () => {
               'C',
             ],
           },
+        },
+        stack: {
+          _storage: [{
+            data: 'foo',
+            meta: {sequence: {type: 'chain', data: []}},
+            'opts': {},
+          }, {
+            data: {count: 0},
+            meta: {sequence: {type: 'chain', data: ['A']}},
+            opts: {},
+          }, {
+            data: {count: 1},
+            meta: {sequence: {type: 'chain', data: ['A', 'B']}},
+            opts: {},
+          }],
         },
       })
     })

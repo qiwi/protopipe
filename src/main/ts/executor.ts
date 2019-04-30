@@ -3,24 +3,27 @@
 import {
   IMode,
   IExecutor,
-  IExecutorContext,
   ISequence,
   IInput,
   IStack,
+  IExecutorContext,
+  IExecutorOutput,
 } from './interface'
 
 import Stack from './stack'
 
+type IExecutorContextExtended = IExecutorContext & {stack: IStack}
+
 export const ASYNC: IMode = 'async'
 
 export const promisify = (result: any): Promise<any> => Promise.resolve(result)
-export const findResult = (results: Array<any>): any => results.find((result) => result !== null)
-export const getStack = (context: IExecutorContext): IStack => context.stack || new Stack()
+export const findResult = (results: Array<IExecutorOutput>): IExecutorOutput => results.find((result) => result !== null)
+export const updateSequence = (input: IInput, sequence: ISequence<any, any>): IInput => ({...input, meta: {...input.meta, sequence}})
+// export const assertTransition = (context) => {}
 
-export const process: IExecutor = (context) => {
-  const {input, graph, handler, traverser} = context
+const _process = (context: IExecutorContextExtended): IExecutorOutput => {
+  const {input, graph, handler, traverser, stack} = context
   const isAsyncMode = context.input.meta.mode === ASYNC
-  const stack = getStack(context)
   const paths = traverser({graph, sequence: input.meta.sequence})
 
   let next: IInput
@@ -29,29 +32,44 @@ export const process: IExecutor = (context) => {
 
   if (isAsyncMode) {
     if (paths === null) {
-      return promisify(input)
+      return promisify(null)
     }
 
     return Promise.all(paths.map((sequence: ISequence<any, any>) => {
 
-      next = {...input, meta: {...input.meta, sequence}}
+      next = updateSequence(input, sequence)
 
       return promisify(handler(next))
-        .then(res => process({...context, stack, input: {...next, ...res}}))
+        .then(res => _process({...context, stack, input: {...next, ...res}}))
     }))
       .then(findResult)
   }
 
   if (paths === null) {
-    return input
+    return null
   }
 
   return findResult(paths.map((sequence: ISequence<any, any>) => {
-    next = {...input, meta: {...input.meta, sequence}}
+    next = updateSequence(input, sequence)
     next = {...next, ...handler(next)}
 
-    return process({...context, stack, input: next})
+    return _process({...context, stack, input: next})
   }))
 }
+
+export const process: IExecutor = (context) => {
+  const stack: IStack = new Stack()
+  const _context: IExecutorContextExtended = {...context, stack}
+
+  if (context.input.meta.mode === ASYNC) {
+    return promisify(_process(_context)).then(extractResultFromStack.bind(null, stack))
+  }
+
+  _process(_context)
+
+  return extractResultFromStack(stack)
+}
+
+export const extractResultFromStack = (stack: IStack) => ({...stack.pop(), stack})
 
 export default process

@@ -59,7 +59,8 @@ export type IInput = {
 export type IOutput = {
   data: IData
   meta?: IMeta
-  opts?: IOpts
+  opts?: IOpts,
+  stack?: IStack
 }
 
 export type IHandler = (input: IInput) => IOutput | Promise<IOutput>
@@ -145,8 +146,7 @@ export type IProtopipeOptsNormalized = IProtopipeOpts & {
 }
 
 export interface IExecutorContext extends IProtopipeOpts {
-  input: IInput,
-  stack?: IStack
+  input: IInput
 }
 
 export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>
