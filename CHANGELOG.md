@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/qiwi/protopipe/compare/v1.1.0...v1.2.0) (2019-04-30)
+
+
+### Features
+
+* **executor:** mixin stack data to result ([301d861](https://github.com/qiwi/protopipe/commit/301d861)), closes [#19](https://github.com/qiwi/protopipe/issues/19)
+
+
+### Performance Improvements
+
+* **executor:** optimize stack injection ([ad308ac](https://github.com/qiwi/protopipe/commit/ad308ac))
+
 # [1.1.0](https://github.com/qiwi/protopipe/compare/v1.0.1...v1.1.0) (2019-04-18)
 
 
