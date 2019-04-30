@@ -6,6 +6,15 @@ export type IAnyMap = {
   [key: string]: IAny
 }
 
+export interface IStack {
+  get(index: number): any
+  push(...items: Array<any>): any
+  pop(): any
+  shift(): any
+  size(): number
+  filter(cb: (item: any) => boolean): Array<any>
+}
+
 export type IData = IAny
 
 export type IPath = Array<IVertex | IPathArray>
@@ -136,7 +145,8 @@ export type IProtopipeOptsNormalized = IProtopipeOpts & {
 }
 
 export interface IExecutorContext extends IProtopipeOpts {
-  input: IInput
+  input: IInput,
+  stack?: IStack
 }
 
 export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>

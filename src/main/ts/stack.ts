@@ -1,9 +1,11 @@
 /** @module protopipe */
 
+import {IStack} from './interface'
+
 /**
  * @ignore
  */
-export default class Stack {
+export default class Stack implements IStack{
 
   private _storage: Array<any>
   constructor(...args: Array<any>) {
