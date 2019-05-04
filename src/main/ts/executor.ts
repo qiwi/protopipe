@@ -11,15 +11,14 @@ import {
 } from './interface'
 
 import Stack from './stack'
+import {promisify} from './util'
 
 type IExecutorContextExtended = IExecutorContext & {stack: IStack}
 
 export const ASYNC: IMode = 'async'
 
-export const promisify = (result: any): Promise<any> => Promise.resolve(result)
 export const findResult = (results: Array<IExecutorOutput>): IExecutorOutput => results.find((result) => result !== null)
 export const updateSequence = (input: IInput, sequence: ISequence<any, any>): IInput => ({...input, meta: {...input.meta, sequence}})
-// export const assertTransition = (context) => {}
 
 const _process = (context: IExecutorContextExtended): IExecutorOutput => {
   const {input, graph, handler, traverser, stack} = context
