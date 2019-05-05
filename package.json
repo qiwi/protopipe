@@ -32,6 +32,14 @@
   },
   "keywords": [
     "protopipe",
+    "graph processor",
+    "graph",
+    "dgraph",
+    "vertex",
+    "edge",
+    "arch",
+    "sequence",
+    "gdd",
     "lambda"
   ],
   "author": "Anton Golub <mailbox@antongolub.ru>",
