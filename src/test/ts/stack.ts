@@ -24,6 +24,12 @@ describe('stack', () => {
       })
     })
 
+    describe('#last', () => {
+      it('returns the last element', () => {
+        expect(stack.last()).toBe('qux')
+      })
+    })
+
     describe('#get', () => {
       it('gets item by index', () => {
         expect(stack.get(0)).toBe('bar')

@@ -69,6 +69,6 @@ export const process: IExecutor = (context) => {
   return extractResultFromStack(stack)
 }
 
-export const extractResultFromStack = (stack: IStack) => ({...stack.pop(), stack})
+export const extractResultFromStack = (stack: IStack) => ({...stack.last(), stack})
 
 export default process

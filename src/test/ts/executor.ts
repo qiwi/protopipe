@@ -72,6 +72,10 @@ describe('executor', () => {
             data: {count: 1},
             meta: {sequence: {type: 'chain', data: ['A', 'B']}},
             opts: {},
+          }, {
+            data: {count: 2},
+            meta: {sequence: {type: 'chain', data: ['A', 'B', 'C']}},
+            opts: {},
           }],
         },
       })
@@ -115,6 +119,10 @@ describe('executor', () => {
           }, {
             data: {path: 'AB'},
             meta: {mode: 'async', sequence: {type: 'chain', data: ['A', 'B']}},
+            opts: {},
+          }, {
+            data: {path: 'ABC'},
+            meta: {mode: 'async', sequence: {type: 'chain', data: ['A', 'B', 'C']}},
             opts: {},
           }],
         },

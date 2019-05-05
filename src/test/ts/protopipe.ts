@@ -97,6 +97,10 @@ describe('Protopipe', () => {
               data: {count: 1},
               meta: {sequence: {type: 'chain', data: ['A', 'B']}},
               opts: {},
+            }, {
+              data: {count: 2},
+              meta: {sequence: {type: 'chain', data: ['A', 'B', 'C']}},
+              opts: {},
             }],
           },
         })
@@ -266,6 +270,10 @@ describe('Protopipe', () => {
           }, {
             data: {count: 1},
             meta: {sequence: {type: 'chain', data: ['A', 'B']}},
+            opts: {},
+          }, {
+            data: {count: 2},
+            meta: {sequence: {type: 'chain', data: ['A', 'B', 'C']}},
             opts: {},
           }],
         },
