@@ -134,7 +134,7 @@ export type IEdgeListIncidentor = IGraphIncidentor & {
   }
 }
 
-export interface IProtopipeOpts {
+export interface IProtopipeParams {
   graph: IGraph
   handler?: IHandler,
   traverser?: ITraverser,
@@ -143,11 +143,13 @@ export interface IProtopipeOpts {
   [key: string]: IAny
 }
 
-export interface IProtopipeOptsNormalized extends IProtopipeOpts {
-  executor: IExecutor
+export interface IProtopipeParamsNormalized extends IProtopipeParams {
+  executor: IExecutor,
+  handler: IHandler,
+  traverser: ITraverser
 }
 
-export interface IExecutorContext extends IProtopipeOpts {
+export interface IExecutorContext extends IProtopipeParamsNormalized {
   input: IInput
 }
 
@@ -155,8 +157,8 @@ export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>
 
 export type IExecutor = (executorContext: IExecutorContext) => IExecutorOutput
 
-export interface IProtopipe extends IProtopipeOptsNormalized {
+export interface IProtopipe extends IProtopipeParamsNormalized {
   process: (input: IInput) => IExecutorOutput
 }
 
-export type IParser = (...params: Array<IAny>) => IProtopipeOptsNormalized
+export type IParser = (...params: Array<IAny>) => IProtopipeParamsNormalized

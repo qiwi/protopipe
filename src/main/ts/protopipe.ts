@@ -8,8 +8,8 @@ import {
   IInput,
   IExecutorOutput,
   IProtopipe,
-  IProtopipeOpts,
-  IProtopipeOptsNormalized,
+  IProtopipeParams,
+  IProtopipeParamsNormalized,
   IExecutor,
   IGraphOperator,
   IGraphOperationMap,
@@ -49,12 +49,13 @@ export class Protopipe implements IProtopipe, IGraphOperator {
       graph: this.graph,
       handler: this.handler,
       traverser: this.traverser,
+      executor: this.executor,
       input,
     })
   }
 
-  static parser(...params: any[]): IProtopipeOptsNormalized {
-    const opts: IProtopipeOpts = params[0]
+  static parser(...params: any[]): IProtopipeParamsNormalized {
+    const opts: IProtopipeParams = params[0]
 
     if (opts && typeof opts.parser === 'function') {
       return opts.parser(...params)
