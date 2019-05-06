@@ -135,8 +135,8 @@ export type IEdgeListIncidentor = IGraphIncidentor & {
 
 export interface IProtopipeOpts {
   graph: IGraph
-  handler: IHandler,
-  traverser: ITraverser,
+  handler?: IHandler,
+  traverser?: ITraverser,
   executor?: IExecutor
   parser?: IParser
   [key: string]: IAny
