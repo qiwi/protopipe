@@ -43,4 +43,8 @@ export default class Stack implements IStack{
     return this._storage[this.size() - 1]
   }
 
+  first(): any {
+    return this._storage[0]
+  }
+
 }

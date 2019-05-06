@@ -13,7 +13,8 @@ export interface IStack {
   shift(): any
   size(): number
   filter(cb: (item: any) => boolean): Array<any>
-  last(): any
+  last(): any,
+  first(): any,
 }
 
 export type IData = IAny

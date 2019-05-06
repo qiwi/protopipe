@@ -14,13 +14,17 @@ describe('stack', () => {
 
     describe('#push', () => {
       it('push adds new item to stack', () => {
-        const foo = 'bar'
-
-        expect(stack.push(foo)).toBe('bar')
+        expect(stack.push('bar')).toBe('bar')
       })
 
-      it('appends sevaral items and returns the lasr', () => {
+      it('appends several items and returns the lasr', () => {
         expect(stack.push('baz', 'qux')).toBe('qux')
+      })
+    })
+
+    describe('#first', () => {
+      it('returns the first element', () => {
+        expect(stack.first()).toBe('bar')
       })
     })
 
