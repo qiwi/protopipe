@@ -1,6 +1,7 @@
 /** @module protopipe */
 
 import {
+  IAny,
   IGraph,
   IHandler,
   ITraverser,
@@ -29,6 +30,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
   traverser: ITraverser
   executor: IExecutor
   operations: IGraphOperationMap
+  [key: string]: IAny
 
   constructor(...params: any[]) {
     const {traverser, graph, handler, executor} = Protopipe.parser(...params)
@@ -59,11 +61,11 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     }
 
     return {
-      executor: this.executor,
-      handler: this.handler,
-      traverser: this.traverser,
-      graph: this.graph,
       ...opts,
+      executor: opts.executor || this.executor,
+      handler: opts.handler || this.handler,
+      traverser: opts.traverser || this.traverser,
+      graph: opts.graph || this.graph,
     }
   }
 

@@ -142,7 +142,7 @@ export interface IProtopipeOpts {
   [key: string]: IAny
 }
 
-export type IProtopipeOptsNormalized = IProtopipeOpts & {
+export interface IProtopipeOptsNormalized extends IProtopipeOpts {
   executor: IExecutor
 }
 
@@ -154,7 +154,7 @@ export type IExecutorOutput = IOutput | INil | Promise<IOutput | INil>
 
 export type IExecutor = (executorContext: IExecutorContext) => IExecutorOutput
 
-export interface IProtopipe extends IProtopipeOpts{
+export interface IProtopipe extends IProtopipeOptsNormalized {
   process: (input: IInput) => IExecutorOutput
 }
 
