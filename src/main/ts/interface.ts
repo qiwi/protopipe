@@ -6,6 +6,59 @@ export type IAnyMap = {
   [key: string]: IAny
 }
 
+export type IPath = Array<IVertex | IPathArray>
+
+interface IPathArray extends Array<IPath> {}
+
+export type ITypedValue<T, V> = {
+  type: T,
+  value: V
+}
+
+export type IStreamValue = {
+  meta: IMeta,
+  data: IAny
+}
+
+export type IAnySource = ITypedValue<IAny, IAny>
+export type IOptSource = ITypedValue<'OPTION', IAnyMap>
+export type IStreamSource = ITypedValue<'STREAM', IStreamValue>
+export type IGraphSource = ITypedValue<'GRAPH', IGraph>
+export type IMetaSource = ITypedValue<'META', IMeta>
+export type IEventSource = ITypedValue<'EVENT', IEvent>
+
+
+export type IActor = (...sources: Array<IStreamSource | IOptSource>) => IStreamSource[]
+export type IWalker = (...sources: Array<IMetaSource | IGraphSource>) => IMetaSource[]
+export type IResolver = (...sources: Array<IMetaSource | IStreamSource>) => IStreamSource[]
+
+export type IEvent = {
+  id: string,
+  name: string,
+  timestamp: number,
+  details?: IAny
+}
+
+export type ISnapshot = {
+  type: 'SNAPSHOT'
+  value: {
+    data: IAny,
+    ref: {
+      type: string,
+      id: string
+    },
+  }
+}
+export type IState = {
+  type: 'STATE',
+  value: Array<ISnapshot>
+}
+
+
+
+
+export type IProcessor = (...sources: Array<IGraphSource | IState>) => IState
+
 export interface IStack {
   get(index: number): any
   push(...items: Array<any>): any
@@ -19,10 +72,6 @@ export interface IStack {
 
 export type IData = IAny
 
-export type IPath = Array<IVertex | IPathArray>
-
-interface IPathArray extends Array<IPath> {}
-
 export type ISequence<N, T> = {
   type: N,
   data: T
@@ -33,7 +82,8 @@ export type IEdgeSequence = ISequence<'EDGE_SEQUENCE', Array<IVertex>>
 
 export type ITraverserInput = {
   sequence: ISequence<any, any>,
-  graph: IGraph
+  graph: IGraph,
+  stack?: IStack // events stack, data stack — whatever
 }
 
 export type ITraverserOutput = Array<ISequence<any, any>> | null
@@ -65,7 +115,7 @@ export type IOutput = {
   stack?: IStack
 }
 
-export type IHandler = (input: IInput) => IOutput | Promise<IOutput>
+export type IHandler = (input: Array<IInput>) => IOutput | Promise<IOutput>
 
 export type IPipe = {
   handler: IHandler

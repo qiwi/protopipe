@@ -23,11 +23,11 @@ export const updateSequence = (input: IInput, sequence: ISequence<any, any>): II
 const _process = (context: IExecutorContextExtended): IExecutorOutput => {
   const {input, graph, handler, traverser, stack} = context
   const isAsyncMode = context.input.meta.mode === ASYNC
-  const paths = traverser({graph, sequence: input.meta.sequence})
+  const paths = traverser({graph, sequence: input.meta.sequence, stack})
 
   let next: IInput
 
-  stack.push(input)
+  stack.push(...input)
 
   if (isAsyncMode) {
     if (paths === null) {

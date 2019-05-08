@@ -42,7 +42,7 @@ describe('executor', () => {
 
   describe('SYNC', () => {
     it('transits data from `source` to `target` vertex', () => {
-      const res = executor({graph, handler, traverser, input})
+      const res = executor({graph, handler, traverser, input, executor})
 
       expect(res).toEqual({
         opts: {},
@@ -89,7 +89,7 @@ describe('executor', () => {
       const handler: IHandler = ({data, meta}: IInput) => new Promise((resolve) => {
         setTimeout(() => resolve({data: {path: (data.path || '') + meta.sequence.data.slice(-1)}}), 100)
       })
-      const res = executor({graph, handler, traverser, input})
+      const res = executor({graph, handler, traverser, input, executor})
 
       await expect(res).resolves.toEqual({
         opts: {},

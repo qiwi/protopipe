@@ -72,7 +72,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
 
   static executor: IExecutor = _executor
 
-  static handler: IHandler = (input) => input
+  static handler: IHandler = (input: Array<IInput>) => input[0]
 
   static graph: IGraph = {
     vertexes: [],
@@ -83,7 +83,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     } as IEdgeListIncidentor,
   }
 
-  static traverser: ITraverser = ({sequence, graph}) => {
+  static traverser: ITraverser = ({sequence, graph, stack}) => {
 
     if (sequence.data.length === 0) {
       if (graph.vertexes.length !== 0) {
@@ -96,16 +96,41 @@ export class Protopipe implements IProtopipe, IGraphOperator {
 
     const arcs: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
     const prev = sequence.data[sequence.data.length - 1]
-    const next: IVertex | null = (arcs.find(([head]) => head === prev) || [])[1] || null
+    const next: Array<IVertex> = arcs.reduce((memo: Array<IVertex>, [head, tail]: [IVertex, IVertex]) => {
+      if (head === prev) {
+        memo.push(tail)
+      }
 
-    if (next) {
-      return [{
-        type: 'chain',
-        data: [...sequence.data, next],
-      }]
+      return memo
+    }, [])
+
+    if (next.length === 0) {
+      return null
     }
 
-    return null
+    // checks that all sources was processed
+    // TODO use event stack
+    if (stack) {
+      const sources: Array<IVertex> = arcs.reduce((memo: Array<IVertex>, [head, tail]: [IVertex, IVertex]) => {
+        if (tail === prev) {
+          memo.push(head)
+        }
+
+        return memo
+      }, [])
+
+      const processed = stack.filter(({meta: {sequence}}) => sources.includes(sequence[sequence.length - 1]))
+
+      if (sources.length !== processed.length) {
+        return null
+      }
+    }
+
+    return next.map(tail => ({
+      type: 'chain',
+      data: [...sequence.data, tail],
+    }))
+
   }
 
 }
