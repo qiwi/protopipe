@@ -57,11 +57,19 @@ export class Pathfinder implements IGraphOperator {
     this.graph = graph
   }
 
-  getGraph: IGraphOperation = () => {
-    return this.graph
-  }
+  getDegree: IGraphOperation = (vertex: IVertex) => Pathfinder.getDegree(this.graph, vertex)
+  getInDegree: IGraphOperation = (vertex: IVertex) => Pathfinder.getInDegree(this.graph, vertex)
+  getOutDegree: IGraphOperation = (vertex: IVertex) => Pathfinder.getOutDegree(this.graph, vertex)
+
+  getEdgesOf: IGraphOperation = (vertex: IVertex) => Pathfinder.getEdgesOf(this.graph, vertex)
+  getInEdgesOf: IGraphOperation = (vertex: IVertex) => Pathfinder.getInEdgesOf(this.graph, vertex)
+  getOutEdgesOf: IGraphOperation = (vertex: IVertex) => Pathfinder.getOutEdgesOf(this.graph, vertex)
 
   static getDegree: IGraphStaticOperation = pathfinder.getDegree
   static getInDegree: IGraphStaticOperation = pathfinder.getInDegree
   static getOutDegree: IGraphStaticOperation = pathfinder.getOutDegree
+
+  static getEdgesOf: IGraphStaticOperation = pathfinder.getEdgesOf
+  static getInEdgesOf: IGraphStaticOperation = pathfinder.getInEdgesOf
+  static getOutEdgesOf: IGraphStaticOperation = pathfinder.getOutEdgesOf
 }
