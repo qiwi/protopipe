@@ -1,32 +1,82 @@
 import {
-  IAny, IEdge,
-  IGraph,
+  IAny,
   IVertex,
+  IEdge,
+  IGraph,
 } from '../interface'
 
-type IGraphOperation = (...params: IAny[]) => IAny
 
-type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
-
-interface IGraphOperator {
-  graph: IGraph,
-  [key: string]: IAny
+function staticImplements<T>() {
+  return <U extends T>(constructor: U) => {constructor};
 }
 
-interface IGraphStaticOperator {
+interface Type<T> {
+  new (...args: any[]): T;
+}
+
+export type IGraphOperation = (...params: IAny[]) => IAny
+
+export type IGraphOperator = {
+  [key: string]: IGraphOperation
+} & {
+  graph: IGraph,
+}
+
+export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
+
+export interface IGraphStaticOperator extends Type<IGraphOperator> {
   [key: string]: IGraphStaticOperation
 }
 
-export const pathfinder: IGraphStaticOperator = {
-  getInDegree(graph: IGraph, vertex: IVertex): number { return pathfinder.getInEdgesOf(graph, vertex).length },
-  getOutDegree(graph: IGraph, vertex: IVertex): number { return pathfinder.getOutEdgesOf(graph, vertex).length },
-  getDegree(graph: IGraph, vertex: IVertex): number { return pathfinder.getEdgesOf(graph, vertex).length },
+@staticImplements<IGraphStaticOperator>()
+export class Pathfinder {
+  graph: IGraph
+  [key: string]: IAny
 
-  getEdgesOf(graph: IGraph, vertex: IVertex) {
-    return [...pathfinder.getInEdgesOf(graph, vertex), ...pathfinder.getOutEdgesOf(graph, vertex)]
-  },
+  constructor(graph: IGraph) {
+    this.graph = graph
+  }
 
-  getOutEdgesOf(graph: IGraph, vertex: IVertex): Array<IEdge> {
+  getDegree(vertex: IVertex): number {
+    return Pathfinder.getDegree(this.graph, vertex)
+  }
+
+  getInDegree(vertex: IVertex): number {
+    return Pathfinder.getInDegree(this.graph, vertex)
+  }
+
+  getOutDegree(vertex: IVertex): number {
+    return Pathfinder.getOutDegree(this.graph, vertex)
+  }
+
+  getEdgesOf(vertex: IVertex): Array<IEdge> {
+    return Pathfinder.getEdgesOf(this.graph, vertex)
+  }
+
+  getInEdgesOf(vertex: IVertex): Array<IEdge> {
+    return Pathfinder.getInEdgesOf(this.graph, vertex)
+  }
+
+  getOutEdgesOf(vertex: IVertex): Array<IEdge> {
+    return Pathfinder.getOutEdgesOf(this.graph, vertex)
+  }
+
+  static getInDegree(graph: IGraph, vertex: IVertex): number {
+    return this.getInEdgesOf(graph, vertex).length
+  }
+  static getOutDegree(graph: IGraph, vertex: IVertex): number {
+    return this.getOutEdgesOf(graph, vertex).length
+  }
+
+  static getDegree (graph: IGraph, vertex: IVertex): number {
+    return this.getEdgesOf(graph, vertex).length
+  }
+
+  static getEdgesOf(graph: IGraph, vertex: IVertex): Array<IEdge> {
+    return [...this.getInEdgesOf(graph, vertex), ...this.getOutEdgesOf(graph, vertex)]
+  }
+
+  static getOutEdgesOf(graph: IGraph, vertex: IVertex): Array<IEdge> {
     const edges = graph.edges
 
     return edges.filter((edge: IEdge) => {
@@ -36,9 +86,9 @@ export const pathfinder: IGraphStaticOperator = {
         return true
       }
     })
-  },
+  }
 
-  getInEdgesOf(graph: IGraph, vertex: IVertex) {
+  static getInEdgesOf(graph: IGraph, vertex: IVertex): Array<IEdge> {
     return graph.edges.filter((edge: IEdge) => {
       const [, tail]: [IVertex, IVertex] = graph.incidentor.representation[edge]
 
@@ -47,29 +97,4 @@ export const pathfinder: IGraphStaticOperator = {
       }
     })
   }
-}
-
-export class Pathfinder implements IGraphOperator {
-  graph: IGraph
-  [key: string]: IAny
-
-  constructor(graph: IGraph) {
-    this.graph = graph
-  }
-
-  getDegree: IGraphOperation = (vertex: IVertex) => Pathfinder.getDegree(this.graph, vertex)
-  getInDegree: IGraphOperation = (vertex: IVertex) => Pathfinder.getInDegree(this.graph, vertex)
-  getOutDegree: IGraphOperation = (vertex: IVertex) => Pathfinder.getOutDegree(this.graph, vertex)
-
-  getEdgesOf: IGraphOperation = (vertex: IVertex) => Pathfinder.getEdgesOf(this.graph, vertex)
-  getInEdgesOf: IGraphOperation = (vertex: IVertex) => Pathfinder.getInEdgesOf(this.graph, vertex)
-  getOutEdgesOf: IGraphOperation = (vertex: IVertex) => Pathfinder.getOutEdgesOf(this.graph, vertex)
-
-  static getDegree: IGraphStaticOperation = pathfinder.getDegree
-  static getInDegree: IGraphStaticOperation = pathfinder.getInDegree
-  static getOutDegree: IGraphStaticOperation = pathfinder.getOutDegree
-
-  static getEdgesOf: IGraphStaticOperation = pathfinder.getEdgesOf
-  static getInEdgesOf: IGraphStaticOperation = pathfinder.getInEdgesOf
-  static getOutEdgesOf: IGraphStaticOperation = pathfinder.getOutEdgesOf
 }
