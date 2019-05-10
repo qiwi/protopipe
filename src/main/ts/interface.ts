@@ -35,19 +35,22 @@ export type IResolver = (...sources: Array<IMetaSource | IStreamSource>) => IStr
 export type IEvent = {
   id: string,
   name: string,
+  type: string,
   timestamp: number,
-  details?: IAny
+  snapshot: ISnapshot
 }
 
+export type IRef = IEdgeRef | IEdgeRef
+
+export type IEdgeRef = ITypedValue<'EDGE_REF', IAny>
+
+// Snapshot is a data atom
 export type ISnapshot = {
   type: 'SNAPSHOT'
-  value: {
-    data: IAny,
-    ref: {
-      type: string,
-      id: string
-    },
+  meta: {
+    refs: IRef[]
   }
+  value: IAny
 }
 export type IState = {
   type: 'STATE',

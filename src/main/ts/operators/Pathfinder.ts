@@ -25,7 +25,7 @@ export type IGraphOperator = {
 export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
 
 export interface IGraphStaticOperator extends Type<IGraphOperator> {
-  [key: string]: IGraphStaticOperation
+  // [key: string]: IGraphStaticOperation
 }
 
 @staticImplements<IGraphStaticOperator>()
