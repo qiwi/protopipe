@@ -1,10 +1,10 @@
 import {
   IAny,
-  IState
+  ISpace
 } from '../interface'
 
-type IReducer = (state: IState, ...payload: IAny[]) => {}
+export type IReducer = (space: ISpace, ...payload: IAny[]) => ISpace
 
-type IProcessor = {
-
+export type ISpaceOperator = {
+  space: ISpace
 }

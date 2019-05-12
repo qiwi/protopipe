@@ -58,6 +58,7 @@ const result = protopipe.process(input).data.count // 2
 * No consistency checks out of box: graph is traversed as is. But you're able to add custom assertions (for example, BFS-based check).
 
 ## Definitions and contracts
+* Space is a set with some added structure.
 * Vertex is a graph atom.
 * Edge — bond.
 * Incidentor — the _rule_ of connecting vertexes and edges.

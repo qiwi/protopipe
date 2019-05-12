@@ -24,7 +24,7 @@ describe('aqueduct', () => {
 
   describe('static', () => {
     describe('processor', () => {
-      it('processes state through graph', () => {
+      it('processes space through graph', () => {
         Aqueduct.processor({
           type: 'GRAPH',
           value: graph

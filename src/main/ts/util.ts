@@ -3,7 +3,7 @@
 import {
   IAnySource,
   IGraphSource,
-  IState
+  ISpace
 } from './interface'
 
 export const promisify = (result: any): Promise<any> => Promise.resolve(result)
@@ -15,8 +15,11 @@ export const findSourceByType = (type: string, ...sources: Array<IAnySource>): I
 }
 
 export const getGraph = (...sources: Array<IAnySource>): IGraphSource | undefined => findSourceByType('GRAPH', ...sources)
-export const getState = (...sources: Array<IAnySource>): IState | undefined => findSourceByType('STATE', ...sources)
+// export const getState = (...sources: Array<IAnySource>): ISpace | undefined => findSourceByType('SPACE', ...sources)
+export const getState = findSourceByType.bind(null,'SPACE') as (...sources: Array<IAnySource>) => ISpace | undefined
 
-export const getSourcesTo = (state: IState): Array<IAnySource> => {
+/*
+export const getSourcesTo = (space: ISpace): Array<IAnySource> => {
   return []
 }
+*/

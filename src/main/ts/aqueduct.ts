@@ -3,7 +3,7 @@
 import {
   IProcessor,
   IGraphSource,
-  IState
+  ISpace
 } from './interface'
 
 import {
@@ -12,7 +12,7 @@ import {
 } from './util'
 
 const _processor = (context) => {
-  const { graph, walker, mode, handler, sources, state } = context
+  const { graph, walker, mode, handler, sources, space } = context
 
   switch (sources.length) {
     case 0:
@@ -24,7 +24,7 @@ const _processor = (context) => {
 
   }
 
-  return state
+  return space
 
 }
 
@@ -38,12 +38,12 @@ export class Aqueduct {
   static processor: IProcessor = (...sources) => {
 
     const graph: IGraphSource | undefined = getGraph(...sources)
-    const state: IState | undefined = getState(...sources)
+    const space: ISpace | undefined = getState(...sources)
 
-    console.log('state=', state, 'graph=', graph)
+    console.log('space=', space, 'graph=', graph)
 
     return {
-      type: 'STATE',
+      type: 'SPACE',
       value: []
     }
   }

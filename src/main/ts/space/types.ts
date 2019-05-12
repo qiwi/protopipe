@@ -1,4 +1,8 @@
-import {IGraph, IVertex, IEdge} from './interface'
+import {
+  IGraph,
+  IVertex,
+  IEdge
+} from '../graph/'
 
 export type IAny = any
 
@@ -24,7 +28,7 @@ export type IEvent = ITypedValue<'EVENT', {
   ref?: IReference
 }>
 
-export type IAnyValue = ITypedValue<string, IAny>
+export type IAnyValue = ITypedValue<IAny, IAny>
 
 export type IPointer = ITypedValue<'POINTER', {
   graph: IGraph,

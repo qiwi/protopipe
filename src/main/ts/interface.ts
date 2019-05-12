@@ -52,15 +52,15 @@ export type ISnapshot = {
   }
   value: IAny
 }
-export type IState = {
-  type: 'STATE',
+export type ISpace = {
+  type: 'SPACE',
   value: Array<ISnapshot>
 }
 
 
 
 
-export type IProcessor = (...sources: Array<IGraphSource | IState>) => IState
+export type IProcessor = (...sources: Array<IGraphSource | ISpace>) => ISpace
 
 export interface IStack {
   get(index: number): any

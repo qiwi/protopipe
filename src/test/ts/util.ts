@@ -14,7 +14,7 @@ import {
   IEdgeListIncidentor,
   IGraphFeatures,
   IGraphSource,
-  IState,
+  ISpace,
   IVertex
 } from '../../main/ts/interface'
 
@@ -52,14 +52,14 @@ describe('util', () => {
   })
 
   describe('getState', () => {
-    it('extracts the first IState from sources', () => {
+    it('extracts the first ISpace from sources', () => {
       const sources: Array<IAnySource> = [{
         type: 'STATE',
         value: []
       }]
-      const stateSource: IState | undefined = getState(...sources)
+      const spaceSource: ISpace | undefined = getState(...sources)
 
-      expect(stateSource).toBe(sources[0])
+      expect(spaceSource).toBe(sources[0])
     })
 
     it('returns undefined if not found', () => {
