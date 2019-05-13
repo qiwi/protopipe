@@ -1,32 +1,19 @@
 import {
   IAny,
+  staticImplements
+} from '../../types'
+
+import {
   IVertex,
   IEdge,
   IGraph,
-} from '../interface'
+  IGraphStaticOperator
+} from '../types'
 
-function staticImplements<T>() {
-  return <U extends T>(constructor: U) => {constructor};
-}
-
-interface Type<T> {
-  new (...args: any[]): T;
-}
-
-export type IGraphOperation = (...params: IAny[]) => IAny
-
-export type IGraphOperator = {
-  [key: string]: IGraphOperation
-} & {
-  graph: IGraph,
-}
-
-export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
-
-export interface IGraphStaticOperator extends Type<IGraphOperator> {
-  // [key: string]: IGraphStaticOperation
-}
-
+/**
+ * Pathfinder.
+ * Class implements path resolving utils.
+ */
 @staticImplements<IGraphStaticOperator>()
 export class Pathfinder {
   graph: IGraph

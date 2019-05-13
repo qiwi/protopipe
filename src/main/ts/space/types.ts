@@ -9,7 +9,6 @@ import {
   ITypedValue
 } from '../types'
 
-
 export type IData = ITypedValue<'DATA', IAny>
 
 export type IOpt = ITypedValue<'OPT', IAny>

@@ -1,4 +1,10 @@
-import { ITypedValue } from '../types'
+/** @module protopipe */
+
+import {
+  ConstructorType,
+  IAny,
+  ITypedValue
+} from '../types'
 
 export type IGraphFeatures = {
   [key: string]: string | number | boolean | null
@@ -32,4 +38,18 @@ export type IGraphParams = {
 
 export type IGraph = IGraphParams & {
   features?: IGraphFeatures // TODO make required
+}
+
+export type IGraphOperation = (...params: IAny[]) => IAny
+
+export type IGraphOperator = {
+  [key: string]: IGraphOperation
+} & {
+  graph: IGraph,
+}
+
+export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
+
+export interface IGraphStaticOperator extends ConstructorType<IGraphOperator> {
+  // [key: string]: IGraphStaticOperation
 }
