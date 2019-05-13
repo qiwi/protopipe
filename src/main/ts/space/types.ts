@@ -4,16 +4,11 @@ import {
   IEdge
 } from '../graph/'
 
-export type IAny = any
+import {
+  IAny,
+  ITypedValue
+} from '../types'
 
-export type IAnyMap = {
-  [key: string]: IAny
-}
-
-export type ITypedValue<T, V> = {
-  type: T,
-  value: V
-}
 
 export type IData = ITypedValue<'DATA', IAny>
 
@@ -66,3 +61,9 @@ export type IDataRef = ITypedValue<'DATA_REF', {
 export type ISpace = ITypedValue<'SPACE', Array<IAnyValue>>
 
 export type IWalker = (pointer: IPointer) => Array<IPointer>
+
+export type IReducer = (space: ISpace, ...payload: IAny[]) => ISpace
+
+export type ISpaceOperator = {
+  space: ISpace
+}

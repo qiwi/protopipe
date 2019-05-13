@@ -8,7 +8,7 @@ describe('Pathfinder', () => {
     vertexes: ['A', 'B', 'C', 'D'],
     incidentor: {
       type: 'EDGE_LIST',
-      representation: {
+      value: {
         'AB': ['A', 'B'],
         'AC': ['A', 'C'],
         'BC': ['B', 'C'],

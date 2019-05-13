@@ -2,11 +2,11 @@ import {
   ISpace,
   findByType,
   findDataRefs,
+  Graph,
   IDataRef,
   IPointer,
   IData
-} from '../../../main/ts/space/'
-import {Graph} from '../../../main/ts'
+} from '../../../main/ts/'
 
 describe('space', () => {
   describe('extractors', () => {
@@ -23,7 +23,7 @@ describe('space', () => {
       vertexes: ['A', 'B', 'C', 'D'],
       incidentor: {
         type: 'EDGE_LIST',
-        representation: {
+        value: {
           'AB': ['A', 'B'],
           'AC': ['A', 'C'],
           'BC': ['B', 'C'],
@@ -63,17 +63,19 @@ describe('space', () => {
     })
 
     describe('#findDataRefs', () => {
-
-      const space: ISpace= {
-        type: 'SPACE',
-        value: [dataRef]
-      }
-
       it('gets the first value matching by type', () => {
+        const space: ISpace= {
+          type: 'SPACE',
+          value: [dataRef]
+        }
         expect(findDataRefs(space)).toBe(dataRef)
       })
 
       it('returns undefined if no match found', () => {
+        const space: ISpace= {
+          type: 'SPACE',
+          value: []
+        }
         expect(findDataRefs(space)).toBeUndefined()
       })
     })

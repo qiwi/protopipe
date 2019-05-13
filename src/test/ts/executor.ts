@@ -17,7 +17,7 @@ describe('executor', () => {
     vertexes: ['A', 'B', 'C'],
     incidentor: {
       type: 'EDGE_LIST',
-      representation: {
+      value: {
         'AB': ['A', 'B'],
         'BC': ['B', 'C'],
       },
@@ -29,9 +29,9 @@ describe('executor', () => {
       return [{type: 'chain', data: ['A']}]
     }
 
-    const representation: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.representation)
+    const value: Array<[IVertex, IVertex]> = Object.values(graph.incidentor.value)
     const prev = sequence.data[sequence.data.length - 1]
-    const next: IVertex | null = (representation.find(([head]) => head === prev) || [])[1] || null
+    const next: IVertex | null = (value.find(([head]) => head === prev) || [])[1] || null
 
     if (next === null) {
       return null

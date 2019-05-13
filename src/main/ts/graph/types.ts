@@ -1,3 +1,5 @@
+import { ITypedValue } from '../types'
+
 export type IGraphFeatures = {
   [key: string]: string | number | boolean | null
 }
@@ -6,10 +8,11 @@ export type IGraphIncidentorType = string
 
 export type IGraphRepresentation = any
 
-export type IGraphIncidentor = {
-  type: IGraphIncidentorType,
-  representation: IGraphRepresentation
-}
+export type IEdgeListIncidentor = ITypedValue<'EDGE_LIST', {
+  [key: string]: [IVertex, IVertex]
+}>
+
+export type IGraphIncidentor = ITypedValue<IGraphIncidentorType, IGraphRepresentation>
 
 export type IVertex = string
 

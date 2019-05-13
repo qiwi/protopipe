@@ -2,14 +2,11 @@ import {
   Graph,
   IGraph,
   IGraphParams,
-} from '../../main/ts/graph'
-
-import {
   IVertex,
   IEdge,
   IEdgeListIncidentor,
   IGraphFeatures,
-} from '../../main/ts/interface'
+} from '../../../main/ts/'
 
 describe('graph', () => {
   describe('constructor', () => {
@@ -19,7 +16,7 @@ describe('graph', () => {
       const features: IGraphFeatures = {}
       const incidentor: IEdgeListIncidentor = {
         type: 'EDGE_LIST',
-        representation: {},
+        value: {},
       }
       const graphParams: IGraphParams = {
         vertexes,

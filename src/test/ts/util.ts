@@ -26,7 +26,7 @@ describe('util', () => {
       const features: IGraphFeatures = {}
       const incidentor: IEdgeListIncidentor = {
         type: 'EDGE_LIST',
-        representation: {},
+        value: {},
       }
       const graphParams: IGraphParams = {
         vertexes,

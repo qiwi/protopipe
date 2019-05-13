@@ -1,8 +1,6 @@
 /** @module protopipe */
 
-import Protopipe from './protopipe'
-
+export * from './types'
 export * from './graph'
-export * from './protopipe'
-
-export default Protopipe
+export * from './space'
+export * from './processor'

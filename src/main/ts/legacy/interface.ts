@@ -177,12 +177,12 @@ export interface IGraphOperator {
 
 export type IGraphIncidentor = {
   type: IGraphIncidentorType,
-  representation: IGraphRepresentation
+  value: IGraphRepresentation
 }
 
 export type IEdgeListIncidentor = IGraphIncidentor & {
   type: 'EDGE_LIST',
-  representation: {
+  value: {
     [key: string]: [IVertex, IVertex]
   }
 }
