@@ -181,7 +181,7 @@ export type IGraphIncidentor = {
 }
 
 export type IEdgeListIncidentor = IGraphIncidentor & {
-  type: 'EDGE_LIST',
+  type: 'EDGE_LIST_INCDR',
   value: {
     [key: string]: [IVertex, IVertex]
   }

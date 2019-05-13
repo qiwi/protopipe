@@ -8,7 +8,7 @@ export type IGraphIncidentorType = string
 
 export type IGraphRepresentation = any
 
-export type IEdgeListIncidentor = ITypedValue<'EDGE_LIST', {
+export type IEdgeListIncidentor = ITypedValue<'EDGE_LIST_INCDR', {
   [key: string]: [IVertex, IVertex]
 }>
 

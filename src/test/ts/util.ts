@@ -25,7 +25,7 @@ describe('util', () => {
       const edges: Array<IEdge> = []
       const features: IGraphFeatures = {}
       const incidentor: IEdgeListIncidentor = {
-        type: 'EDGE_LIST',
+        type: 'EDGE_LIST_INCDR',
         value: {},
       }
       const graphParams: IGraphParams = {

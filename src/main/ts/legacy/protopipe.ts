@@ -78,7 +78,7 @@ export class Protopipe implements IProtopipe, IGraphOperator {
     vertexes: [],
     edges: [],
     incidentor: {
-      type: 'EDGE_LIST',
+      type: 'EDGE_LIST_INCDR',
       value: {},
     } as IEdgeListIncidentor,
   }

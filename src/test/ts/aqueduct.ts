@@ -10,7 +10,7 @@ describe('aqueduct', () => {
     edges: ['AB', 'AC', 'BC', 'BD', 'CD', 'AD'],
     vertexes: ['A', 'B', 'C', 'D'],
     incidentor: {
-      type: 'EDGE_LIST',
+      type: 'EDGE_LIST_INCDR',
       value: {
         'AB': ['A', 'B'],
         'AC': ['A', 'C'],
@@ -41,7 +41,7 @@ describe('aqueduct', () => {
     edges: ['AB', 'BC'],
     vertexes: ['A', 'B', 'C', 'D'],
     incidentor: {
-      type: 'EDGE_LIST',
+      type: 'EDGE_LIST_INCDR',
       value: {
         'AB': ['A', 'B'],
         'AC': ['A', 'C'],

@@ -25,7 +25,7 @@ describe('Protopipe', () => {
     edges,
     vertexes,
     incidentor: {
-      type: 'EDGE_LIST',
+      type: 'EDGE_LIST_INCDR',
       value: {
         'AB': ['A', 'B'],
         'BC': ['B', 'C'],
@@ -124,7 +124,7 @@ describe('Protopipe', () => {
           edges: ['AB', 'BC'],
           vertexes: ['A', 'B', 'C'],
           incidentor: {
-            type: 'EDGE_LIST',
+            type: 'EDGE_LIST_INCDR',
             value: {
               'AB': ['A', 'B'],
               'BC': ['B', 'C'],
@@ -168,7 +168,7 @@ describe('Protopipe', () => {
             vertexes: [],
             edges: [],
             incidentor: {
-              type: 'EDGE_LIST',
+              type: 'EDGE_LIST_INCDR',
               value: {},
             },
           })
@@ -182,7 +182,7 @@ describe('Protopipe', () => {
             edges: [],
             vertexes: [],
             incidentor: {
-              type: 'EDGE_LIST',
+              type: 'EDGE_LIST_INCDR',
               value: {},
             },
           })

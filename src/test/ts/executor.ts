@@ -16,7 +16,7 @@ describe('executor', () => {
     edges: ['AB', 'BC'],
     vertexes: ['A', 'B', 'C'],
     incidentor: {
-      type: 'EDGE_LIST',
+      type: 'EDGE_LIST_INCDR',
       value: {
         'AB': ['A', 'B'],
         'BC': ['B', 'C'],
