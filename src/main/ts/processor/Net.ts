@@ -6,26 +6,24 @@ import {
 import {IProcessorStaticOperator} from './types'
 import {
   ISpace,
-  Extractor
+  Extractor,
+  Injector,
+  IDataRef,
+  IAnyValue,
+  IPointer,
+  IRefReducer,
 } from '../space/'
 import {
   IGraph,
   IVertex,
   Pathfinder
 } from '../graph'
-/*import {Extra}
-
-const executor = (space: ISpace, mode: string, pointer: IPointer) => {
-
-}*/
-
 
 export type INetProcessorParams = {
   graph: IGraph
 }
 
 type ICxt = {
-  pathfinder: Pathfinder,
   queue: number,
   graph: IGraph,
   sync: boolean
@@ -46,33 +44,68 @@ export class NetProcessor {
   }
 
   impact(...targets: IImpactTarget[]) {
-console.log(targets)
-    //const vertexes: IVertex[] = Object.keys(input)
-    //const cxt: ICxt = this.getContext()
 
-   /* if (targets.length === 1) {
+    const cxt: ICxt = this.getContext()
 
-      cxt.queue++
-
+    if (targets.length === 1) {
       const target: IImpactTarget = targets[0]
+      let vertex: IVertex
+      let data: IAny
+      let res: IAny
 
       if (Array.isArray(target)) {
-        const [vertex, data]: [IVertex, IAny] = target
+        [vertex, data] = target
+        this.injectDataRef(vertex, data, cxt)
+      } else {
+        vertex = target
+      }
 
+      const handler: IRefReducer = this.getHandler(vertex)
+      const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(cxt.graph, vertex)
+      const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(cxt.graph, vertex)
+      const sources: IDataRef[] = Extractor.filter(
+        ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
+        this.space
+      )
+
+      if (sources.length === sourceVertexes.length) {
+        cxt.queue++
+        res = handler(...sources)
+
+        this.injectDataRef(vertex, res, cxt)
+
+        this.impact(...targetVertexes)
+        cxt.queue--
       }
 
 
-      const {pathfinder} = cxt
-
-      cxt.queue++
+    } else {
+      targets.map(target => this.impact(target))
     }
 
-    if (vertexes.length > 1) {
-      vertexes.map((vertex: IVertex) => this.impact({[vertex]: input[vertex]})) // TODO use .pick()?
+  }
+
+  injectDataRef(vertex: IVertex, data: IAny, cxt: ICxt) {
+    const pointer: IPointer = {
+      type: 'POINTER',
+      value: {
+        graph: cxt.graph,
+        vertex
+      }
     }
-*/
+    const dataRef: IDataRef = {
+      type: 'DATA_REF',
+      value: {
+        pointer,
+        value: data
+      }
+    }
 
-
+    Injector.upsert(
+      ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
+      this.space,
+      dataRef
+    )
   }
 
   getContext(): ICxt {
@@ -85,12 +118,21 @@ console.log(targets)
     return cxt.value
   }
 
+  getHandler(vertex: IVertex): IRefReducer {
+    return (Extractor.find(
+      ({type, value}: IAnyValue) => type === 'HANDLER_REF' && value.pointer.value.vertex === vertex,
+       this.space,
+    ) || {
+      value: {
+        value: (...args: IAny[]) => void args
+      }
+    }).value.value
+  }
+
   static parser({graph}: INetProcessorParams) {
 
-    const pathfinder = new Pathfinder(graph)
     const cxt: ICxt = {
       graph,
-      pathfinder,
       sync: true,
       queue: 0
     }

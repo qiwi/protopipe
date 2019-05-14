@@ -30,12 +30,14 @@ export type IPointer = ITypedValue<'POINTER', {
   edge?: IEdge
 }>
 
-export type IReference = ITypedValue<'REF', {
+export type IReference = ITypedValue<IAny, {
   pointer: IPointer,
   value: IAnyValue
 }>
 
-export type IHandler = ITypedValue<'HANDLER', (refs: Array<IReference>) => IDataRef>
+export type IRefReducer = (...refs: Array<IReference>) => IAny
+
+export type IHandler = ITypedValue<'HANDLER', IRefReducer>
 
 export type IHandlerRef = ITypedValue<'HANDLER_REF', {
   pointer: IPointer,

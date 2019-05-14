@@ -83,4 +83,28 @@ export class Pathfinder {
       }
     })
   }
+
+  static getInVertexes(graph: IGraph, vertex: IVertex): Array<IVertex> {
+    return graph.edges.reduce((memo: IVertex[], edge: IEdge) => {
+      const [head, tail]: [IVertex, IVertex] = graph.incidentor.value[edge]
+
+      if (tail === vertex) {
+        memo.push(head)
+      }
+
+      return memo
+    }, [])
+  }
+
+  static getOutVertexes(graph: IGraph, vertex: IVertex): Array<IVertex> {
+    return graph.edges.reduce((memo: IVertex[], edge: IEdge) => {
+      const [head, tail]: [IVertex, IVertex] = graph.incidentor.value[edge]
+
+      if (head === vertex) {
+        memo.push(tail)
+      }
+
+      return memo
+    }, [])
+  }
 }

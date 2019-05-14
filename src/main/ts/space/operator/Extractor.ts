@@ -7,6 +7,8 @@ import {
 
 import {IPredicate} from '../../types'
 
+export const filter = (predicate: IPredicate, space: ISpace): IAnyValue[] => space.value.filter(predicate)
+
 export const find = (predicate: IPredicate, space: ISpace): IAnyValue | undefined => space.value.find(predicate)
 
 export const findByType = (type: any, space: ISpace): IAnyValue | undefined => find((item: IAnyValue) => item.type === type, space)
@@ -18,6 +20,10 @@ export class Extractor implements ISpaceOperator {
 
   constructor(space: ISpace) {
     this.space = space
+  }
+
+  filter(predicate: IPredicate) {
+    return Extractor.filter(predicate, this.space)
   }
 
   find(predicate: IPredicate) {
@@ -37,4 +43,6 @@ export class Extractor implements ISpaceOperator {
   static findByType = findByType
 
   static findDataRef = findDataRef
+
+  static filter = filter
 }
