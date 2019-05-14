@@ -1,5 +1,7 @@
-import {Pathfinder} from '../../../main/ts/operators/Pathfinder'
-import {Graph} from '../../../main/ts/graph'
+import {
+  Graph,
+  Pathfinder
+} from '../../../../main/ts'
 
 describe('Pathfinder', () => {
 

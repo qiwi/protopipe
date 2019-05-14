@@ -1,1 +1,1 @@
-export { Extractor } from './Extractor'
+export { Pathfinder } from './Pathfinder'

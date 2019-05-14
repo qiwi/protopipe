@@ -10,6 +10,7 @@ import {
 } from './types'
 
 export * from './types'
+export * from './operator/index'
 
 /**
  * Basic Graph constructor. Stores vertexes, edges collections, features and incidentor.
