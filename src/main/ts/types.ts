@@ -16,3 +16,5 @@ export function staticImplements<T>() {
 export interface ConstructorType<T> {
   new (...args: any[]): T;
 }
+
+export type IPredicate = (...args: IAny[]) => boolean

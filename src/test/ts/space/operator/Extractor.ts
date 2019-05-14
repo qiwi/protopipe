@@ -60,6 +60,16 @@ describe('Extractor', () => {
 
   // describe('proto', () => {})
   describe('static', () => {
+    describe('#find', () => {
+      it('gets the first value matching by type', () => {
+        expect(Extractor.find(({type}) => type === 'FOO', space)).toBe(foo)
+      })
+
+      it('returns undefined if no match found', () => {
+        expect(Extractor.find(({type}) => type === 'BAR', space)).toBeUndefined()
+      })
+    })
+
     describe('#findByType', () => {
       it('gets the first value matching by type', () => {
         expect(Extractor.findByType('FOO', space)).toBe(foo)

@@ -1,8 +1,18 @@
-import {staticImplements, IAny} from '../types'
+import {
+  staticImplements,
+  IAny,
+  // IAnyMap
+} from '../types'
 import {IProcessorStaticOperator} from './types'
-import {ISpace} from '../space/'
-import {IGraph, Pathfinder} from '../graph'
-import {Extractor} from '../space/'
+import {
+  ISpace,
+  Extractor
+} from '../space/'
+import {
+  IGraph,
+  IVertex,
+  Pathfinder
+} from '../graph'
 /*import {Extra}
 
 const executor = (space: ISpace, mode: string, pointer: IPointer) => {
@@ -21,6 +31,8 @@ type ICxt = {
   sync: boolean
 }
 
+type IImpactTarget = IVertex | [IVertex, IAny]
+
 /**
  * Net processor.
  */
@@ -33,12 +45,34 @@ export class NetProcessor {
     this.space = NetProcessor.parser(params)
   }
 
-  impact() {
-    const cxt: ICxt = this.getContext()
+  impact(...targets: IImpactTarget[]) {
+console.log(targets)
+    //const vertexes: IVertex[] = Object.keys(input)
+    //const cxt: ICxt = this.getContext()
 
-    const {pathfinder} = cxt
+   /* if (targets.length === 1) {
 
-    cxt.queue++
+      cxt.queue++
+
+      const target: IImpactTarget = targets[0]
+
+      if (Array.isArray(target)) {
+        const [vertex, data]: [IVertex, IAny] = target
+
+      }
+
+
+      const {pathfinder} = cxt
+
+      cxt.queue++
+    }
+
+    if (vertexes.length > 1) {
+      vertexes.map((vertex: IVertex) => this.impact({[vertex]: input[vertex]})) // TODO use .pick()?
+    }
+*/
+
+
   }
 
   getContext(): ICxt {
