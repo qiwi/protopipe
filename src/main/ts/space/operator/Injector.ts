@@ -23,7 +23,9 @@ export const upsert = (predicate: IPredicate, space: ISpace, item: IAnyValue): I
   const target = find(predicate, space)
 
   if (target) {
-    return {...target, ...item}
+    // @ts-ignore
+    // tslint:disable-next-line
+    return Object.assign(target, item)
   }
 
   return push(space, item)
