@@ -26,7 +26,17 @@ export const upsert = (predicate: IPredicate, space: ISpace, item: IAnyValue): I
     return Object.assign(target, item)
   }
 
+  return push(space, item)
+}
+
+export const push = (space: ISpace, item: IAnyValue): IAnyValue => {
   space.value.push(item)
+
+  return item
+}
+
+export const unshift = (space: ISpace, item: IAnyValue): IAnyValue => {
+  space.value.unshift(item)
 
   return item
 }
@@ -75,4 +85,8 @@ export class Injector implements ISpaceOperator {
   static upsert = upsert
 
   static upsertDataRef = upsertDataRef
+
+  static push = push
+
+  static unshift = unshift
 }

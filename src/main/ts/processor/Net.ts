@@ -25,7 +25,6 @@ export type INetProcessorParams = {
 
 type ICxt = {
   queue: number,
-  graph: IGraph,
   sync: boolean,
   dp: IDecomposedPromise
 }
@@ -44,7 +43,10 @@ export class NetProcessor {
     this.space = NetProcessor.parser(params)
   }
 
-  private _impact(cxt: ICxt, ...targets: IImpactTarget[]) {
+  private static _impact(space: ISpace, ...targets: IImpactTarget[]) {
+    const cxt: ICxt = this.getContext(space)
+    const graph: IGraph = this.getGraph(space)
+
     if (targets.length === 1) {
       const target: IImpactTarget = targets[0]
       let vertex: IVertex
@@ -53,32 +55,32 @@ export class NetProcessor {
       if (Array.isArray(target)) {
         [vertex, data] = target
 
-        Injector.upsertDataRef(this.space, data, cxt.graph, vertex)
+        Injector.upsertDataRef(space, data, graph, vertex)
       } else {
         vertex = target
       }
 
-      const handler: IRefReducer = this.getHandler(vertex)
-      const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(cxt.graph, vertex)
-      const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(cxt.graph, vertex)
+      const handler: IRefReducer = this.getHandler(space, vertex)
+      const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
+      const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(graph, vertex)
       const sources: IDataRef[] = Extractor.filter(
         ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
-        this.space
+        space
       )
 
       if (sources.length === sourceVertexes.length) {
         cxt.queue++
 
         if (cxt.sync) {
-          Injector.upsertDataRef(this.space, handler(...sources), cxt.graph, vertex)
-          this._impact(cxt, ...targetVertexes)
+          Injector.upsertDataRef(space, handler(...sources), graph, vertex)
+          this._impact(space, ...targetVertexes)
           cxt.queue--
 
         } else {
           promisify(handler(...sources))
             .then(res => {
-              Injector.upsertDataRef(this.space, res, cxt.graph, vertex)
-              this._impact(cxt, ...targetVertexes)
+              Injector.upsertDataRef(space, res, graph, vertex)
+              this._impact(space, ...targetVertexes)
               cxt.queue--
             })
         }
@@ -88,63 +90,73 @@ export class NetProcessor {
 
 
     } else {
-      targets.map(target => this.impact(target))
+      targets.map(target => this._impact(space,target))
     }
   }
 
   impact(...targets: IImpactTarget[]) {
-
-    const cxt: ICxt = this.getContext()
-    const dp = getDecomposedPromise()
-
-
-
-
-
-
-    if (cxt.sync) {
-      return this.space
-    } else {
-
-    }
+    return NetProcessor.impact(this.space, ...targets)
   }
 
-  getContext(): ICxt {
-    const cxt = Extractor.findByType('CXT', this.space)
-
-
-    if (!cxt) {
-      throw new Error('CXT is required')
-    }
-
-    return cxt.value
-  }
-
-  createContext(): ICxt {
-    // const cxt = Extractor.findByType('CXT', this.space)
-    const dp = getDecomposedPromise()
-    const cxt = {
-      space: this.space,
-      queue: 0,
-      dp
-    }
-
-    if (!cxt) {
-      throw new Error('CXT is required')
-    }
-
-    return {...cxt.value, }
-  }
-
-  getHandler(vertex: IVertex): IRefReducer {
-    return (Extractor.find(
+  static getHandler(space: ISpace, vertex: IVertex): IRefReducer {
+    const handlerRef = Extractor.find(
       ({type, value}: IAnyValue) => type === 'HANDLER_REF' && value.pointer.value.vertex === vertex,
-       this.space,
-    ) || {
+       space,
+    ) || Extractor.find(
+      ({type, value}: IAnyValue) => type === 'HANDLER_REF' && !value.pointer.value.vertex,
+      space,
+    )
+
+    if (!handlerRef) {
+      throw new Error('HANDLER is required')
+    }
+
+    return handlerRef.value.value
+  }
+
+  static impact(space: ISpace, ...targets: IImpactTarget[]) {
+
+    this.attachContext(space)
+
+  }
+
+  static attachContext(space: ISpace): void {
+
+    if (Extractor.findByType('CXT', space)) {
+      throw new Error('There\'s no place for yet another one execution context')
+    }
+
+    Injector.unshift(space, {
+      type: 'CXT',
       value: {
-        value: (...args: IAny[]) => void args
+        sync: true,
+        queue: 0,
+        dp: getDecomposedPromise()
       }
-    }).value.value
+    })
+
+  }
+
+  static getContext(space: ISpace): ICxt {
+    const cxt = Extractor.findByType('CXT', space)
+
+
+    if (!cxt) {
+      throw new Error('CXT is required')
+    }
+
+    return cxt && cxt.value
+  }
+
+  static getGraph(space: ISpace): IGraph {
+    const graph = Extractor.findByType('GRAPH', space)
+
+
+    if (!graph) {
+      throw new Error('GRAPH is required')
+    }
+
+    return graph && graph.value
   }
 
   static parser({graph}: INetProcessorParams) {
