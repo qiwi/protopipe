@@ -3,13 +3,17 @@ import {Graph, NetProcessor} from '../../../main/ts'
 describe('NetProcessor', () => {
 
   const graph = new Graph({
-    edges: ['AB', 'BC'],
-    vertexes: ['A', 'B', 'C'],
+    edges: ['AB', 'AC', 'BC', 'BD', 'CD', 'AD'],
+    vertexes: ['A', 'B', 'C', 'D'],
     incidentor: {
       type: 'EDGE_LIST_INCDR',
       value: {
         'AB': ['A', 'B'],
+        'AC': ['A', 'C'],
         'BC': ['B', 'C'],
+        'BD': ['B', 'D'],
+        'CD': ['C', 'D'],
+        'AD': ['A', 'D']
       },
     },
   })
@@ -28,7 +32,7 @@ describe('NetProcessor', () => {
 
   describe('proto', () => {
     describe('#impact', () => {
-      it('processes data from A to C', () => {
+      it('processes data from A to D', () => {
         netProcessor.impact('A')
 
         console.log('space!!!=', JSON.stringify(netProcessor.space, null, 4))
@@ -38,4 +42,5 @@ describe('NetProcessor', () => {
   })
   // describe('static', () => {})
 })
+
 
