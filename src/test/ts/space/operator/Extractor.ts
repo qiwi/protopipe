@@ -4,17 +4,17 @@ import {
   IData,
   IDataRef,
   IPointer,
-  ISpace
+  ISpace,
 } from '../../../../main/ts/'
 
 describe('Extractor', () => {
   const foo = {
     type: 'FOO',
-    value: 'foo'
+    value: 'foo',
   }
   const space: ISpace = {
     type: 'SPACE',
-    value: [foo]
+    value: [foo],
   }
   const graph = new Graph({
     edges: ['AB', 'AC', 'BC', 'BD', 'CD', 'AD'],
@@ -27,7 +27,7 @@ describe('Extractor', () => {
         'BC': ['B', 'C'],
         'BD': ['B', 'D'],
         'CD': ['C', 'D'],
-        'AD': ['A', 'D']
+        'AD': ['A', 'D'],
       },
     },
   })
@@ -35,19 +35,19 @@ describe('Extractor', () => {
     type: 'POINTER',
     value: {
       graph,
-      vertex: 'A'
-    }
+      vertex: 'A',
+    },
   }
   const data: IData = {
     type: 'DATA',
-    value: {}
+    value: {},
   }
   const dataRef: IDataRef = {
     type: 'DATA_REF',
     value: {
       pointer,
-      value: data
-    }
+      value: data,
+    },
   }
 
   describe('constructor', () => {
@@ -82,17 +82,17 @@ describe('Extractor', () => {
 
     describe('#findDataRefs', () => {
       it('gets the first value matching by type', () => {
-        const space: ISpace= {
+        const space: ISpace = {
           type: 'SPACE',
-          value: [dataRef]
+          value: [dataRef],
         }
         expect(Extractor.findDataRef(space)).toBe(dataRef)
       })
 
       it('returns undefined if no match found', () => {
-        const space: ISpace= {
+        const space: ISpace = {
           type: 'SPACE',
-          value: []
+          value: [],
         }
         expect(Extractor.findDataRef(space)).toBeUndefined()
       })

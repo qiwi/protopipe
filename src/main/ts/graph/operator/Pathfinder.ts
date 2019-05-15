@@ -1,13 +1,13 @@
 import {
   IAny,
-  staticImplements
+  staticImplements,
 } from '../../types'
 
 import {
   IVertex,
   IEdge,
   IGraph,
-  IGraphStaticOperator
+  IGraphStaticOperator,
 } from '../types'
 
 /**
@@ -16,6 +16,7 @@ import {
  */
 @staticImplements<IGraphStaticOperator>()
 export class Pathfinder {
+
   graph: IGraph
   [key: string]: IAny
 
@@ -54,7 +55,7 @@ export class Pathfinder {
     return this.getOutEdgesOf(graph, vertex).length
   }
 
-  static getDegree (graph: IGraph, vertex: IVertex): number {
+  static getDegree(graph: IGraph, vertex: IVertex): number {
     return this.getEdgesOf(graph, vertex).length
   }
 
@@ -107,4 +108,5 @@ export class Pathfinder {
       return memo
     }, [])
   }
+
 }

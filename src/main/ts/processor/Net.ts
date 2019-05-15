@@ -15,9 +15,9 @@ import {
 import {
   IGraph,
   IVertex,
-  Pathfinder
+  Pathfinder,
 } from '../graph'
-import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util';
+import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util'
 
 export type INetProcessorParams = {
   graph: IGraph,
@@ -40,6 +40,7 @@ type IImpactTarget = IVertex | [IVertex, IAny]
  */
 @staticImplements<IProcessorStaticOperator>()
 export class NetProcessor {
+
   [key: string]: IAny
   space: ISpace
 
@@ -60,12 +61,13 @@ export class NetProcessor {
         [vertex, data] = target
 
         Injector.upsertDataRef(space, data, graph, vertex)
-      } else {
+      }
+      else {
         vertex = target
 
         if (!cxt.override && Extractor.find(
           ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
-          space
+          space,
         )) {
           return
         }
@@ -76,7 +78,7 @@ export class NetProcessor {
       const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(graph, vertex)
       const sources: IDataRef[] = Extractor.filter(
         ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
-        space
+        space,
       )
 
       if (sources.length === sourceVertexes.length) {
@@ -87,18 +89,20 @@ export class NetProcessor {
           this._impact(space, ...targetVertexes)
           cxt.after()
 
-        } else {
+        }
+        else {
           promisify(handler(...sources))
             .then(res => {
               Injector.upsertDataRef(space, res, graph, vertex)
               this._impact(space, ...targetVertexes)
               cxt.after()
             })
+            .catch(e => cxt.dp.reject(e))
         }
       }
 
-
-    } else {
+    }
+    else {
       cxt.before()
       targets.map(target => this._impact(space,target))
       cxt.after()
@@ -157,12 +161,12 @@ export class NetProcessor {
         if (this.queue === 0) {
           dp.resolve(space)
         }
-      }
+      },
     }
 
     Injector.unshift(space, {
       type: 'CXT',
-      value: cxt
+      value: cxt,
     })
 
     return cxt
@@ -171,7 +175,6 @@ export class NetProcessor {
 
   static getContext(space: ISpace): ICxt {
     const cxt = Extractor.findByType('CXT', space)
-
 
     if (!cxt) {
       throw new Error('CXT is required')
@@ -182,7 +185,6 @@ export class NetProcessor {
 
   static getGraph(space: ISpace): IGraph {
     const graph = Extractor.findByType('GRAPH', space)
-
 
     if (!graph) {
       throw new Error('GRAPH is required')
@@ -200,19 +202,19 @@ export class NetProcessor {
         pointer: {
           type: 'POINTER',
           value: {
-            graph
-          }
+            graph,
+          },
         },
-        value: handler
-      }
+        value: handler,
+      },
     }]
 
     const space: ISpace = {
       type: 'SPACE',
       value: [{
         type: 'GRAPH',
-        value: graph
-      }, ...handlers]
+        value: graph,
+      }, ...handlers],
     }
 
     return space

@@ -1,1 +1,1 @@
-export { Pathfinder } from './Pathfinder'
+export {Pathfinder} from './Pathfinder'

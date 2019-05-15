@@ -1,6 +1,6 @@
 import {
   Graph,
-  Extractor
+  Extractor,
 } from '../../main/ts'
 
 describe('index', () => {

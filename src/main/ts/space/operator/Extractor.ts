@@ -2,7 +2,7 @@ import {
   IAnyValue,
   IDataRef,
   ISpace,
-  ISpaceOperator
+  ISpaceOperator,
 } from '../types'
 
 import {IPredicate} from '../../types'
@@ -16,6 +16,7 @@ export const findByType = (type: any, space: ISpace): IAnyValue | undefined => f
 export const findDataRef = findByType.bind(null, 'DATA_REF') as (space: ISpace) => IDataRef | undefined
 
 export class Extractor implements ISpaceOperator {
+
   space: ISpace
 
   constructor(space: ISpace) {
@@ -45,4 +46,5 @@ export class Extractor implements ISpaceOperator {
   static findDataRef = findDataRef
 
   static filter = filter
+
 }

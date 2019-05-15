@@ -1,6 +1,6 @@
 import {
   Graph,
-  Pathfinder
+  Pathfinder,
 } from '../../../../main/ts'
 
 describe('Pathfinder', () => {
@@ -16,7 +16,7 @@ describe('Pathfinder', () => {
         'BC': ['B', 'C'],
         'BD': ['B', 'D'],
         'CD': ['C', 'D'],
-        'AD': ['A', 'D']
+        'AD': ['A', 'D'],
       },
     },
   })
@@ -31,7 +31,7 @@ describe('Pathfinder', () => {
 
   describe('proto', () => {
     const pathfinder = new Pathfinder(graph)
-    
+
     describe('#getDegree', () => {
       it('returns degree of vertex', () => {
         expect(pathfinder.getDegree('A')).toBe(3)
@@ -73,7 +73,7 @@ describe('Pathfinder', () => {
       })
     })
   })
-  
+
   describe('static', () => {
     describe('#getDegree', () => {
       it('returns degree of vertex', () => {

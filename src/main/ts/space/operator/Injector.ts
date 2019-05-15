@@ -3,27 +3,27 @@ import {
   IDataRef,
   IPointer,
   ISpace,
-  ISpaceOperator
+  ISpaceOperator,
 } from '../types'
 
 import {find} from './Extractor'
 
 import {
   IAny,
-  IPredicate
+  IPredicate,
 } from '../../types'
 
 import {
   IEdge,
   IGraph,
-  IVertex
+  IVertex,
 } from '../../graph'
 
 export const upsert = (predicate: IPredicate, space: ISpace, item: IAnyValue): IAnyValue => {
   const target = find(predicate, space)
 
   if (target) {
-    return Object.assign(target, item)
+    return {...target, ...item}
   }
 
   return push(space, item)
@@ -47,15 +47,15 @@ export const upsertRef = (type: IAny, space: ISpace, data: IAny, graph: IGraph, 
     value: {
       graph,
       vertex,
-      edge
-    }
+      edge,
+    },
   }
   const dataRef: IDataRef = {
     type,
     value: {
       pointer,
-      value: data
-    }
+      value: data,
+    },
   }
 
   upsert(
@@ -65,13 +65,14 @@ export const upsertRef = (type: IAny, space: ISpace, data: IAny, graph: IGraph, 
       && (!vertex || value.pointer.value.vertex === vertex)
       && (!edge || value.pointer.value.edge === edge),
     space,
-    dataRef
+    dataRef,
   )
 }
 
 const upsertDataRef = upsertRef.bind(null, 'DATA_REF') as (space: ISpace, data: IAny, graph: IGraph, vertex?: IVertex, edge?: IEdge) => IDataRef
 
 export class Injector implements ISpaceOperator {
+
   space: ISpace
 
   constructor(space: ISpace) {
@@ -89,4 +90,5 @@ export class Injector implements ISpaceOperator {
   static push = push
 
   static unshift = unshift
+
 }

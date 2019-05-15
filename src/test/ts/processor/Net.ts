@@ -13,7 +13,7 @@ describe('NetProcessor', () => {
         'BC': ['B', 'C'],
         'BD': ['B', 'D'],
         'CD': ['C', 'D'],
-        'AD': ['A', 'D']
+        'AD': ['A', 'D'],
       },
     },
   })
@@ -31,7 +31,7 @@ describe('NetProcessor', () => {
         expect(res.value.pointer.value.vertex).toBe('D')
       })
 
-      it('asynchronously processes data from A to D', async () => {
+      it('asynchronously processes data from A to D', async() => {
         const netProcessor = new NetProcessor({graph, handler})
         const space = await netProcessor.impact(false,'A') as ISpace
         const res = space.value[space.value.length - 1]
@@ -43,5 +43,3 @@ describe('NetProcessor', () => {
 
   // describe('static', () => {})
 })
-
-

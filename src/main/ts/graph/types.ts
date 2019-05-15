@@ -3,7 +3,7 @@
 import {
   ConstructorType,
   IAny,
-  ITypedValue
+  ITypedValue,
 } from '../types'
 
 export type IGraphFeatures = {
@@ -45,7 +45,7 @@ export type IGraphOperation = (...params: IAny[]) => IAny
 export type IGraphOperator = {
   [key: string]: IGraphOperation
 } & {
-  graph: IGraph,
+  graph: IGraph
 }
 
 export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny

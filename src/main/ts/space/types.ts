@@ -1,12 +1,12 @@
 import {
   IGraph,
   IVertex,
-  IEdge
+  IEdge,
 } from '../graph/'
 
 import {
   IAny,
-  ITypedValue
+  ITypedValue,
 } from '../types'
 
 export type IData = ITypedValue<'DATA', IAny>

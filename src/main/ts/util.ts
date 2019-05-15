@@ -31,6 +31,6 @@ export const getDecomposedPromise = (): IDecomposedPromise => {
   return {
     promise,
     resolve,
-    reject
+    reject,
   }
 }

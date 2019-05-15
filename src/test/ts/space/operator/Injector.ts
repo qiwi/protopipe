@@ -1,12 +1,12 @@
 import {
   Injector,
-  ISpace
+  ISpace,
 } from '../../../../main/ts/'
 
 describe('Injector', () => {
   const space: ISpace = {
     type: 'SPACE',
-    value: []
+    value: [],
   }
 
   describe('constructor', () => {
