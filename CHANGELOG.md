@@ -1,3 +1,22 @@
+# [2.0.0](https://github.com/qiwi/protopipe/compare/v1.2.0...v2.0.0) (2019-05-15)
+
+
+### Bug Fixes
+
+* **Injector:** correct upsert flow ([0ddf235](https://github.com/qiwi/protopipe/commit/0ddf235))
+* linting ([08c4f88](https://github.com/qiwi/protopipe/commit/08c4f88))
+
+
+### Features
+
+* **NetProcessor:** support async flow ([a4ea1d0](https://github.com/qiwi/protopipe/commit/a4ea1d0))
+* add Net processor ([eca08c3](https://github.com/qiwi/protopipe/commit/eca08c3)), closes [#25](https://github.com/qiwi/protopipe/issues/25) [#24](https://github.com/qiwi/protopipe/issues/24) [#22](https://github.com/qiwi/protopipe/issues/22) [#21](https://github.com/qiwi/protopipe/issues/21) [#11](https://github.com/qiwi/protopipe/issues/11)
+
+
+### BREAKING CHANGES
+
+* introduce completely new API
+
 # [1.2.0](https://github.com/qiwi/protopipe/compare/v1.1.0...v1.2.0) (2019-04-30)
 
 
