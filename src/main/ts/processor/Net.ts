@@ -20,13 +20,17 @@ import {
 import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util';
 
 export type INetProcessorParams = {
-  graph: IGraph
+  graph: IGraph,
+  handler: Function
 }
 
 type ICxt = {
   queue: number,
   sync: boolean,
-  dp: IDecomposedPromise
+  override: boolean,
+  dp: IDecomposedPromise,
+  before: Function
+  after: Function
 }
 
 type IImpactTarget = IVertex | [IVertex, IAny]
@@ -58,6 +62,13 @@ export class NetProcessor {
         Injector.upsertDataRef(space, data, graph, vertex)
       } else {
         vertex = target
+
+        if (!cxt.override && Extractor.find(
+          ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
+          space
+        )) {
+          return
+        }
       }
 
       const handler: IRefReducer = this.getHandler(space, vertex)
@@ -69,33 +80,33 @@ export class NetProcessor {
       )
 
       if (sources.length === sourceVertexes.length) {
-        cxt.queue++
+        cxt.before()
 
         if (cxt.sync) {
           Injector.upsertDataRef(space, handler(...sources), graph, vertex)
           this._impact(space, ...targetVertexes)
-          cxt.queue--
+          cxt.after()
 
         } else {
           promisify(handler(...sources))
             .then(res => {
               Injector.upsertDataRef(space, res, graph, vertex)
               this._impact(space, ...targetVertexes)
-              cxt.queue--
+              cxt.after()
             })
         }
-
-
       }
 
 
     } else {
+      cxt.before()
       targets.map(target => this._impact(space,target))
+      cxt.after()
     }
   }
 
-  impact(...targets: IImpactTarget[]) {
-    return NetProcessor.impact(this.space, ...targets)
+  impact(sync: boolean, ...targets: IImpactTarget[]) {
+    return NetProcessor.impact(this.space, sync, ...targets)
   }
 
   static getHandler(space: ISpace, vertex: IVertex): IRefReducer {
@@ -114,26 +125,47 @@ export class NetProcessor {
     return handlerRef.value.value
   }
 
-  static impact(space: ISpace, ...targets: IImpactTarget[]) {
+  static impact(space: ISpace, sync: boolean, ...targets: IImpactTarget[]) {
 
-    this.attachContext(space)
+    const cxt: ICxt = this.attachContext(space, sync)
+
+    this._impact(space, ...targets)
+
+    return sync
+      ? space
+      : cxt.dp.promise
 
   }
 
-  static attachContext(space: ISpace): void {
+  static attachContext(space: ISpace, sync: boolean): ICxt {
 
     if (Extractor.findByType('CXT', space)) {
       throw new Error('There\'s no place for yet another one execution context')
     }
 
+    const dp: IDecomposedPromise = getDecomposedPromise()
+    const cxt = {
+      sync,
+      queue: 0,
+      override: false,
+      dp,
+      before() {
+        this.queue++
+      },
+      after() {
+        this.queue--
+        if (this.queue === 0) {
+          dp.resolve(space)
+        }
+      }
+    }
+
     Injector.unshift(space, {
       type: 'CXT',
-      value: {
-        sync: true,
-        queue: 0,
-        dp: getDecomposedPromise()
-      }
+      value: cxt
     })
+
+    return cxt
 
   }
 
@@ -159,14 +191,28 @@ export class NetProcessor {
     return graph && graph.value
   }
 
-  static parser({graph}: INetProcessorParams) {
+  static parser({graph, handler}: INetProcessorParams) {
+
+    // TODO implement handlers parser
+    const handlers = [{
+      type: 'HANDLER_REF',
+      value: {
+        pointer: {
+          type: 'POINTER',
+          value: {
+            graph
+          }
+        },
+        value: handler
+      }
+    }]
 
     const space: ISpace = {
       type: 'SPACE',
       value: [{
         type: 'GRAPH',
         value: graph
-      }]
+      }, ...handlers]
     }
 
     return space

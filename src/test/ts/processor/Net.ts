@@ -1,4 +1,4 @@
-import {Graph, NetProcessor} from '../../../main/ts'
+import {Graph, ISpace, NetProcessor} from '../../../main/ts'
 
 describe('NetProcessor', () => {
 
@@ -17,29 +17,30 @@ describe('NetProcessor', () => {
       },
     },
   })
+  const handler = (...args: any[]) => console.log('args=', JSON.stringify(args.map(v => v.value.pointer.value.vertex), null, 2))
 
-  const netProcessor = new NetProcessor({graph})
-
-  describe('constructor', () => {
-
-    /*it('returns proper instance', () => {
-      expect(netProcessor.space).toEqual({
-        type: 'SPACE',
-        value: []
-      })
-    })*/
-  })
+  // describe('constructor', () => {})
 
   describe('proto', () => {
     describe('#impact', () => {
-      it('processes data from A to D', () => {
-        netProcessor.impact('A')
+      it('synchronously processes data from A to D', () => {
+        const netProcessor = new NetProcessor({graph, handler})
+        const space = netProcessor.impact(true,'A') as ISpace
+        const res = space.value[space.value.length - 1]
 
-        console.log('space!!!=', JSON.stringify(netProcessor.space, null, 4))
+        expect(res.value.pointer.value.vertex).toBe('D')
       })
 
+      it('asynchronously processes data from A to D', async () => {
+        const netProcessor = new NetProcessor({graph, handler})
+        const space = await netProcessor.impact(false,'A') as ISpace
+        const res = space.value[space.value.length - 1]
+
+        expect(res.value.pointer.value.vertex).toBe('D')
+      })
     })
   })
+
   // describe('static', () => {})
 })
 
