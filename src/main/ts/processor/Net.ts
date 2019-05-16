@@ -35,6 +35,11 @@ type ICxt = {
 
 type IImpactTarget = IVertex | [IVertex, IAny]
 
+type INormalizedImpactTarget = {
+  vertex: IVertex,
+  data?: IAny
+}
+
 const requireByType = <T, V>(type: T, space: ISpace): V => {
   const item: IAnyValue | undefined = Extractor.findByType(type, space)
 
@@ -58,69 +63,78 @@ export class NetProcessor {
     this.space = NetProcessor.parser(params)
   }
 
-  private static _impact(space: ISpace, ...targets: IImpactTarget[]) {
-    const cxt: ICxt = this.getContext(space)
-    const graph: IGraph = this.getGraph(space)
+  impact(sync: boolean, ...targets: IImpactTarget[]) {
+    return NetProcessor.impact(this.space, sync, ...targets)
+  }
 
-    if (targets.length === 1) {
-      const target: IImpactTarget = targets[0]
-      let vertex: IVertex
-      let data: IAny
+  private static _normalizeImpactTarget(target: IImpactTarget): INormalizedImpactTarget {
+    let vertex: IVertex
+    let data: IAny
 
-      if (Array.isArray(target)) {
-        [vertex, data] = target
-
-        Injector.upsertDataRef(space, data, graph, vertex)
-      }
-      else {
-        vertex = target
-
-        if (!cxt.override && Extractor.find(
-          ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
-          space,
-        )) {
-          return
-        }
-      }
-
-      const handler: IRefReducer = this.getHandler(space, vertex)
-      const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
-      const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(graph, vertex)
-      const sources: IDataRef[] = Extractor.filter(
-        ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
-        space,
-      )
-
-      if (sources.length === sourceVertexes.length) {
-        cxt.before()
-
-        if (cxt.sync) {
-          Injector.upsertDataRef(space, handler(...sources), graph, vertex)
-          this._impact(space, ...targetVertexes)
-          cxt.after()
-
-        }
-        else {
-          promisify(handler(...sources))
-            .then(res => {
-              Injector.upsertDataRef(space, res, graph, vertex)
-              this._impact(space, ...targetVertexes)
-              cxt.after()
-            })
-            .catch(e => cxt.dp.reject(e))
-        }
-      }
+    if (Array.isArray(target)) {
+      [vertex, data] = target
 
     }
     else {
-      cxt.before()
-      targets.map(target => this._impact(space,target))
-      cxt.after()
+      vertex = target
+    }
+
+    return {
+      vertex,
+      data,
     }
   }
 
-  impact(sync: boolean, ...targets: IImpactTarget[]) {
-    return NetProcessor.impact(this.space, sync, ...targets)
+  private static _impactSingle(space: ISpace, target: IImpactTarget) {
+    const cxt: ICxt = this.getContext(space)
+    const graph: IGraph = this.getGraph(space)
+    const {vertex, data} = this._normalizeImpactTarget(target)
+
+    if (data !== undefined) {
+      Injector.upsertDataRef(space, data, graph, vertex)
+    }
+    else if (!cxt.override && Extractor.find(
+      ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
+      space,
+    )) {
+      return
+    }
+
+    const handler: IRefReducer = this.getHandler(space, vertex)
+    const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
+    const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(graph, vertex)
+    const sources: IDataRef[] = Extractor.filter(
+      ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
+      space,
+    )
+
+    if (sources.length === sourceVertexes.length) {
+      cxt.before()
+
+      if (cxt.sync) {
+        Injector.upsertDataRef(space, handler(...sources), graph, vertex)
+        this._impactGroup(space, ...targetVertexes)
+        cxt.after()
+
+      }
+      else {
+        promisify(handler(...sources))
+          .then(res => {
+            Injector.upsertDataRef(space, res, graph, vertex)
+            this._impactGroup(space, ...targetVertexes)
+            cxt.after()
+          })
+          .catch(e => cxt.dp.reject(e))
+      }
+    }
+  }
+
+  private static _impactGroup(space: ISpace, ...targets: IImpactTarget[]) {
+    const cxt: ICxt = this.getContext(space)
+
+    cxt.before()
+    targets.map(target => this._impactSingle(space, target))
+    cxt.after()
   }
 
   static getHandler(space: ISpace, vertex: IVertex): IRefReducer {
@@ -143,7 +157,7 @@ export class NetProcessor {
 
     const cxt: ICxt = this.attachContext(space, sync)
 
-    this._impact(space, ...targets)
+    this._impactGroup(space, ...targets)
 
     return sync
       ? space
