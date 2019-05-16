@@ -61,6 +61,13 @@ describe('stack', () => {
       })
     })
 
+    describe('#unshift', () => {
+      it('prepends items to the beginning of stack', () => {
+        expect(stack.unshift('pre', 'item')).toBe('pre')
+        expect(stack.get(0)).toBe('pre')
+      })
+    })
+
     describe('#pop', () => {
       it('returns the last stack item', () => {
         expect(stack.pop()).toBe('qux')
@@ -69,7 +76,7 @@ describe('stack', () => {
 
     describe('#size', () => {
       it('returns current stack size', () => {
-        expect(stack.size()).toBe(1)
+        expect(stack.size()).toBe(3)
       })
     })
   })

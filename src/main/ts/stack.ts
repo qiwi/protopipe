@@ -5,6 +5,7 @@ export interface IStack {
   push(...items: Array<any>): any
   pop(): any
   shift(): any
+  unshift(...items: Array<any>): any
   size(): number
   filter(cb: (item: any) => boolean): Array<any>
   last(): any,
@@ -14,7 +15,7 @@ export interface IStack {
 /**
  * @ignore
  */
-export default class Stack implements IStack{
+export default class Stack implements IStack {
 
   private _storage: Array<any>
   constructor(...args: Array<any>) {
@@ -38,6 +39,12 @@ export default class Stack implements IStack{
 
   shift(): any {
     return this._storage.shift()
+  }
+
+  unshift(...items: Array<any>): any {
+    this._storage.unshift(...items)
+
+    return items[0]
   }
 
   size(): number {
