@@ -85,21 +85,34 @@ export class NetProcessor {
     }
   }
 
+  private static _process(cxt: ICxt, space: ISpace, graph: IGraph, vertex: IVertex, handler: IRefReducer) {
+    cxt.before()
+
+    const targetVetexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
+    const processResult = (res: IAny) => {
+      Injector.upsertDataRef(space, res, graph, vertex)
+      this._impactGroup(space, ...targetVetexes)
+      cxt.after()
+    }
+
+    if (cxt.sync) {
+      processResult(handler())
+
+    }
+    else {
+      promisify(handler())
+        .then(processResult)
+        .catch(e => cxt.dp.reject(e))
+    }
+  }
+
   private static _impactSingle(space: ISpace, target: IImpactTarget): void {
     const cxt: ICxt = this.getContext(space)
     const graph: IGraph = this.getGraph(space)
     const {vertex, data} = this._normalizeImpactTarget(target)
-    const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
-    const processResult = (res: IAny) => {
-      Injector.upsertDataRef(space, res, graph, vertex)
-      this._impactGroup(space, ...targetVertexes)
-      cxt.after()
-    }
 
     if (data !== undefined) {
-      cxt.before()
-      processResult(data)
-
+      this._process(cxt, space, graph, vertex, () => data)
       return
     }
 
@@ -118,17 +131,7 @@ export class NetProcessor {
     )
 
     if (sources.length === sourceVertexes.length) {
-      cxt.before()
-
-      if (cxt.sync) {
-        processResult(handler(...sources))
-
-      }
-      else {
-        promisify(handler(...sources))
-          .then(processResult)
-          .catch(e => cxt.dp.reject(e))
-      }
+      this._process(cxt, space, graph, vertex, () => handler(...sources))
     }
   }
 
