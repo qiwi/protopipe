@@ -35,6 +35,16 @@ type ICxt = {
 
 type IImpactTarget = IVertex | [IVertex, IAny]
 
+const requireByType = <T, V>(type: T, space: ISpace): V => {
+  const item: IAnyValue | undefined = Extractor.findByType(type, space)
+
+  if (!item) {
+    throw new Error(`${type} is required`)
+  }
+
+  return item && item.value
+}
+
 /**
  * Net processor.
  */
@@ -173,25 +183,9 @@ export class NetProcessor {
 
   }
 
-  static getContext(space: ISpace): ICxt {
-    const cxt = Extractor.findByType('CXT', space)
+  static getGraph = requireByType.bind(null, 'GRAPH') as (space: ISpace) => IGraph
 
-    if (!cxt) {
-      throw new Error('CXT is required')
-    }
-
-    return cxt && cxt.value
-  }
-
-  static getGraph(space: ISpace): IGraph {
-    const graph = Extractor.findByType('GRAPH', space)
-
-    if (!graph) {
-      throw new Error('GRAPH is required')
-    }
-
-    return graph && graph.value
-  }
+  static getContext = requireByType.bind(null, 'CXT') as (space: ISpace) => ICxt
 
   static parser({graph, handler}: INetProcessorParams) {
 

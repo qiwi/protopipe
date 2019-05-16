@@ -69,9 +69,7 @@ export class Pathfinder {
     return edges.filter((edge: IEdge) => {
       const [head]: [IVertex, IVertex] = graph.incidentor.value[edge]
 
-      if (head === vertex) {
-        return true
-      }
+      return head === vertex
     })
   }
 
@@ -79,9 +77,7 @@ export class Pathfinder {
     return graph.edges.filter((edge: IEdge) => {
       const [, tail]: [IVertex, IVertex] = graph.incidentor.value[edge]
 
-      if (tail === vertex) {
-        return true
-      }
+      return tail === vertex
     })
   }
 
