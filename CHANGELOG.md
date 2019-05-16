@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/qiwi/protopipe/compare/v2.0.0...v2.0.1) (2019-05-16)
+
+
+### Bug Fixes
+
+* **Net:** do not override edge data after the inject ([86bc1e6](https://github.com/qiwi/protopipe/commit/86bc1e6))
+
 # [2.0.0](https://github.com/qiwi/protopipe/compare/v1.2.0...v2.0.0) (2019-05-15)
 
 
