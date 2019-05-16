@@ -21,48 +21,47 @@ Not universal, not high-performance. But dumb and clear.
 
 #### Usage
 ```javascript
-import { Protopipe } from 'protopipe'
+import { NetProcessor, Extractor, IDataRef, ISpace } from 'protopipe'
 
-const input = {data: 'foo', meta: {sequence: {type: 'chain', data: []}}, opts: {}}
 const graph = new Graph({
   edges: ['AB', 'BC'],
   vertexes: ['A', 'B', 'C'],
   incidentor: {
-    type: 'EDGE_LIST',
-    representation: {
+    type: 'EDGE_LIST_INCDR',
+    value: {
       'AB': ['A', 'B'],
       'BC': ['B', 'C']
     },
   },
 })
-const handler = ({data}: IInput): IOutput => ({data: {count: (data.count + 1 || 0)}})
-const protopipe = new Protopipe({
+const handler = (prev: IDataRef): IAny => prev.value.value * 2
+const protopipe = new NetProcessor({
   graph,
-  traverser,
   handler,
 })
+const space: ISpace = protopipe.impact(true, 'A', 1)
+const dVertexDataRef: IDataRef = space.value[space.value.length - 1]
 
-const result = protopipe.process(input).data.count // 2
+const val = dVertexDataRef.value.value // 4
 ```
 
 ##### Features
 * Sync / async execution modes.
+* Stateful an stateless contracts.
 * Deep customization.
 * Typings for both worlds — TS and flow.
 
 ##### Limitations (of default executor, traverser, etc)
 * Protopipe supports digraphs only.
-* Graphs are immutable.
-* Graph has only one `source` and one `target` vertexes.
 * The lib does not solve the declaration problem (you know, _adjacency/incidence matrix_, _adjacency list_, DSL).
-* No consistency checks out of box: graph is traversed as is. But you're able to add custom assertions (for example, BFS-based check).
+* No consistency checks out of box: graph is being processed as is. But you're able to add custom assertions (for example, BFS-based check).
 
 ## Definitions and contracts
 * Space is a set with some added structure.
 * Vertex is a graph atom.
 * Edge — bond.
 * Incidentor — the _rule_ of connecting vertexes and edges.
-* Graph — a class that implements [`IGraph`](./src/main/ts/interface.ts) — stores vertexes and edges collections, features and incidentor.
+* Graph — a class that implements [`IGraph`](./src/main/ts/types.ts) — stores vertexes and edges collections, features and incidentor.
 * Sequence — any possible transition.
     * Walk: vertices may repeat, edges may repeat (closed / open)
     * Trail: vertices may repeat, edges cannot repeat (open)
@@ -84,73 +83,7 @@ export type IGraphRepresentation = any
 
 export type IGraphIncidentor = {
   type: IGraphIncidentorType,
-  representation: IGraphRepresentation
-}
-```
-
-### IGraphOperator
-Graph API facade. Something that assembles `graph`, its `features` and `operations`.
-```javascript
-export interface IGraphOperator {
-  graph: IGraph,
-  operations?: IGraphOperationMap,
-  features?: IGraphFeatures,
-  [key: string]: any
-}
-```
-
-### Protopipe
-The fundamental goal of Protopipe is data processing.
-```javascript
-export interface IProtopipe {
-  graph: IGraph
-  handler: IHandler
-  traverser: ITraverser
-  executor: IExecutor
-  process: (input: IInput) => IOutput
-}
-```
-
-`graph` defines the all variety of available states.  
-`traverseur` interprets graph rules to build possible path, step by step.  
-`handler` is invoked each time when vertex transition occurs (`meta.sequence` change).  
-`executor` binds it all together.  
-`process` — the data processing starting point.
-
-The `executor` gets an `input`, then triggers `traverser` to resolve next over the `graph` processing step, after invokes the `handler(input)` and passes its result to further iteration. Once `traverser` returns null the process stops.
-
-Everything _should_ be stateless and immutable, but it is up to you.
-
-### Single argument contract
-
-```javascript
-export type IInput = {
-  data: IData
-  meta: IMeta
-  opts: IOpts
-}
-```
-##### data
-Anything to be processed.
-```javascript
-export type IData = IAny
-```
-
-##### opts
-Declares optional parameters about how to handle data.
-```javascript
-export type IOpts = {
-  [key: string]: IAny
-}
-```
-
-##### meta
-Contains any reasonable execution directives (such as `mode`, `sequence`, etc).
-```javascript
-{
-  sequence: ISequence
-  mode?: IMode,
-  [key: string]: IAny
+  value: IGraphRepresentation
 }
 ```
 
