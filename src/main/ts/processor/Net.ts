@@ -85,7 +85,7 @@ export class NetProcessor {
     }
   }
 
-  private static _impactSingle(space: ISpace, target: IImpactTarget) {
+  private static _impactSingle(space: ISpace, target: IImpactTarget): void {
     const cxt: ICxt = this.getContext(space)
     const graph: IGraph = this.getGraph(space)
     const {vertex, data} = this._normalizeImpactTarget(target)
@@ -107,29 +107,28 @@ export class NetProcessor {
       ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
       space,
     )
+    const processResult = (res: IAny) => {
+      Injector.upsertDataRef(space, res, graph, vertex)
+      this._impactGroup(space, ...targetVertexes)
+      cxt.after()
+    }
 
     if (sources.length === sourceVertexes.length) {
       cxt.before()
 
       if (cxt.sync) {
-        Injector.upsertDataRef(space, handler(...sources), graph, vertex)
-        this._impactGroup(space, ...targetVertexes)
-        cxt.after()
+        processResult(handler(...sources))
 
       }
       else {
         promisify(handler(...sources))
-          .then(res => {
-            Injector.upsertDataRef(space, res, graph, vertex)
-            this._impactGroup(space, ...targetVertexes)
-            cxt.after()
-          })
+          .then(processResult)
           .catch(e => cxt.dp.reject(e))
       }
     }
   }
 
-  private static _impactGroup(space: ISpace, ...targets: IImpactTarget[]) {
+  private static _impactGroup(space: ISpace, ...targets: IImpactTarget[]): void {
     const cxt: ICxt = this.getContext(space)
 
     cxt.before()
