@@ -89,11 +89,21 @@ export class NetProcessor {
     const cxt: ICxt = this.getContext(space)
     const graph: IGraph = this.getGraph(space)
     const {vertex, data} = this._normalizeImpactTarget(target)
+    const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
+    const processResult = (res: IAny) => {
+      Injector.upsertDataRef(space, res, graph, vertex)
+      this._impactGroup(space, ...targetVertexes)
+      cxt.after()
+    }
 
     if (data !== undefined) {
-      Injector.upsertDataRef(space, data, graph, vertex)
+      cxt.before()
+      processResult(data)
+
+      return
     }
-    else if (!cxt.override && Extractor.find(
+
+    if (!cxt.override && Extractor.find(
       ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
       space,
     )) {
@@ -101,17 +111,11 @@ export class NetProcessor {
     }
 
     const handler: IRefReducer = this.getHandler(space, vertex)
-    const targetVertexes: IVertex[] = Pathfinder.getOutVertexes(graph, vertex)
     const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(graph, vertex)
     const sources: IDataRef[] = Extractor.filter(
       ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
       space,
     )
-    const processResult = (res: IAny) => {
-      Injector.upsertDataRef(space, res, graph, vertex)
-      this._impactGroup(space, ...targetVertexes)
-      cxt.after()
-    }
 
     if (sources.length === sourceVertexes.length) {
       cxt.before()
