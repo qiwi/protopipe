@@ -77,41 +77,40 @@
 				<h4 id="install">Install</h4>
 				<pre><code class="language-bash">  yarn add protopipe</code></pre>
 				<h4 id="usage">Usage</h4>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Protopipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'protopipe'</span>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { NetProcessor, Extractor, IDataRef, ISpace } <span class="hljs-keyword">from</span> <span class="hljs-string">'protopipe'</span>
 
-<span class="hljs-keyword">const</span> input = {<span class="hljs-attr">data</span>: <span class="hljs-string">'foo'</span>, <span class="hljs-attr">meta</span>: {<span class="hljs-attr">sequence</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'chain'</span>, <span class="hljs-attr">data</span>: []}}, <span class="hljs-attr">opts</span>: {}}
 <span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph({
   <span class="hljs-attr">edges</span>: [<span class="hljs-string">'AB'</span>, <span class="hljs-string">'BC'</span>],
   <span class="hljs-attr">vertexes</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>],
   <span class="hljs-attr">incidentor</span>: {
-    <span class="hljs-attr">type</span>: <span class="hljs-string">'EDGE_LIST'</span>,
-    <span class="hljs-attr">representation</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'EDGE_LIST_INCDR'</span>,
+    <span class="hljs-attr">value</span>: {
       <span class="hljs-string">'AB'</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>],
       <span class="hljs-string">'BC'</span>: [<span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>]
     },
   },
 })
-<span class="hljs-keyword">const</span> handler = ({data}: IInput): <span class="hljs-function"><span class="hljs-params">IOutput</span> =&gt;</span> ({<span class="hljs-attr">data</span>: {<span class="hljs-attr">count</span>: (data.count + <span class="hljs-number">1</span> || <span class="hljs-number">0</span>)}})
-<span class="hljs-keyword">const</span> protopipe = <span class="hljs-keyword">new</span> Protopipe({
+<span class="hljs-keyword">const</span> handler = (prev: IDataRef): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> prev.value.value * <span class="hljs-number">2</span>
+<span class="hljs-keyword">const</span> protopipe = <span class="hljs-keyword">new</span> NetProcessor({
   graph,
-  traverser,
   handler,
 })
+<span class="hljs-keyword">const</span> space: ISpace = protopipe.impact(<span class="hljs-literal">true</span>, <span class="hljs-string">'A'</span>, <span class="hljs-number">1</span>)
+<span class="hljs-keyword">const</span> dVertexDataRef: IDataRef = space.value[space.value.length - <span class="hljs-number">1</span>]
 
-<span class="hljs-keyword">const</span> result = protopipe.process(input).data.count <span class="hljs-comment">// 2</span></code></pre>
+<span class="hljs-keyword">const</span> val = dVertexDataRef.value.value <span class="hljs-comment">// 4</span></code></pre>
 				<h5 id="features">Features</h5>
 				<ul>
 					<li>Sync / async execution modes.</li>
+					<li>Stateful an stateless contracts.</li>
 					<li>Deep customization.</li>
 					<li>Typings for both worlds — TS and flow.</li>
 				</ul>
 				<h5 id="limitations-of-default-executor-traverser-etc-">Limitations (of default executor, traverser, etc)</h5>
 				<ul>
 					<li>Protopipe supports digraphs only.</li>
-					<li>Graphs are immutable.</li>
-					<li>Graph has only one <code>source</code> and one <code>target</code> vertexes.</li>
 					<li>The lib does not solve the declaration problem (you know, <em>adjacency/incidence matrix</em>, <em>adjacency list</em>, DSL).</li>
-					<li>No consistency checks out of box: graph is traversed as is. But you&#39;re able to add custom assertions (for example, BFS-based check).</li>
+					<li>No consistency checks out of box: graph is being processed as is. But you&#39;re able to add custom assertions (for example, BFS-based check).</li>
 				</ul>
 				<h2 id="definitions-and-contracts">Definitions and contracts</h2>
 				<ul>
@@ -119,7 +118,7 @@
 					<li>Vertex is a graph atom.</li>
 					<li>Edge — bond.</li>
 					<li>Incidentor — the <em>rule</em> of connecting vertexes and edges.</li>
-					<li>Graph — a class that implements <a href="./src/main/ts/interface.ts"><code>IGraph</code></a> — stores vertexes and edges collections, features and incidentor.</li>
+					<li>Graph — a class that implements <a href="./src/main/ts/types.ts"><code>IGraph</code></a> — stores vertexes and edges collections, features and incidentor.</li>
 					<li>Sequence — any possible transition.<ul>
 							<li>Walk: vertices may repeat, edges may repeat (closed / open)</li>
 							<li>Trail: vertices may repeat, edges cannot repeat (open)</li>
@@ -142,48 +141,7 @@
 
 <span class="hljs-keyword">export</span> type IGraphIncidentor = {
   <span class="hljs-attr">type</span>: IGraphIncidentorType,
-  <span class="hljs-attr">representation</span>: IGraphRepresentation
-}</code></pre>
-				<h3 id="igraphoperator">IGraphOperator</h3>
-				<p>Graph API facade. Something that assembles <code>graph</code>, its <code>features</code> and <code>operations</code>.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> interface IGraphOperator {
-  <span class="hljs-attr">graph</span>: IGraph,
-  operations?: IGraphOperationMap,
-  features?: IGraphFeatures,
-  [key: string]: any
-}</code></pre>
-				<h3 id="protopipe">Protopipe</h3>
-				<p>The fundamental goal of Protopipe is data processing.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> interface IProtopipe {
-  <span class="hljs-attr">graph</span>: IGraph
-  handler: IHandler
-  traverser: ITraverser
-  executor: IExecutor
-  process: <span class="hljs-function">(<span class="hljs-params">input: IInput</span>) =&gt;</span> IOutput
-}</code></pre>
-				<p><code>graph</code> defines the all variety of available states.<br><code>traverseur</code> interprets graph rules to build possible path, step by step.<br><code>handler</code> is invoked each time when vertex transition occurs (<code>meta.sequence</code> change).<br><code>executor</code> binds it all together.<br><code>process</code> — the data processing starting point.</p>
-				<p>The <code>executor</code> gets an <code>input</code>, then triggers <code>traverser</code> to resolve next over the <code>graph</code> processing step, after invokes the <code>handler(input)</code> and passes its result to further iteration. Once <code>traverser</code> returns null the process stops.</p>
-				<p>Everything <em>should</em> be stateless and immutable, but it is up to you.</p>
-				<h3 id="single-argument-contract">Single argument contract</h3>
-				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> type IInput = {
-  <span class="hljs-attr">data</span>: IData
-  meta: IMeta
-  opts: IOpts
-}</code></pre>
-				<h5 id="data">data</h5>
-				<p>Anything to be processed.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> type IData = IAny</code></pre>
-				<h5 id="opts">opts</h5>
-				<p>Declares optional parameters about how to handle data.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> type IOpts = {
-  [key: string]: IAny
-}</code></pre>
-				<h5 id="meta">meta</h5>
-				<p>Contains any reasonable execution directives (such as <code>mode</code>, <code>sequence</code>, etc).</p>
-				<pre><code class="language-javascript">{
-  <span class="hljs-attr">sequence</span>: ISequence
-  mode?: IMode,
-  [key: string]: IAny
+  <span class="hljs-attr">value</span>: IGraphRepresentation
 }</code></pre>
 				<h3 id="sync-async">Sync / async</h3>
 				<p>Both. Pass <code>mode</code> flag as a part of <code>input.meta</code>. If handler returns a Promise then executor awaits until it will be resolved.</p>

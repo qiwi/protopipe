@@ -105,6 +105,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_processor_net_.netprocessor.html#space" class="tsd-kind-icon">space</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#getcontext" class="tsd-kind-icon">get<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#getgraph" class="tsd-kind-icon">get<wbr>Graph</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -112,8 +114,6 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_processor_net_.netprocessor.html#impact" class="tsd-kind-icon">impact</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#attachcontext" class="tsd-kind-icon">attach<wbr>Context</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#getcontext" class="tsd-kind-icon">get<wbr>Context</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#getgraph" class="tsd-kind-icon">get<wbr>Graph</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#gethandler" class="tsd-kind-icon">get<wbr>Handler</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#impact-1" class="tsd-kind-icon">impact</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#parser" class="tsd-kind-icon">parser</a></li>
@@ -134,7 +134,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L45">processor/Net.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L60">processor/Net.ts:60</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -156,9 +156,71 @@
 					<div class="tsd-signature tsd-kind-icon">space<span class="tsd-signature-symbol">:</span> <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L45">processor/Net.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L60">processor/Net.ts:60</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="getcontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">get<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;requireByType.bind(null, &#x27;CXT&#x27;) as (space: ISpace) &#x3D;&gt; ICxt</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L205">processor/Net.ts:205</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICxt</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>space: <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ICxt</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="getgraph" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Graph</h3>
+					<div class="tsd-signature tsd-kind-icon">get<wbr>Graph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;requireByType.bind(null, &#x27;GRAPH&#x27;) as (space: ISpace) &#x3D;&gt; IGraph</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L203">processor/Net.ts:203</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/protopipe.html#igraph" class="tsd-signature-type">IGraph</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>space: <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="../modules/protopipe.html#igraph" class="tsd-signature-type">IGraph</a></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -173,7 +235,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L112">processor/Net.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L66">processor/Net.ts:66</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -202,7 +264,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L144">processor/Net.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L171">processor/Net.ts:171</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -219,52 +281,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getcontext" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Context</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Context<span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICxt</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L176">processor/Net.ts:176</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>space: <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ICxt</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getgraph" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Graph</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Graph<span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/protopipe.html#igraph" class="tsd-signature-type">IGraph</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L186">processor/Net.ts:186</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>space: <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/protopipe.html#igraph" class="tsd-signature-type">IGraph</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="gethandler" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Handler</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
@@ -274,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L116">processor/Net.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L143">processor/Net.ts:143</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -300,7 +316,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L132">processor/Net.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L159">processor/Net.ts:159</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -332,7 +348,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/08c4f88/src/main/ts/processor/Net.ts#L196">processor/Net.ts:196</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L207">processor/Net.ts:207</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -426,17 +442,17 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_processor_net_.netprocessor.html#space" class="tsd-kind-icon">space</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_processor_net_.netprocessor.html#getcontext" class="tsd-kind-icon">get<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_processor_net_.netprocessor.html#getgraph" class="tsd-kind-icon">get<wbr>Graph</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_processor_net_.netprocessor.html#impact" class="tsd-kind-icon">impact</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_processor_net_.netprocessor.html#attachcontext" class="tsd-kind-icon">attach<wbr>Context</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_processor_net_.netprocessor.html#getcontext" class="tsd-kind-icon">get<wbr>Context</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="_processor_net_.netprocessor.html#getgraph" class="tsd-kind-icon">get<wbr>Graph</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_processor_net_.netprocessor.html#gethandler" class="tsd-kind-icon">get<wbr>Handler</a>
