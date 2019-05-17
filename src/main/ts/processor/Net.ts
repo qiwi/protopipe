@@ -13,15 +13,26 @@ import {
   IHandlerRef,
 } from '../space/'
 import {
+  IEdge,
   IGraph,
   IVertex,
   Pathfinder,
 } from '../graph'
 import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util'
 
+type IRefReducerMap = {
+  [key: string]: IRefReducer
+}
+
+export type IHandlerParamDeclaration = IRefReducer | {
+  graph?: IRefReducer,
+  vertexes?: IRefReducerMap,
+  edges?: IRefReducerMap
+}
+
 export type INetProcessorParams = {
   graph: IGraph,
-  handler: Function
+  handler: IHandlerParamDeclaration
 }
 
 type ICxt = {
@@ -209,23 +220,7 @@ export class NetProcessor {
 
   static parser({graph, handler}: INetProcessorParams) {
 
-    // TODO implement handlers parser
-    const handlers = [{
-      type: 'HANDLER_REF',
-      value: {
-        pointer: {
-          type: 'POINTER',
-          value: {
-            graph,
-          },
-        },
-        handler: {
-          type: 'HANDLER',
-          value: handler,
-        },
-      },
-    }]
-
+    const handlers = this.parseHandlers(handler, graph)
     const space: ISpace = {
       type: 'SPACE',
       value: [{
@@ -235,6 +230,41 @@ export class NetProcessor {
     }
 
     return space
+  }
+
+  static parseHandlers(handler: IHandlerParamDeclaration, graph: IGraph): IHandlerRef[] {
+    const handlers: IHandlerRef[] = []
+    const createHandlerRef = (pointer: {graph: IGraph, vertex?: IVertex, edge?: IEdge}, handler: IRefReducer): IHandlerRef => ({
+      type: 'HANDLER_REF',
+      value: {
+        pointer: {
+          type: 'POINTER',
+          value: pointer,
+        },
+        handler: {
+          type: 'HANDLER',
+          value: handler,
+        },
+      },
+    })
+    const createHandlerRefsByMap = (type: 'vertex' | 'edge', map: IRefReducerMap, graph: IGraph) =>
+      Object.keys(map).map(key =>
+        createHandlerRef({graph, [type]: key}, map[key]))
+
+    if (typeof handler === 'function') {
+      handlers.push(createHandlerRef({graph}, handler))
+    }
+    else {
+      if (handler.graph) {
+        handlers.push(createHandlerRef({graph}, handler.graph))
+      }
+
+      handlers.push(...createHandlerRefsByMap('edge', handler.edges || {}, graph))
+      handlers.push(...createHandlerRefsByMap('vertex', handler.vertexes || {}, graph))
+
+    }
+
+    return handlers
   }
 
 }

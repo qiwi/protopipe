@@ -1,5 +1,5 @@
 import {
-  IAnyValue,
+  IAnyValue, IData,
   IDataRef,
   IPointer,
   ISpace,
@@ -52,11 +52,15 @@ export const upsertRef = (type: IAny, space: ISpace, data: IAny, graph: IGraph, 
       edge,
     },
   }
+  const _data: IData = {
+    type: 'DATA',
+    value: data,
+  }
   const dataRef: IDataRef = {
     type,
     value: {
       pointer,
-      value: data,
+      data: _data,
     },
   }
 

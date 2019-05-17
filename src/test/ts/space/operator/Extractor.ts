@@ -46,7 +46,7 @@ describe('Extractor', () => {
     type: 'DATA_REF',
     value: {
       pointer,
-      value: data,
+      data,
     },
   }
 

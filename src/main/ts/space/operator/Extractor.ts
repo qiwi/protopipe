@@ -17,12 +17,10 @@ export const findByType = (type: any, space: ISpace): IAnyValue | undefined => f
 
 export const findDataRef = findByType.bind(null, 'DATA_REF') as (space: ISpace) => IDataRef | undefined
 
-export const findRefByVertex = (type: any, space: ISpace, vertex: IVertex): IAnyValue | undefined => {
-  return Extractor.find(
-    ({type: _type, value}: IAnyValue) => type === _type && value.pointer.value.vertex === vertex,
-    space,
-  )
-}
+export const findRefByVertex = (type: any, space: ISpace, vertex: IVertex): IAnyValue | undefined => Extractor.find(
+  ({type: _type, value}: IAnyValue) => type === _type && value.pointer.value.vertex === vertex,
+  space,
+)
 
 export const findHandlerRefByVertex = findRefByVertex.bind(null, 'HANDLER_REF') as (space: ISpace, vertex: IVertex) => IHandlerRef | undefined
 export const findDataRefByVertex = findRefByVertex.bind(null, 'DATA_REF') as (space: ISpace, vertex: IVertex) => IDataRef | undefined

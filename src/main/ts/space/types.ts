@@ -31,8 +31,8 @@ export type IPointer = ITypedValue<'POINTER', {
 }>
 
 export type IReference = ITypedValue<IAny, {
-  pointer: IPointer,
-  value: IAnyValue
+  [key: string]: IAny,
+  pointer: IPointer
 }>
 
 export type IRefReducer = (...refs: Array<IReference>) => IAny
@@ -46,17 +46,17 @@ export type IHandlerRef = ITypedValue<'HANDLER_REF', {
 
 export type IMetaRef = ITypedValue<'META_REF', {
   pointer: IPointer,
-  value: IMeta
+  meta: IMeta
 }>
 
 export type IOptRef = ITypedValue<'OPT_REF', {
   pointer: IPointer,
-  value: IOpt
+  opt: IOpt
 }>
 
 export type IDataRef = ITypedValue<'DATA_REF', {
   pointer: IPointer,
-  value: IData
+  data: IData
 }>
 
 export type ISpace = ITypedValue<'SPACE', Array<IAnyValue>>
