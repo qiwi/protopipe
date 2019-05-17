@@ -41,7 +41,7 @@ export type IHandler = ITypedValue<'HANDLER', IRefReducer>
 
 export type IHandlerRef = ITypedValue<'HANDLER_REF', {
   pointer: IPointer,
-  value: IHandler
+  handler: IHandler
 }>
 
 export type IMetaRef = ITypedValue<'META_REF', {

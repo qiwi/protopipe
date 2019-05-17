@@ -1,7 +1,6 @@
 import {
   staticImplements,
   IAny,
-  // IAnyMap
 } from '../types'
 import {IProcessorStaticOperator} from './types'
 import {
@@ -11,6 +10,7 @@ import {
   IDataRef,
   IAnyValue,
   IRefReducer,
+  IHandlerRef,
 } from '../space/'
 import {
   IGraph,
@@ -144,19 +144,29 @@ export class NetProcessor {
   }
 
   static getHandler(space: ISpace, vertex: IVertex): IRefReducer {
-    const handlerRef = Extractor.find(
-      ({type, value}: IAnyValue) => type === 'HANDLER_REF' && value.pointer.value.vertex === vertex,
-       space,
-    ) || Extractor.find(
-      ({type, value}: IAnyValue) => type === 'HANDLER_REF' && !value.pointer.value.vertex,
-      space,
-    )
+    const handlerRef: IHandlerRef | undefined = this.findVertexHandlerRef(space, vertex) || this.findDefaultHandlerRef(space)
 
     if (!handlerRef) {
       throw new Error('HANDLER is required')
     }
 
-    return handlerRef.value.value
+    return handlerRef.value.handler.value
+  }
+
+  static findDefaultHandlerRef(space: ISpace): IHandlerRef | undefined {
+    return Extractor.find(
+      ({type, value}: IAnyValue) => type === 'HANDLER_REF'
+        && value.pointer.value.vertex === undefined
+        && value.pointer.value.edge === undefined,
+      space,
+    )
+  }
+
+  static findVertexHandlerRef(space: ISpace, vertex: IVertex): IHandlerRef | undefined {
+    return Extractor.find(
+      ({type, value}: IAnyValue) => type === 'HANDLER_REF' && value.pointer.value.vertex === vertex,
+      space,
+    )
   }
 
   static impact(space: ISpace, sync: boolean, ...targets: IImpactTarget[]) {
@@ -219,7 +229,10 @@ export class NetProcessor {
             graph,
           },
         },
-        value: handler,
+        handler: {
+          type: 'HANDLER',
+          value: handler,
+        },
       },
     }]
 
