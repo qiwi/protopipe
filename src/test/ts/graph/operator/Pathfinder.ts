@@ -72,6 +72,20 @@ describe('Pathfinder', () => {
         expect(pathfinder.getOutEdgesOf('B')).toEqual(['BC', 'BD'])
       })
     })
+
+    describe('#getOutVertexes', () => {
+      it('returns out-vertexes related to target vertex', () => {
+        expect(pathfinder.getOutVertexes('A')).toEqual(['B', 'C', 'D'])
+        expect(pathfinder.getOutVertexes('B')).toEqual(['C', 'D'])
+      })
+    })
+
+    describe('#getInVertexes', () => {
+      it('returns in-vertexes related to target vertex', () => {
+        expect(pathfinder.getInVertexes('A')).toEqual([])
+        expect(pathfinder.getInVertexes('B')).toEqual(['A'])
+      })
+    })
   })
 
   describe('static', () => {
@@ -113,6 +127,20 @@ describe('Pathfinder', () => {
       it('returns out-edges of vertex', () => {
         expect(Pathfinder.getOutEdgesOf(graph, 'A')).toEqual(['AB', 'AC', 'AD'])
         expect(Pathfinder.getOutEdgesOf(graph, 'B')).toEqual(['BC', 'BD'])
+      })
+    })
+
+    describe('#getOutVertexes', () => {
+      it('returns out-vertexes related to target vertex', () => {
+        expect(Pathfinder.getOutVertexes(graph, 'A')).toEqual(['B', 'C', 'D'])
+        expect(Pathfinder.getOutVertexes(graph, 'B')).toEqual(['C', 'D'])
+      })
+    })
+
+    describe('#getInVertexes', () => {
+      it('returns in-vertexes related to target vertex', () => {
+        expect(Pathfinder.getInVertexes(graph, 'A')).toEqual([])
+        expect(Pathfinder.getInVertexes(graph, 'B')).toEqual(['A'])
       })
     })
   })

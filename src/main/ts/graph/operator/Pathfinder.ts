@@ -48,6 +48,14 @@ export class Pathfinder {
     return Pathfinder.getOutEdgesOf(this.graph, vertex)
   }
 
+  getInVertexes(vertex: IVertex): Array<IEdge> {
+    return Pathfinder.getInVertexes(this.graph, vertex)
+  }
+
+  getOutVertexes(vertex: IVertex): Array<IEdge> {
+    return Pathfinder.getOutVertexes(this.graph, vertex)
+  }
+
   static getInDegree(graph: IGraph, vertex: IVertex): number {
     return this.getInEdgesOf(graph, vertex).length
   }
@@ -81,28 +89,23 @@ export class Pathfinder {
     })
   }
 
-  static getInVertexes(graph: IGraph, vertex: IVertex): Array<IVertex> {
+  static getAdjunctiveVertexes(strategy: 'HEAD' | 'TAIL', graph: IGraph, vertex: IVertex): IVertex[] {
     return graph.edges.reduce((memo: IVertex[], edge: IEdge) => {
       const [head, tail]: [IVertex, IVertex] = graph.incidentor.value[edge]
+      const adjVertex = strategy === 'HEAD'
+        ? head === vertex ? tail : null
+        : tail === vertex ? head : null
 
-      if (tail === vertex) {
-        memo.push(head)
+      if (adjVertex) {
+        memo.push(adjVertex)
       }
 
       return memo
     }, [])
+
   }
 
-  static getOutVertexes(graph: IGraph, vertex: IVertex): Array<IVertex> {
-    return graph.edges.reduce((memo: IVertex[], edge: IEdge) => {
-      const [head, tail]: [IVertex, IVertex] = graph.incidentor.value[edge]
-
-      if (head === vertex) {
-        memo.push(tail)
-      }
-
-      return memo
-    }, [])
-  }
+  static getOutVertexes = Pathfinder.getAdjunctiveVertexes.bind(null, 'HEAD')
+  static getInVertexes = Pathfinder.getAdjunctiveVertexes.bind(null, 'TAIL')
 
 }
