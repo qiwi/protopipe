@@ -114,8 +114,10 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_processor_net_.netprocessor.html#impact" class="tsd-kind-icon">impact</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#attachcontext" class="tsd-kind-icon">attach<wbr>Context</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#finddefaulthandlerref" class="tsd-kind-icon">find<wbr>Default<wbr>Handler<wbr>Ref</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#gethandler" class="tsd-kind-icon">get<wbr>Handler</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#impact-1" class="tsd-kind-icon">impact</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#parsehandlers" class="tsd-kind-icon">parse<wbr>Handlers</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_processor_net_.netprocessor.html#parser" class="tsd-kind-icon">parser</a></li>
 							</ul>
 						</section>
@@ -134,7 +136,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L60">processor/Net.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L71">processor/Net.ts:71</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -156,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">space<span class="tsd-signature-symbol">:</span> <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L60">processor/Net.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L71">processor/Net.ts:71</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;requireByType.bind(null, &#x27;CXT&#x27;) as (space: ISpace) &#x3D;&gt; ICxt</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L205">processor/Net.ts:205</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L219">processor/Net.ts:219</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -197,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Graph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;requireByType.bind(null, &#x27;GRAPH&#x27;) as (space: ISpace) &#x3D;&gt; IGraph</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L203">processor/Net.ts:203</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L217">processor/Net.ts:217</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -235,7 +237,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L66">processor/Net.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L77">processor/Net.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -264,7 +266,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L171">processor/Net.ts:171</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L185">processor/Net.ts:185</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -281,6 +283,32 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="finddefaulthandlerref" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> find<wbr>Default<wbr>Handler<wbr>Ref</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Default<wbr>Handler<wbr>Ref<span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ihandlerref" class="tsd-signature-type">IHandlerRef</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L164">processor/Net.ts:164</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>space: <a href="../modules/_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_space_types_.html#ihandlerref" class="tsd-signature-type">IHandlerRef</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">undefined</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="gethandler" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Handler</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
@@ -290,7 +318,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L143">processor/Net.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L154">processor/Net.ts:154</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -316,7 +344,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L159">processor/Net.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L173">processor/Net.ts:173</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -339,6 +367,32 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="parsehandlers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> parse<wbr>Handlers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Handlers<span class="tsd-signature-symbol">(</span>handler<span class="tsd-signature-symbol">: </span><a href="../modules/_processor_net_.html#ihandlerparamdeclaration" class="tsd-signature-type">IHandlerParamDeclaration</a>, graph<span class="tsd-signature-symbol">: </span><a href="../modules/protopipe.html#igraph" class="tsd-signature-type">IGraph</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_space_types_.html#ihandlerref" class="tsd-signature-type">IHandlerRef</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L235">processor/Net.ts:235</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>handler: <a href="../modules/_processor_net_.html#ihandlerparamdeclaration" class="tsd-signature-type">IHandlerParamDeclaration</a></h5>
+								</li>
+								<li>
+									<h5>graph: <a href="../modules/protopipe.html#igraph" class="tsd-signature-type">IGraph</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_space_types_.html#ihandlerref" class="tsd-signature-type">IHandlerRef</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="parser" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> parser</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
@@ -348,7 +402,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/processor/Net.ts#L207">processor/Net.ts:207</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L221">processor/Net.ts:221</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -455,10 +509,16 @@
 								<a href="_processor_net_.netprocessor.html#attachcontext" class="tsd-kind-icon">attach<wbr>Context</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_processor_net_.netprocessor.html#finddefaulthandlerref" class="tsd-kind-icon">find<wbr>Default<wbr>Handler<wbr>Ref</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_processor_net_.netprocessor.html#gethandler" class="tsd-kind-icon">get<wbr>Handler</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_processor_net_.netprocessor.html#impact-1" class="tsd-kind-icon">impact</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_processor_net_.netprocessor.html#parsehandlers" class="tsd-kind-icon">parse<wbr>Handlers</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="_processor_net_.netprocessor.html#parser" class="tsd-kind-icon">parser</a>
@@ -467,6 +527,9 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_processor_net_.html#ihandlerparamdeclaration" class="tsd-kind-icon">IHandler<wbr>Param<wbr>Declaration</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="../modules/_processor_net_.html#inetprocessorparams" class="tsd-kind-icon">INet<wbr>Processor<wbr>Params</a>
 					</li>

@@ -78,6 +78,8 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#finddataref" class="tsd-kind-icon">find<wbr>Data<wbr>Ref</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#finddatarefbyvertex" class="tsd-kind-icon">find<wbr>Data<wbr>Ref<wbr>ByVertex</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#findhandlerrefbyvertex" class="tsd-kind-icon">find<wbr>Handler<wbr>Ref<wbr>ByVertex</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -86,6 +88,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#filter" class="tsd-kind-icon">filter</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#find" class="tsd-kind-icon">find</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#findbytype" class="tsd-kind-icon">find<wbr>ByType</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_space_operator_extractor_.html#findrefbyvertex" class="tsd-kind-icon">find<wbr>Ref<wbr>ByVertex</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,7 +102,7 @@
 					<div class="tsd-signature tsd-kind-icon">find<wbr>Data<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;findByType.bind(null, &#x27;DATA_REF&#x27;) as (space: ISpace) &#x3D;&gt; IDataRef | undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/space/operator/Extractor.ts#L16">space/operator/Extractor.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L18">space/operator/Extractor.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -127,6 +130,80 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="finddatarefbyvertex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> find<wbr>Data<wbr>Ref<wbr>ByVertex</h3>
+					<div class="tsd-signature tsd-kind-icon">find<wbr>Data<wbr>Ref<wbr>ByVertex<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;findRefByVertex.bind(null, &#x27;DATA_REF&#x27;) as (space: ISpace, vertex: IVertex) &#x3D;&gt; IDataRef | undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L26">space/operator/Extractor.ts:26</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a>, vertex<span class="tsd-signature-symbol">: </span><a href="protopipe.html#ivertex" class="tsd-signature-type">IVertex</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_space_types_.html#idataref" class="tsd-signature-type">IDataRef</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>space: <a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+											</li>
+											<li>
+												<h5>vertex: <a href="protopipe.html#ivertex" class="tsd-signature-type">IVertex</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="_space_types_.html#idataref" class="tsd-signature-type">IDataRef</a>
+											<span class="tsd-signature-symbol"> | </span>
+											<span class="tsd-signature-type">undefined</span>
+										</h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="findhandlerrefbyvertex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> find<wbr>Handler<wbr>Ref<wbr>ByVertex</h3>
+					<div class="tsd-signature tsd-kind-icon">find<wbr>Handler<wbr>Ref<wbr>ByVertex<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;findRefByVertex.bind(null, &#x27;HANDLER_REF&#x27;) as (space: ISpace, vertex: IVertex) &#x3D;&gt; IHandlerRef | undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L25">space/operator/Extractor.ts:25</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a>, vertex<span class="tsd-signature-symbol">: </span><a href="protopipe.html#ivertex" class="tsd-signature-type">IVertex</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_space_types_.html#ihandlerref" class="tsd-signature-type">IHandlerRef</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>space: <a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+											</li>
+											<li>
+												<h5>vertex: <a href="protopipe.html#ivertex" class="tsd-signature-type">IVertex</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="_space_types_.html#ihandlerref" class="tsd-signature-type">IHandlerRef</a>
+											<span class="tsd-signature-symbol"> | </span>
+											<span class="tsd-signature-type">undefined</span>
+										</h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
@@ -140,7 +217,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/space/operator/Extractor.ts#L10">space/operator/Extractor.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L12">space/operator/Extractor.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -166,7 +243,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/space/operator/Extractor.ts#L12">space/operator/Extractor.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L14">space/operator/Extractor.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -195,7 +272,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/86bc1e6/src/main/ts/space/operator/Extractor.ts#L14">space/operator/Extractor.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L16">space/operator/Extractor.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -205,6 +282,38 @@
 								</li>
 								<li>
 									<h5>space: <a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_space_types_.html#ianyvalue" class="tsd-signature-type">IAnyValue</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">undefined</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="findrefbyvertex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> find<wbr>Ref<wbr>ByVertex</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Ref<wbr>ByVertex<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, space<span class="tsd-signature-symbol">: </span><a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a>, vertex<span class="tsd-signature-symbol">: </span><a href="protopipe.html#ivertex" class="tsd-signature-type">IVertex</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_space_types_.html#ianyvalue" class="tsd-signature-type">IAnyValue</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/space/operator/Extractor.ts#L20">space/operator/Extractor.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>space: <a href="_space_types_.html#ispace" class="tsd-signature-type">ISpace</a></h5>
+								</li>
+								<li>
+									<h5>vertex: <a href="protopipe.html#ivertex" class="tsd-signature-type">IVertex</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_space_types_.html#ianyvalue" class="tsd-signature-type">IAnyValue</a>
@@ -286,6 +395,12 @@
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_space_operator_extractor_.html#finddataref" class="tsd-kind-icon">find<wbr>Data<wbr>Ref</a>
 					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_space_operator_extractor_.html#finddatarefbyvertex" class="tsd-kind-icon">find<wbr>Data<wbr>Ref<wbr>ByVertex</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_space_operator_extractor_.html#findhandlerrefbyvertex" class="tsd-kind-icon">find<wbr>Handler<wbr>Ref<wbr>ByVertex</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_space_operator_extractor_.html#filter" class="tsd-kind-icon">filter</a>
 					</li>
@@ -294,6 +409,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_space_operator_extractor_.html#findbytype" class="tsd-kind-icon">find<wbr>ByType</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_space_operator_extractor_.html#findrefbyvertex" class="tsd-kind-icon">find<wbr>Ref<wbr>ByVertex</a>
 					</li>
 				</ul>
 			</nav>
