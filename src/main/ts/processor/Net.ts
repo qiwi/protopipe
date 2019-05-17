@@ -116,10 +116,7 @@ export class NetProcessor {
       return
     }
 
-    if (!cxt.override && Extractor.find(
-      ({type, value}: IAnyValue) => type === 'DATA_REF' && value.pointer.value.vertex === vertex,
-      space,
-    )) {
+    if (!cxt.override && Extractor.findDataRefByVertex(space, vertex)) {
       return
     }
 
@@ -144,7 +141,7 @@ export class NetProcessor {
   }
 
   static getHandler(space: ISpace, vertex: IVertex): IRefReducer {
-    const handlerRef: IHandlerRef | undefined = this.findVertexHandlerRef(space, vertex) || this.findDefaultHandlerRef(space)
+    const handlerRef: IHandlerRef | undefined = Extractor.findHandlerRefByVertex(space, vertex) || this.findDefaultHandlerRef(space)
 
     if (!handlerRef) {
       throw new Error('HANDLER is required')
@@ -158,13 +155,6 @@ export class NetProcessor {
       ({type, value}: IAnyValue) => type === 'HANDLER_REF'
         && value.pointer.value.vertex === undefined
         && value.pointer.value.edge === undefined,
-      space,
-    )
-  }
-
-  static findVertexHandlerRef(space: ISpace, vertex: IVertex): IHandlerRef | undefined {
-    return Extractor.find(
-      ({type, value}: IAnyValue) => type === 'HANDLER_REF' && value.pointer.value.vertex === vertex,
       space,
     )
   }
