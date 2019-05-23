@@ -1,21 +1,10 @@
 /** @module protopipe */
-
-export interface IStack {
-  get(index: number): any
-  push(...items: Array<any>): any
-  pop(): any
-  shift(): any
-  unshift(...items: Array<any>): any
-  size(): number
-  filter(cb: (item: any) => boolean): Array<any>
-  last(): any,
-  first(): any,
-}
+import {IStack} from './types'
 
 /**
  * @ignore
  */
-export default class Stack implements IStack {
+export class Stack implements IStack<any> {
 
   private _storage: Array<any>
   constructor(...args: Array<any>) {
@@ -51,7 +40,7 @@ export default class Stack implements IStack {
     return this._storage.length
   }
 
-  filter(cb: (item: any) => boolean): Array<any> {
+  filter(cb: (...args: Array<any>) => boolean): Array<any> {
     return this._storage.filter(cb)
   }
 
@@ -61,6 +50,14 @@ export default class Stack implements IStack {
 
   first(): any {
     return this._storage[0]
+  }
+
+  toArray(): Array<any> {
+    return [...this._storage]
+  }
+
+  clear(): void {
+    this._storage.length = 0
   }
 
 }
