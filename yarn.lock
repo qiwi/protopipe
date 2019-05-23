@@ -355,10 +355,10 @@
   resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-1.4.0.tgz#fd6672e5594bde188c299035ad122c5099fdfad6"
   integrity sha512-3tuTF+KqBOUMWxF/HzpsZhZ7Urke3SBYzlcqjTOtyBSFwJZCH3k8QzEV8JbTMZbMrVuqFMikvK0p9/pf51tyFA==
 
-"@qiwi/substrate@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-1.9.1.tgz#a16d58c4cf921bbd73a3138d941cc021093dc5b5"
-  integrity sha512-EsdZo4e27KASOQcHZgxXNjN0SXNpo50O9SM0bJlmMtg3VL0tpOklRsGHSc0bGAu14lsBwitVmg/EEQEuMcG9Yw==
+"@qiwi/substrate@^1.11.2":
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-1.11.2.tgz#f3d0a06f595da38e3c86095baa1e5a5a03fad56c"
+  integrity sha512-knQK98Ds/WxrJaPQreMba6nFcnUs8xPD5Ygg7ZIpT57NqnHW95Y8fzfoxn/lmrmxnvShaLFgt2R168oeofh4dA==
   dependencies:
     "@qiwi/substrate-types" "^1.0.0"
 
@@ -2308,10 +2308,10 @@ find-versions@^3.0.0:
     array-uniq "^2.0.0"
     semver-regex "^2.0.0"
 
-flowgen@1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/flowgen/-/flowgen-1.8.2.tgz#e108660d5432e1b7c48fb0daf2dabe9f4e2233c4"
-  integrity sha512-h6SnbNPXdbKF4fgLpmqymSNWMXT9gUpHpNXNvQR9ot+GUbwnRP8c4jHrkfPoVmgQIzXoG5+p4cvFqBeysWgZRg==
+flowgen@1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/flowgen/-/flowgen-1.8.3.tgz#1c3bea04455552b99483422ec21d7ae477d17881"
+  integrity sha512-AUOXBA/o9jfvMzmYJTeoWHGEenC/rOMZNJjCQQEjSNu7Am7hP2VtiXDiBrE0JMGaqx4jPLd3iGXM3NbAQ2aZYA==
   dependencies:
     commander "^2.11.0"
     lodash "^4.17.4"
