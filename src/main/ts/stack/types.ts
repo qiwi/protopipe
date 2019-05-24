@@ -10,6 +10,8 @@ export interface IStack<T> {
   first(): T,
   toArray(): Array<T>
   clear(): void
+  indexOf(item: T): number
+  add(index: string | number, item: T): T
 }
 
 export type IStackOperator<IStack> = {

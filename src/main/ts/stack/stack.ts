@@ -60,4 +60,14 @@ export class Stack implements IStack<any> {
     this._storage.length = 0
   }
 
+  indexOf(item: any): number {
+    return this._storage.indexOf(item)
+  }
+
+  add(index: number, item: any): any {
+    this._storage[index] = item
+
+    return item
+  }
+
 }

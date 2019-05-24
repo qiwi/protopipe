@@ -17,22 +17,12 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
     return CrudStackOperator.read(this.stack, predicate, limit)
   }
 
-  upsert(predicate: IStackFilterPredicate<any>, value: any): any {
-    const updated = this.update(predicate, value, 1)
-
-    return updated.length === 0
-      ? this.create(value)
-      : updated[0]
+  update(predicate: IStackFilterPredicate<any>, value: any, upsert?: boolean): any[] {
+    return CrudStackOperator.update(this.stack, predicate, value, upsert)
   }
 
-  update(predicate: IStackFilterPredicate<any>, value: any, limit?: number): any[] {
-    // @ts-ignore
-    // tslint:disable-next-line
-    return this.filter(predicate, limit).forEach(item => Object.assign(item, value))
-  }
-
-  del(predicate: IStackFilterPredicate<any>) {
-    CrudStackOperator.del(this.stack, predicate)
+  del(predicate: IStackFilterPredicate<any>): any[] {
+    return CrudStackOperator.del(this.stack, predicate)
   }
 
   static create(stack: IStack<any>, value: any): any {
@@ -50,24 +40,35 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
     return stack.filter(predicate)
   }
 
-  static upsert(stack: IStack<any>, predicate: IStackFilterPredicate<any>, value: any): any {
-    const updated = this.update(stack, predicate, value, 1)
+  static update(stack: IStack<any>, predicate: IStackFilterPredicate<any>, value: any, upsert?: boolean): any {
+    const index = stack.indexOf(this.read(stack, predicate, 1)[0])
 
-    return updated.length === 0
-      ? this.create(stack, value)
-      : updated[0]
+    if (index !== -1) {
+      return stack.add(index, value)
+    }
+
+    if (upsert) {
+      return this.create(stack, value)
+    }
+
   }
 
-  static update(stack: IStack<any>, predicate: IStackFilterPredicate<any>, value: any, limit?: number): any[] {
-    // @ts-ignore
-    // tslint:disable-next-line
-    return this.filter(stack, predicate, limit).forEach(item => Object.assign(item, value))
-  }
+  static del(stack: IStack<any>, predicate: IStackFilterPredicate<any>): any[] {
+    const removed: any[] = []
+    const filtered = stack.filter((item: any, index: number, arr: any[]) => {
+      if (predicate(item, index, arr)) {
+        removed.push(item)
 
-  static del(stack: IStack<any>, predicate: IStackFilterPredicate<any>) {
+        return false
+      }
+
+      return true
+    })
+
     stack.clear()
-    const filtered = stack.filter((item: any, index: number, arr: any[]) => !predicate(item, index, arr))
     stack.push(...filtered)
+
+    return removed
   }
 
 }
