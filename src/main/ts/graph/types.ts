@@ -53,3 +53,9 @@ export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
 export interface IGraphStaticOperator extends ConstructorType<IGraphOperator> {
   // [key: string]: IGraphStaticOperation
 }
+
+export type IPointer = {
+  graph: IGraph,
+  vertex?: IVertex,
+  edge?: IEdge
+}

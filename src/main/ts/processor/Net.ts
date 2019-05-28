@@ -2,7 +2,9 @@ import {
   staticImplements,
   IAny,
 } from '../types'
-import {IProcessorStaticOperator} from './types'
+import {
+  IProcessorStaticOperator
+} from './types'
 import {
   ISpace,
   Extractor,
@@ -14,11 +16,12 @@ import {
 } from '../space/'
 import {
   IEdge,
-  IGraph,
+  IGraph, IPointer,
   IVertex,
   Pathfinder,
 } from '../graph'
 import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util'
+import {ISpaceElement} from '../space/types2'
 
 type IRefReducerMap = {
   [key: string]: IRefReducer
@@ -59,6 +62,22 @@ const requireByType = <T, V>(type: T, space: ISpace): V => {
   }
 
   return item && item.value
+}
+
+//
+export interface IAnchor extends ISpaceElement {
+  type: 'ANCHOR',
+  value: IPointer
+}
+
+export interface IData extends ISpaceElement {
+  type: 'DATA',
+  value: IAny
+}
+
+export interface IHandler extends ISpaceElement {
+  type: 'HANDLER',
+  value: Function
 }
 
 /**
