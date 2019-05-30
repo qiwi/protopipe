@@ -12,6 +12,8 @@ export interface IReference extends ISpaceElement {
   }
 }
 
+export type IDirection = 'from' | 'to'
+
 export class RefOperator implements ISpaceOperator<ISpace> {
 
   space: ISpace
@@ -50,12 +52,22 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     )
   }
 
-  static getRels(space: ISpace, id: IId): ISpaceElement[] {
-    const refs: IReference[] = CrudStackOperator.read(
+  static getRefs(space: ISpace, id: IId | IId[], direction: IDirection = 'from'): ISpaceElement[] {
+    const ids = Array.isArray(id) ? id : [id]
+    return CrudStackOperator.read(
       space.value,
-      (item) => item.type === 'REF' && id === item.value.from,
+      (item) => item.type === 'REF' && ids.includes(item.value[direction]),
     )
-    const ids = refs.map(ref => ref.value.to)
+  }
+
+  static get(space: ISpace, id: IId, type?: string): ISpaceElement | undefined {
+    return CrudStackOperator.read(space.value, ({id: _id, type: _type}) => id === _id && (type ? type === _type : true), 1)[0]
+  }
+
+  static getRels(space: ISpace, id: IId, direction: IDirection = 'from'): ISpaceElement[] {
+    const refs = this.getRefs(space, id, direction)
+    const _direction: IDirection = direction === 'from' ? 'to' : 'from'
+    const ids = refs.map(ref => ref.value[_direction])
 
     return CrudStackOperator.read(space.value, item => ids.includes(item.id))
   }

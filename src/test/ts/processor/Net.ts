@@ -17,7 +17,8 @@ describe('NetProcessor', () => {
       },
     },
   })
-  const handler = (...args: any[]) => console.log('args=', JSON.stringify(args.map(v => v.value), null, 2))
+
+  const handler = (...args: any[]) => console.log('args=', JSON.stringify(args, null, 2))
 
   // describe('constructor', () => {})
 
@@ -26,9 +27,16 @@ describe('NetProcessor', () => {
       it('synchronously processes data from A to D', () => {
         const netProcessor = new NetProcessor({graph, handler})
         const space = netProcessor.impact(true,'A') as ISpace
-        const res = space.value.last()
 
-        expect(res.value).toBe('D')
+        const res = NetProcessor.getData(space, 'D')
+
+
+        //console.log('space=', JSON.stringify(space, null, 2))
+
+        expect(res).toEqual({
+          type: 'DATA',
+          value: 1
+        })
       })
 /*
       it('asynchronously processes data from A to D', async() => {
