@@ -9,13 +9,7 @@ import {
   ISpaceElement,
   RefOperator,
   ISpace,
-  IReference, IId,
-  /*Extractor,
-  Injector,
-  IDataRef,
-  IAnyValue,
-  IRefReducer,
-  IHandlerRef,*/
+  IId,
 } from '../space/'
 import {
   IEdge,
@@ -25,6 +19,7 @@ import {
   Pathfinder,
 } from '../graph'
 import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util'
+import {Stack} from "../stack";
 
 type IRefReducerMap = {
   [key: string]: IRefReducer
@@ -55,17 +50,6 @@ type IImpactTarget = IVertex | [IVertex, IAny]
 type INormalizedImpactTarget = {
   vertex: IVertex,
   data?: IAny
-}
-
-const requireByType = <T, V>(type: T, space: ISpace): V => {
-  // const item: IReference | undefined = Extractor.findByType(type, space)
-  const item: ISpaceElement | undefined = RefOperator.find(({type: _type}) => type === _type, space)
-
-  if (!item) {
-    throw new Error(`${type} is required`)
-  }
-
-  return item && item.value
 }
 
 
@@ -145,7 +129,7 @@ export class NetProcessor {
     const processResult = (res: IAny) => {
       const anchor = this.getAnchor(space, graph, vertex)
       const dataRef = this.getLinkedData(space, anchor.id)
-      const data = RefOperator.upsert(space, 'DATA', res, dataRef ? ({id}) => dataRef.id === id : null)
+      const data = RefOperator.upsert(space, 'DATA', res, dataRef ? ({id}) => dataRef.id === id : undefined)
 
       if (!dataRef) {
         RefOperator.link(space, anchor.id, data.id)
@@ -190,7 +174,14 @@ export class NetProcessor {
     const anchorsIds: IId[] = anchors.map(({id}) => id)
     const sources: IData[] = RefOperator.read(({type, id}) =>
       type === 'DATA'
-      && !!RefOperator.find(({value: {from, to}}) => to === id && anchorsIds.includes(from), space)
+      && !!RefOperator.find(({type, value}) => {
+        if (type === 'REF') {
+          const {from, to} = value
+          return to === id && anchorsIds.includes(from)
+        }
+
+        return false
+      }, space)
     , space)
     /*const sources: IDataRef[] = Extractor.filter(
       ({type, value}: IAnyValue) => type === 'DATA_REF' && sourceVertexes.includes(value.pointer.value.vertex),
@@ -218,7 +209,7 @@ export class NetProcessor {
   }
 
   static getElt(type: string, space: ISpace, vertex?: IVertex): ISpaceElement | undefined {
-    const typePredicate = ({type: _type}) => type === _type
+    const typePredicate: IPredicate = ({type: _type}) => type === _type
 
     if (vertex) {
       return this.getRelsByVertex(space, vertex).find(typePredicate)
@@ -300,9 +291,20 @@ export class NetProcessor {
 
   static getContext = requireByType.bind(null, 'CXT') as (space: ISpace) => ICxt*/
 
-  static parser({graph, handler}: INetProcessorParams) {
+  static parser({graph, handler}: INetProcessorParams): ISpace {
+    const space: ISpace = {
+      type: 'SPACE',
+      value: new Stack()
+    }
 
-    const handlers = this.parseHandlers(handler, graph)
+    RefOperator.create(space, 'GRAPH', graph)
+
+    this.injectHandlers(space, handler, graph)
+
+    return space
+
+
+    /*const handlers = this.parseHandlers(space, handler, graph)
     return {
       type: 'SPACE',
       value: [{
@@ -310,42 +312,31 @@ export class NetProcessor {
         type: 'GRAPH',
         value: graph,
       }, ...handlers],
-    }
+    }*/
   }
 
-  static parseHandlers(handler: IHandlerParamDeclaration, graph: IGraph): IHandlerRef[] {
-    const handlers: IHandlerRef[] = []
-    const createHandlerRef = (pointer: {graph: IGraph, vertex?: IVertex, edge?: IEdge}, handler: IRefReducer): IHandlerRef => ({
-      type: 'HANDLER_REF',
-      value: {
-        pointer: {
-          type: 'POINTER',
-          value: pointer,
-        },
-        handler: {
-          type: 'HANDLER',
-          value: handler,
-        },
-      },
-    })
-    const createHandlerRefsByMap = (type: 'vertex' | 'edge', map: IRefReducerMap, graph: IGraph) =>
-      Object.keys(map).map(key =>
-        createHandlerRef({graph, [type]: key}, map[key]))
+  static injectHandlers(space: ISpace, handler: IHandlerParamDeclaration, graph: IGraph): void {
+    const attachHandler = ({vertex, edge}: {vertex?: IVertex, edge?: IEdge}, handler: IRefReducer): void => {
+      const anchor = this.getAnchor(space, graph, vertex, edge)
+      const _handler: IHandler = RefOperator.create(space, 'HANDLER', handler)
+
+      RefOperator.link(space, anchor.id, _handler.id)
+    }
+    const createHandlerRefsByMap = (type: 'vertex' | 'edge', map: IRefReducerMap = {}) =>
+      Object.keys(map).forEach(key => attachHandler({[type]: key}, map[key]))
 
     if (typeof handler === 'function') {
-      handlers.push(createHandlerRef({graph}, handler))
+      attachHandler({}, handler)
     }
     else {
       if (handler.graph) {
-        handlers.push(createHandlerRef({graph}, handler.graph))
+        attachHandler({}, handler.graph)
       }
 
-      handlers.push(...createHandlerRefsByMap('edge', handler.edges || {}, graph))
-      handlers.push(...createHandlerRefsByMap('vertex', handler.vertexes || {}, graph))
+      createHandlerRefsByMap('edge', handler.edges)
+      createHandlerRefsByMap('vertex', handler.vertexes)
 
     }
-
-    return handlers
   }
 
 }

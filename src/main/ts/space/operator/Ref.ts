@@ -2,6 +2,7 @@ import {IId, ISpaceElement, ISpaceOperator, ISpace} from '../types'
 import {CrudStackOperator} from '../../stack/operator'
 import {IAny, IPredicate} from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
+import {IStack} from "../../stack";
 
 export interface IReference extends ISpaceElement {
   type: 'REF',
@@ -19,8 +20,8 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     this.space = space
   }
 
-  static create(space, type, value): ISpaceElement {
-    const stack = space.value
+  static create(space: ISpace, type: string, value: IAny): ISpaceElement {
+    const stack: IStack<ISpaceElement> = space.value
     const elt: ISpaceElement = {
       id: Math.random() + '',
       type,
