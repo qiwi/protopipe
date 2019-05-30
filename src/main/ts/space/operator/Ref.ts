@@ -1,4 +1,4 @@
-import {IId, ISpaceElement, ISpaceOperator, ISpace} from '../types2'
+import {IId, ISpaceElement, ISpaceOperator, ISpace} from '../types'
 import {CrudStackOperator} from '../../stack/operator'
 import {IAny, IPredicate} from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
@@ -19,7 +19,19 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     this.space = space
   }
 
-  static upsert(space: ISpace, type: string, value: IAny, predicate?: IPredicate) {
+  static create(space, type, value): ISpaceElement {
+    const stack = space.value
+    const elt: ISpaceElement = {
+      id: Math.random() + '',
+      type,
+      value,
+    }
+
+    return CrudStackOperator.create(stack, elt)
+  }
+
+  static upsert(space: ISpace, type: string, value: IAny, predicate?: IPredicate): ISpaceElement {
+    const stack = space.value
     const elt: ISpaceElement = {
       id: Math.random() + '',
       type,
@@ -28,8 +40,8 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     const _predicate = predicate ? predicate : () => false
     const reducer: IStackValueUpdateReducer = (prev, next) => ({...prev, ...next, id: prev.id})
 
-    CrudStackOperator.update(
-      space.value,
+    return CrudStackOperator.update(
+      stack,
       _predicate,
       elt,
       true,
@@ -58,4 +70,11 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     return this.upsert(space, type, value, (item: ISpaceElement) => item.type === type && item.value.from === from && item.value.to === to)
   }
 
+  static read(predicate: IPredicate, space: ISpace, limit?: number): ISpaceElement[] {
+    return CrudStackOperator.read(space.value, predicate, limit)
+  }
+
+  static find(predicate: IPredicate, space: ISpace): ISpaceElement | undefined {
+    return this.read(predicate, space, 1)[0]
+  }
 }
