@@ -2,7 +2,7 @@ import {IId, ISpaceElement, ISpaceOperator, ISpace} from '../types'
 import {CrudStackOperator} from '../../stack/operator'
 import {IAny, IPredicate} from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
-import {IStack} from "../../stack";
+import {IStack} from '../../stack'
 
 export interface IReference extends ISpaceElement {
   type: 'REF',
@@ -90,4 +90,5 @@ export class RefOperator implements ISpaceOperator<ISpace> {
   static find(predicate: IPredicate, space: ISpace): ISpaceElement | undefined {
     return this.read(predicate, space, 1)[0]
   }
+
 }

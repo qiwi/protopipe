@@ -20,7 +20,7 @@ describe('NetProcessor', () => {
 
   const handler = (space: ISpace) => {
     // console.log('args=', JSON.stringify(space, null, 2))
-    return  NetProcessor.requireElt('ANCHOR', space).value.vertex
+    return NetProcessor.requireElt('ANCHOR', space).value.vertex
   }
 
   // describe('constructor', () => {})
@@ -35,7 +35,7 @@ describe('NetProcessor', () => {
         expect(res).toEqual({
           id: expect.any(String),
           type: 'DATA',
-          value: 'D'
+          value: 'D',
         })
       })
 
@@ -47,7 +47,7 @@ describe('NetProcessor', () => {
         expect(res).toEqual({
           id: expect.any(String),
           type: 'DATA',
-          value: 'D'
+          value: 'D',
         })
       })
 
@@ -78,7 +78,7 @@ describe('NetProcessor', () => {
         expect(NetProcessor.getData(space, 'C')).toEqual({
           id: expect.any(String),
           type: 'DATA',
-          value: 6
+          value: 6,
         })
       })
 

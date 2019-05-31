@@ -3,7 +3,7 @@ import {
   IAny, IPredicate,
 } from '../types'
 import {
-  IProcessorStaticOperator
+  IProcessorStaticOperator,
 } from './types'
 import {
   ISpaceElement,
@@ -20,7 +20,7 @@ import {
   Pathfinder,
 } from '../graph'
 import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util'
-import {Stack} from "../stack";
+import {Stack} from '../stack'
 
 type ISpaceReducerMap = {
   [key: string]: ISpaceReducer
@@ -214,7 +214,7 @@ export class NetProcessor {
   }
 
   static getHandler(space: ISpace, vertex: IVertex): ISpaceReducer {
-    const handler =  this.getElt('HANDLER', space, vertex) || this.requireElt('HANDLER', space)
+    const handler = this.getElt('HANDLER', space, vertex) || this.requireElt('HANDLER', space)
 
     return handler.value
   }
@@ -270,10 +270,10 @@ export class NetProcessor {
       },
     }
 
-    space.value.unshift( {
+    space.value.unshift({
       id: '' + Math.random(),
       type: 'CXT',
-      value: cxt
+      value: cxt,
     })
 
     return cxt
@@ -283,7 +283,7 @@ export class NetProcessor {
   static parser({graph, handler}: INetProcessorParams): ISpace {
     const space: ISpace = {
       type: 'SPACE',
-      value: new Stack()
+      value: new Stack(),
     }
 
     RefOperator.create(space, 'GRAPH', graph)
@@ -291,7 +291,6 @@ export class NetProcessor {
     this.injectHandlers(space, handler, graph)
 
     return space
-
 
     /*const handlers = this.parseHandlers(space, handler, graph)
     return {

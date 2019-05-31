@@ -1,7 +1,7 @@
 import {
   Graph,
   RefOperator,
-  NetProcessor
+  NetProcessor,
 } from '../../main/ts'
 
 describe('index', () => {

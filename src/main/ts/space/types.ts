@@ -1,10 +1,4 @@
 import {
-  IGraph,
-  IVertex,
-  IEdge,
-} from '../graph/'
-
-import {
   IAny,
 } from '../types'
 
@@ -28,4 +22,3 @@ export type ISpace = {
   type: 'SPACE',
   value: IStack<ISpaceElement>
 }
-
