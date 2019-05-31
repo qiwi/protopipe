@@ -131,7 +131,6 @@ export class NetProcessor {
         RefOperator.link(space, anchor.id, data.id)
       }
 
-      // Injector.upsertDataRef(space, res, graph, vertex)
       this._impactGroup(space, ...targetVetexes)
       cxt.after()
     }
@@ -173,7 +172,8 @@ export class NetProcessor {
       .filter(elt => elt !== undefined) as IData[]
 
     if (sources.length === sourceVertexes.length) {
-      const _space = new Space(anchor, ...refs, ...sources)
+      const graphElt = this.requireElt('GRAPH', space)
+      const _space = new Space(anchor, ...anchors, graphElt, ...refs, ...sources)
       this._process(cxt, space, graph, vertex, () => handler(_space))
     }
   }
@@ -232,9 +232,7 @@ export class NetProcessor {
       return RefOperator.get(space, id, 'DATA')
     }
 
-    if (vertex) {
-      return this.getElt('DATA', space, vertex)
-    }
+    return this.getElt('DATA', space, vertex)
   }
 
   static impact(space: ISpace, sync: boolean, ...targets: IImpactTarget[]) {

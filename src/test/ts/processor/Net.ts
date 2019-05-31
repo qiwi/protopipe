@@ -1,4 +1,4 @@
-import {Graph, /*IAny, ISpaceElement,*/ ISpace, NetProcessor} from '../../../main/ts'
+import {Graph, IAny, /*IAny, ISpaceElement,*/ ISpace, NetProcessor} from '../../../main/ts'
 
 describe('NetProcessor', () => {
 
@@ -18,7 +18,10 @@ describe('NetProcessor', () => {
     },
   })
 
-  const handler = (...args: any[]) => console.log('args=', JSON.stringify(args, null, 2))
+  const handler = (space: ISpace) => {
+    // console.log('args=', JSON.stringify(space, null, 2))
+    return  NetProcessor.requireElt('ANCHOR', space).value.vertex
+  }
 
   // describe('constructor', () => {})
 
@@ -27,24 +30,25 @@ describe('NetProcessor', () => {
       it('synchronously processes data from A to D', () => {
         const netProcessor = new NetProcessor({graph, handler})
         const space = netProcessor.impact(true,'A') as ISpace
-
         const res = NetProcessor.getData(space, 'D')
 
-
-        //console.log('space=', JSON.stringify(space, null, 2))
-
         expect(res).toEqual({
+          id: expect.any(String),
           type: 'DATA',
-          value: 1
+          value: 'D'
         })
       })
-/*
+
       it('asynchronously processes data from A to D', async() => {
         const netProcessor = new NetProcessor({graph, handler})
         const space = await netProcessor.impact(false,'A') as ISpace
-        const res = space.value.last()
+        const res = NetProcessor.getData(space, 'D')
 
-        // expect(res.value.pointer.value.vertex).toBe('D')
+        expect(res).toEqual({
+          id: expect.any(String),
+          type: 'DATA',
+          value: 'D'
+        })
       })
 
       it('uses the most specific step handler', () => {
@@ -60,9 +64,9 @@ describe('NetProcessor', () => {
           },
         })
         const handler = {
-          graph: (prev: ISpaceElement): IAny => +prev.value * 2,
+          graph: (space: ISpace): IAny => (NetProcessor.getData(space) || {value: 0}).value * 2,
           vertexes: {
-            'B': (prev: ISpaceElement): IAny => +prev.value * 100,
+            'B': (space: ISpace): IAny => (NetProcessor.getData(space, 'A') || {value: 10}).value * 3,
           },
         }
         const protopipe = new NetProcessor({
@@ -71,11 +75,13 @@ describe('NetProcessor', () => {
         })
         const space = protopipe.impact(true, ['A', 1]) as ISpace
 
-
-        expect(space).toBeUndefined()
-        // expect(space.value[6].value).toBe(200)
+        expect(NetProcessor.getData(space, 'C')).toEqual({
+          id: expect.any(String),
+          type: 'DATA',
+          value: 6
+        })
       })
-      */
+
     })
   })
 
