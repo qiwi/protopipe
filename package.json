@@ -1,6 +1,6 @@
 {
   "name": "protopipe",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Graph-based data processor",
   "main": "lib/es5/index.js",
   "files": [

@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/qiwi/protopipe/compare/v2.1.0...v2.1.1) (2019-05-31)
+
+
+### Bug Fixes
+
+* **CrudOperator:** repair default #update reducer ([b2de48a](https://github.com/qiwi/protopipe/commit/b2de48a))
+
 # [2.1.0](https://github.com/qiwi/protopipe/compare/v2.0.1...v2.1.0) (2019-05-17)
 
 
