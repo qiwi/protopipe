@@ -47,7 +47,7 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
 
     if (index !== -1) {
       const prev: any = stack.get(index)
-      const _reducer: IStackValueUpdateReducer = reducer ? reducer : (...args) => args[0]
+      const _reducer: IStackValueUpdateReducer = reducer ? reducer : (...args) => args[args.length - 1]
       const next = _reducer(prev, value)
 
       return stack.add(index, next)
