@@ -1,11 +1,17 @@
 import {
   Graph,
-  Extractor,
+  RefOperator,
+  NetProcessor
 } from '../../main/ts'
 
 describe('index', () => {
-  it('exposes lib inners', () => {
-    expect(Graph).toEqual(expect.any(Function))
-    expect(Extractor).toEqual(expect.any(Function))
+  describe('lib inners', () => {
+    const constructors = [Graph, RefOperator, NetProcessor]
+
+    constructors.forEach((Constructor) => {
+      it(`${Constructor.name} is exposed`, () => {
+        expect(Constructor).toEqual(expect.any(Function))
+      })
+    })
   })
 })
