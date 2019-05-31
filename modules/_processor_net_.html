@@ -75,10 +75,19 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_processor_net_.ianchor.html" class="tsd-kind-icon">IAnchor</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_processor_net_.idata.html" class="tsd-kind-icon">IData</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_processor_net_.ihandler.html" class="tsd-kind-icon">IHandler</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_processor_net_.html#ihandlerparamdeclaration" class="tsd-kind-icon">IHandler<wbr>Param<wbr>Declaration</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_processor_net_.html#inetprocessorparams" class="tsd-kind-icon">INet<wbr>Processor<wbr>Params</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_processor_net_.html#ispacereducer" class="tsd-kind-icon">ISpace<wbr>Reducer</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,10 +98,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
 					<a name="ihandlerparamdeclaration" class="tsd-anchor"></a>
 					<h3>IHandler<wbr>Param<wbr>Declaration</h3>
-					<div class="tsd-signature tsd-kind-icon">IHandler<wbr>Param<wbr>Declaration<span class="tsd-signature-symbol">:</span> <a href="_space_types_.html#irefreducer" class="tsd-signature-type">IRefReducer</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">IHandler<wbr>Param<wbr>Declaration<span class="tsd-signature-symbol">:</span> <a href="_processor_net_.html#ispacereducer" class="tsd-signature-type">ISpaceReducer</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L27">processor/Net.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/processor/Net.ts#L29">processor/Net.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -102,12 +111,43 @@
 					<div class="tsd-signature tsd-kind-icon">INet<wbr>Processor<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/1821cac/src/main/ts/processor/Net.ts#L33">processor/Net.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/processor/Net.ts#L35">processor/Net.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="ispacereducer" class="tsd-anchor"></a>
+					<h3>ISpace<wbr>Reducer</h3>
+					<div class="tsd-signature tsd-kind-icon">ISpace<wbr>Reducer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/processor/Net.ts#L56">processor/Net.ts:56</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>space<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ISpace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_types_.html#iany" class="tsd-signature-type">IAny</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>space: <a href="" class="tsd-signature-type">ISpace</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="_types_.html#iany" class="tsd-signature-type">IAny</a></h4>
+									</li>
+								</ul>
+							</li>
 						</ul>
 					</div>
 				</section>
@@ -150,19 +190,34 @@
 						<a href="_processor_types_.html">"processor/types"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_space__types_.html">"space/_<wbr>types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_space_index_.html">"space/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_space_operator_extractor_.html">"space/operator/<wbr>Extractor"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space_operator_injector_.html">"space/operator/<wbr>Injector"</a>
+						<a href="_space_operator_ref_.html">"space/operator/<wbr>Ref"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_space_operator_index_.html">"space/operator/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_space_space_.html">"space/space"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_space_types_.html">"space/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_stack_index_.html">"stack/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_stack_operator_crud_.html">"stack/operator/<wbr>Crud"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_stack_operator_index_.html">"stack/operator/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_stack_types_.html">"stack/types"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_types_.html">"types"</a>
@@ -180,11 +235,23 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/_processor_net_.netprocessor.html" class="tsd-kind-icon">Net<wbr>Processor</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_processor_net_.ianchor.html" class="tsd-kind-icon">IAnchor</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_processor_net_.idata.html" class="tsd-kind-icon">IData</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_processor_net_.ihandler.html" class="tsd-kind-icon">IHandler</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="_processor_net_.html#ihandlerparamdeclaration" class="tsd-kind-icon">IHandler<wbr>Param<wbr>Declaration</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="_processor_net_.html#inetprocessorparams" class="tsd-kind-icon">INet<wbr>Processor<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_processor_net_.html#ispacereducer" class="tsd-kind-icon">ISpace<wbr>Reducer</a>
 					</li>
 				</ul>
 			</nav>
