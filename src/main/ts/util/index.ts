@@ -1,5 +1,8 @@
 import {IAny} from '../types'
 
+// TODO use nanoid?
+export const genId = (prefix?: string) => `${prefix || ''}${Math.random()}`
+
 export const promisify = (result: any): Promise<any> => Promise.resolve(result)
 
 export type IDecomposedPromise = {

@@ -3,6 +3,7 @@ import {CrudStackOperator} from '../../stack/operator'
 import {IAny, IPredicate} from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
 import {IStack} from '../../stack'
+import {genId} from '../../util'
 
 export interface IReference extends ISpaceElement {
   type: 'REF',
@@ -25,7 +26,7 @@ export class RefOperator implements ISpaceOperator<ISpace> {
   static create(space: ISpace, type: string, value: IAny): ISpaceElement {
     const stack: IStack<ISpaceElement> = space.value
     const elt: ISpaceElement = {
-      id: type + Math.random() + '',
+      id: genId(type),
       type,
       value,
     }
@@ -36,7 +37,7 @@ export class RefOperator implements ISpaceOperator<ISpace> {
   static upsert(space: ISpace, type: string, value: IAny, predicate?: IPredicate): ISpaceElement {
     const stack = space.value
     const elt: ISpaceElement = {
-      id: type + Math.random() + '',
+      id: genId(type),
       type,
       value,
     }

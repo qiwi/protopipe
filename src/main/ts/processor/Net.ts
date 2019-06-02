@@ -19,7 +19,12 @@ import {
   IVertex,
   Pathfinder,
 } from '../graph'
-import {IDecomposedPromise, promisify, getDecomposedPromise} from '../util'
+import {
+  IDecomposedPromise,
+  promisify,
+  getDecomposedPromise,
+  genId,
+} from '../util'
 import {Stack} from '../stack'
 
 type ISpaceReducerMap = {
@@ -271,7 +276,7 @@ export class NetProcessor {
     }
 
     space.value.unshift({
-      id: '' + Math.random(),
+      id: genId(),
       type: 'CXT',
       value: cxt,
     })
@@ -291,16 +296,6 @@ export class NetProcessor {
     this.injectHandlers(space, handler, graph)
 
     return space
-
-    /*const handlers = this.parseHandlers(space, handler, graph)
-    return {
-      type: 'SPACE',
-      value: [{
-        id: '' + Math.random(),
-        type: 'GRAPH',
-        value: graph,
-      }, ...handlers],
-    }*/
   }
 
   static injectHandlers(space: ISpace, handler: IHandlerParamDeclaration, graph: IGraph): void {
