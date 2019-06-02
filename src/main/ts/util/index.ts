@@ -1,4 +1,4 @@
-import {IAny} from './types'
+import {IAny} from '../types'
 
 export const promisify = (result: any): Promise<any> => Promise.resolve(result)
 
