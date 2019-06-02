@@ -21,7 +21,7 @@ Not universal, not high-performance. But dumb and clear.
 
 #### Usage
 ```javascript
-import { NetProcessor, Extractor, IDataRef, ISpace } from 'protopipe'
+import {Graph, IAny, ISpace, NetProcessor} from 'protopipe'
 
 const graph = new Graph({
   edges: ['AB', 'BC'],
@@ -30,24 +30,30 @@ const graph = new Graph({
     type: 'EDGE_LIST_INCDR',
     value: {
       'AB': ['A', 'B'],
-      'BC': ['B', 'C']
+      'BC': ['B', 'C'],
     },
   },
 })
-const handler = (prev: IDataRef): IAny => prev.value.value * 2
+const handler = {
+  // Default handler
+  graph: (space: ISpace): IAny => (NetProcessor.getData(space) || {value: 0}).value * 2,
+  // Vertex specific handlers
+  vertexes: {
+    'B': (space: ISpace): IAny => (NetProcessor.getData(space, 'A') || {value: 10}).value * 3,
+  },
+}
 const protopipe = new NetProcessor({
   graph,
   handler,
 })
-const space: ISpace = protopipe.impact(true, 'A', 1)
-const dVertexDataRef: IDataRef = space.value[space.value.length - 1]
+const space = protopipe.impact(true, ['A', 1]) as ISpace
 
-const val = dVertexDataRef.value.value // 4
+console.log(NetProcessor.getData(space, 'C').value) // 6
 ```
 
 ##### Features
 * Sync / async execution modes.
-* Stateful an stateless contracts.
+* Stateful and stateless contracts.
 * Deep customization.
 * Typings for both worlds — TS and flow.
 
@@ -88,16 +94,35 @@ export type IGraphIncidentor = {
 ```
 
 ### Sync / async
-Both. Pass `mode` flag as a part of `input.meta`. If handler returns a Promise then executor awaits until it will be resolved.
+Pass `mode` flag as the first `.impact()` argument to get result or promise.
+
 ```javascript
-const input = {
-  data: 'foo',
-  meta: {
-    sequence: {type: 'chain', data: []},
-    mode: 'ASYNC'
+const graph = new Graph({
+  edges: ['AB', 'AC', 'BC', 'BD', 'CD', 'AD'],
+  vertexes: ['A', 'B', 'C', 'D'],
+  incidentor: {
+    type: 'EDGE_LIST_INCDR',
+    value: {
+      'AB': ['A', 'B'],
+      'AC': ['A', 'C'],
+      'BC': ['B', 'C'],
+      'BD': ['B', 'D'],
+      'CD': ['C', 'D'],
+      'AD': ['A', 'D'],
+    },
   },
-  opts: {}
-}
+})
+const handler = (space: ISpace) => NetProcessor.requireElt('ANCHOR', space).value.vertex
+const netProcessor = new NetProcessor({graph, handler})
+
+// SYNC
+const res1 = netProcessor.impact(true,'A') as ISpace 
+NetProcessor.getData(res1, 'D') // 'D'
+
+// ASYNC
+netProcessor.impact(false,'A').then((res) => {
+  NetProcessor.getData(res, 'D') // 'D'
+})
 ```
 
 ### Customization

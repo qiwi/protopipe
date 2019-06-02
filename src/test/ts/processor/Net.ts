@@ -1,4 +1,4 @@
-import {Graph, IAny, /*IAny, ISpaceElement,*/ ISpace, NetProcessor} from '../../../main/ts'
+import {Graph, IAny, ISpace, NetProcessor} from '../../../main/ts'
 
 describe('NetProcessor', () => {
 
