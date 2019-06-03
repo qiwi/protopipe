@@ -1,6 +1,7 @@
 import {
+  IAny,
   staticImplements,
-  IAny, IPredicate,
+  IPredicate,
 } from '../types'
 import {
   IProcessorStaticOperator,
@@ -10,7 +11,8 @@ import {
   RefOperator,
   ISpace,
   Space,
-  IId, IReference,
+  IId,
+  IReference,
 } from '../space/'
 import {
   IEdge,
@@ -25,7 +27,9 @@ import {
   getDecomposedPromise,
   genId,
 } from '../util'
-import {Stack} from '../stack'
+import {
+  Stack
+} from '../stack'
 
 type ISpaceReducerMap = {
   [key: string]: ISpaceReducer

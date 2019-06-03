@@ -3,7 +3,7 @@ import {
   ConstructorType,
 } from '../types'
 
-import {ISpace} from '../space/types'
+import {ISpace} from '../space'
 
 export type ISpaceParser = (...args: IAny[]) => ISpace
 
