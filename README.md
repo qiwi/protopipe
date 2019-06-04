@@ -1,4 +1,5 @@
 # protopipe
+> Graph-driven data processor. [qiwi.github.io/protopipe](https://qiwi.github.io/protopipe/)
 
 [![buildStatus](https://img.shields.io/travis/com/qiwi/protopipe.svg?maxAge=3600&branch=master)](https://travis-ci.com/qiwi/protopipe)
 [![npm (tag)](https://img.shields.io/npm/v/protopipe/latest.svg)](https://www.npmjs.com/package/protopipe)
@@ -7,7 +8,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/maintainability)](https://codeclimate.com/github/qiwi/protopipe/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/test_coverage)](https://codeclimate.com/github/qiwi/protopipe/test_coverage)
 
-Graph-driven data processor. [qiwi.github.io/protopipe](https://qiwi.github.io/protopipe/)
+
 
 ## Idea
 We often come across the problem of atomic data processing ([logwrap](https://github.com/qiwi/logwrap), [uniconfig](https://github.com/qiwi/uniconfig), [cyclone](https://github.com/qiwi/cyclone), etc), and it seems to be useful to make the _one pipeline to rule them all_.
