@@ -4,6 +4,8 @@ export type IAnyMap = {
   [key: string]: IAny
 }
 
+export type INil = null | undefined
+
 export type ITypedValue<T, V> = {
   type: T,
   value: V

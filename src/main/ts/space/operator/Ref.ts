@@ -41,12 +41,11 @@ export class RefOperator implements ISpaceOperator<ISpace> {
       type,
       value,
     }
-    const _predicate = predicate ? predicate : () => false
     const reducer: IStackValueUpdateReducer = (prev, next) => ({...prev, ...next, id: prev.id})
 
     return CrudStackOperator.update(
       stack,
-      _predicate,
+      predicate,
       elt,
       true,
       reducer,

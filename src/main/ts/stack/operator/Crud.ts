@@ -1,4 +1,9 @@
-import {IStackOperator, IStack} from '../types'
+import {INil} from '../../types'
+
+import {
+  IStackOperator,
+  IStack,
+} from '../types'
 
 export type IStackFilterPredicate<T> = (item: T, index: number, arr: T[]) => boolean
 
@@ -42,15 +47,17 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
     return stack.filter(predicate)
   }
 
-  static update(stack: IStack<any>, predicate: IStackFilterPredicate<any>, value: any, upsert?: boolean, reducer?: IStackValueUpdateReducer): any {
-    const index = stack.indexOf(this.read(stack, predicate, 1)[0])
+  static update(stack: IStack<any>, predicate: IStackFilterPredicate<any> | INil, value: any, upsert?: boolean, reducer?: IStackValueUpdateReducer): any {
+    if (predicate) {
+      const index = stack.indexOf(this.read(stack, predicate, 1)[0])
 
-    if (index !== -1) {
-      const prev: any = stack.get(index)
-      const _reducer: IStackValueUpdateReducer = reducer ? reducer : (...args) => args[args.length - 1]
-      const next = _reducer(prev, value)
+      if (index !== -1) {
+        const prev: any = stack.get(index)
+        const _reducer: IStackValueUpdateReducer = reducer ? reducer : (...args) => args[args.length - 1]
+        const next = _reducer(prev, value)
 
-      return stack.add(index, next)
+        return stack.add(index, next)
+      }
     }
 
     if (upsert) {
