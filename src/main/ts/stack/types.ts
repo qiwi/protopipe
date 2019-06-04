@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 export interface IStack<T> {
   get(index: number): T
   push(...items: Array<T>): T

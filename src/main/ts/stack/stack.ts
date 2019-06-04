@@ -1,4 +1,5 @@
 /** @module protopipe */
+
 import {IStack} from './types'
 
 /**

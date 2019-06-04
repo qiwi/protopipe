@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 import {
   IAny,
   staticImplements,

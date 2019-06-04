@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 import {INil} from '../../types'
 
 import {

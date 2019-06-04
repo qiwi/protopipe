@@ -1,3 +1,5 @@
+/** @module protopipe */
+
 import {ISpace, ISpaceElement} from './types'
 import {IStack, Stack} from '../stack'
 

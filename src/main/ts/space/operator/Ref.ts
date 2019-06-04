@@ -1,6 +1,16 @@
-import {IId, ISpaceElement, ISpaceOperator, ISpace} from '../types'
+/** @module protopipe */
+
+import {
+  IId,
+  ISpaceElement,
+  ISpaceOperator,
+  ISpace
+} from '../types'
 import {CrudStackOperator} from '../../stack/operator'
-import {IAny, IPredicate} from '../../types'
+import {
+  IAny,
+  IPredicate
+} from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
 import {IStack} from '../../stack'
 import {genId} from '../../util'
