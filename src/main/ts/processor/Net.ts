@@ -31,7 +31,7 @@ import {
   Stack
 } from '../stack'
 
-type ISpaceReducerMap = {
+export type ISpaceReducerMap = {
   [key: string]: ISpaceReducer
 }
 
@@ -46,7 +46,7 @@ export type INetProcessorParams = {
   handler: IHandlerParamDeclaration
 }
 
-type ICxt = {
+export type ICxt = {
   queue: number,
   sync: boolean,
   override: boolean,
@@ -55,9 +55,9 @@ type ICxt = {
   after: Function
 }
 
-type IImpactTarget = IVertex | [IVertex, IAny]
+export type IImpactTarget = IVertex | [IVertex, IAny]
 
-type INormalizedImpactTarget = {
+export type INormalizedImpactTarget = {
   vertex: IVertex,
   data?: IAny
 }
