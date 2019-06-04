@@ -71,8 +71,10 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
       return true
     })
 
-    stack.clear()
-    stack.push(...filtered)
+    if (removed.length) {
+      stack.clear()
+      stack.push(...filtered)
+    }
 
     return removed
   }
