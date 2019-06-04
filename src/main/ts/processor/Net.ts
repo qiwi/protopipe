@@ -28,7 +28,7 @@ import {
   genId,
 } from '../util'
 import {
-  Stack
+  Stack,
 } from '../stack'
 
 export type ISpaceReducerMap = {
