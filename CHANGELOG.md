@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/qiwi/protopipe/compare/v2.1.1...v2.1.2) (2019-06-11)
+
+
+### Bug Fixes
+
+* **package:** up deps, fix some vulnerabilities ([bb0549e](https://github.com/qiwi/protopipe/commit/bb0549e))
+
 ## [2.1.1](https://github.com/qiwi/protopipe/compare/v2.1.0...v2.1.1) (2019-05-31)
 
 
