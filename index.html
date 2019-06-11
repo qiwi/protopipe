@@ -63,13 +63,15 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="protopipe">protopipe</h1>
+				<blockquote>
+					<p>Graph-driven data processor. <a href="https://qiwi.github.io/protopipe/">qiwi.github.io/protopipe</a></p>
+				</blockquote>
 				<p><a href="https://travis-ci.com/qiwi/protopipe"><img src="https://img.shields.io/travis/com/qiwi/protopipe.svg?maxAge=3600&branch=master" alt="buildStatus"></a>
 					<a href="https://www.npmjs.com/package/protopipe"><img src="https://img.shields.io/npm/v/protopipe/latest.svg" alt="npm (tag)"></a>
 					<a href="https://david-dm.org/qiwi/protopipe"><img src="https://img.shields.io/david/qiwi/protopipe.svg?maxAge=3600" alt="dependencyStatus"></a>
 					<a href="https://david-dm.org/qiwi/protopipe"><img src="https://img.shields.io/david/dev/qiwi/protopipe.svg?maxAge=3600" alt="devDependencyStatus"></a>
 					<a href="https://codeclimate.com/github/qiwi/protopipe/maintainability"><img src="https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/maintainability" alt="Maintainability"></a>
 				<a href="https://codeclimate.com/github/qiwi/protopipe/test_coverage"><img src="https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/test_coverage" alt="Test Coverage"></a></p>
-				<p>Graph-driven data processor. <a href="https://qiwi.github.io/protopipe/">qiwi.github.io/protopipe</a></p>
 				<h2 id="idea">Idea</h2>
 				<p>We often come across the problem of atomic data processing (<a href="https://github.com/qiwi/logwrap">logwrap</a>, <a href="https://github.com/qiwi/uniconfig">uniconfig</a>, <a href="https://github.com/qiwi/cyclone">cyclone</a>, etc), and it seems to be useful to make the <em>one pipeline to rule them all</em>.
 				Not universal, not high-performance. But dumb and clear.</p>
@@ -77,7 +79,7 @@
 				<h4 id="install">Install</h4>
 				<pre><code class="language-bash">  yarn add protopipe</code></pre>
 				<h4 id="usage">Usage</h4>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { NetProcessor, Extractor, IDataRef, ISpace } <span class="hljs-keyword">from</span> <span class="hljs-string">'protopipe'</span>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {Graph, IAny, ISpace, NetProcessor} <span class="hljs-keyword">from</span> <span class="hljs-string">'protopipe'</span>
 
 <span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph({
   <span class="hljs-attr">edges</span>: [<span class="hljs-string">'AB'</span>, <span class="hljs-string">'BC'</span>],
@@ -86,23 +88,29 @@
     <span class="hljs-attr">type</span>: <span class="hljs-string">'EDGE_LIST_INCDR'</span>,
     <span class="hljs-attr">value</span>: {
       <span class="hljs-string">'AB'</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>],
-      <span class="hljs-string">'BC'</span>: [<span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>]
+      <span class="hljs-string">'BC'</span>: [<span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>],
     },
   },
 })
-<span class="hljs-keyword">const</span> handler = (prev: IDataRef): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> prev.value.value * <span class="hljs-number">2</span>
+<span class="hljs-keyword">const</span> handler = {
+  <span class="hljs-comment">// Default handler</span>
+  graph: (space: ISpace): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> (NetProcessor.getData(space) || {<span class="hljs-attr">value</span>: <span class="hljs-number">0</span>}).value * <span class="hljs-number">2</span>,
+  <span class="hljs-comment">// Vertex specific handlers</span>
+  vertexes: {
+    <span class="hljs-string">'B'</span>: (space: ISpace): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> (NetProcessor.getData(space, <span class="hljs-string">'A'</span>) || {<span class="hljs-attr">value</span>: <span class="hljs-number">10</span>}).value * <span class="hljs-number">3</span>,
+  },
+}
 <span class="hljs-keyword">const</span> protopipe = <span class="hljs-keyword">new</span> NetProcessor({
   graph,
   handler,
 })
-<span class="hljs-keyword">const</span> space: ISpace = protopipe.impact(<span class="hljs-literal">true</span>, <span class="hljs-string">'A'</span>, <span class="hljs-number">1</span>)
-<span class="hljs-keyword">const</span> dVertexDataRef: IDataRef = space.value[space.value.length - <span class="hljs-number">1</span>]
+<span class="hljs-keyword">const</span> space = protopipe.impact(<span class="hljs-literal">true</span>, [<span class="hljs-string">'A'</span>, <span class="hljs-number">1</span>]) <span class="hljs-keyword">as</span> ISpace
 
-<span class="hljs-keyword">const</span> val = dVertexDataRef.value.value <span class="hljs-comment">// 4</span></code></pre>
+<span class="hljs-built_in">console</span>.log(NetProcessor.getData(space, <span class="hljs-string">'C'</span>).value) <span class="hljs-comment">// 6</span></code></pre>
 				<h5 id="features">Features</h5>
 				<ul>
 					<li>Sync / async execution modes.</li>
-					<li>Stateful an stateless contracts.</li>
+					<li>Stateful and stateless contracts.</li>
 					<li>Deep customization.</li>
 					<li>Typings for both worlds — TS and flow.</li>
 				</ul>
@@ -144,15 +152,33 @@
   <span class="hljs-attr">value</span>: IGraphRepresentation
 }</code></pre>
 				<h3 id="sync-async">Sync / async</h3>
-				<p>Both. Pass <code>mode</code> flag as a part of <code>input.meta</code>. If handler returns a Promise then executor awaits until it will be resolved.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> input = {
-  <span class="hljs-attr">data</span>: <span class="hljs-string">'foo'</span>,
-  <span class="hljs-attr">meta</span>: {
-    <span class="hljs-attr">sequence</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'chain'</span>, <span class="hljs-attr">data</span>: []},
-    <span class="hljs-attr">mode</span>: <span class="hljs-string">'ASYNC'</span>
+				<p>Pass <code>mode</code> flag as the first <code>.impact()</code> argument to get result or promise.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph({
+  <span class="hljs-attr">edges</span>: [<span class="hljs-string">'AB'</span>, <span class="hljs-string">'AC'</span>, <span class="hljs-string">'BC'</span>, <span class="hljs-string">'BD'</span>, <span class="hljs-string">'CD'</span>, <span class="hljs-string">'AD'</span>],
+  <span class="hljs-attr">vertexes</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'D'</span>],
+  <span class="hljs-attr">incidentor</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'EDGE_LIST_INCDR'</span>,
+    <span class="hljs-attr">value</span>: {
+      <span class="hljs-string">'AB'</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>],
+      <span class="hljs-string">'AC'</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'C'</span>],
+      <span class="hljs-string">'BC'</span>: [<span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>],
+      <span class="hljs-string">'BD'</span>: [<span class="hljs-string">'B'</span>, <span class="hljs-string">'D'</span>],
+      <span class="hljs-string">'CD'</span>: [<span class="hljs-string">'C'</span>, <span class="hljs-string">'D'</span>],
+      <span class="hljs-string">'AD'</span>: [<span class="hljs-string">'A'</span>, <span class="hljs-string">'D'</span>],
+    },
   },
-  <span class="hljs-attr">opts</span>: {}
-}</code></pre>
+})
+<span class="hljs-keyword">const</span> handler = <span class="hljs-function">(<span class="hljs-params">space: ISpace</span>) =&gt;</span> NetProcessor.requireElt(<span class="hljs-string">'ANCHOR'</span>, space).value.vertex
+<span class="hljs-keyword">const</span> netProcessor = <span class="hljs-keyword">new</span> NetProcessor({graph, handler})
+
+<span class="hljs-comment">// SYNC</span>
+<span class="hljs-keyword">const</span> res1 = netProcessor.impact(<span class="hljs-literal">true</span>,<span class="hljs-string">'A'</span>) <span class="hljs-keyword">as</span> ISpace 
+NetProcessor.getData(res1, <span class="hljs-string">'D'</span>) <span class="hljs-comment">// 'D'</span>
+
+<span class="hljs-comment">// ASYNC</span>
+netProcessor.impact(<span class="hljs-literal">false</span>,<span class="hljs-string">'A'</span>).then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+  NetProcessor.getData(res, <span class="hljs-string">'D'</span>) <span class="hljs-comment">// 'D'</span>
+})</code></pre>
 				<h3 id="customization">Customization</h3>
 				<p>You&#39;re able to override everything.</p>
 			</div>
@@ -170,64 +196,16 @@
 						<a href="modules/_graph_operator_modificator_.html">"graph/operator/<wbr>Modificator"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_operator_pathfinder_.html">"graph/operator/<wbr>Pathfinder"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_operator_index_.html">"graph/operator/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_processor_chain_.html">"processor/<wbr>Chain"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_processor_cycle_.html">"processor/<wbr>Cycle"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_net_.html">"processor/<wbr>Net"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_processor_tree_.html">"processor/<wbr>Tree"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_index_.html">"processor/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_types_.html">"processor/types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_space__types_.html">"space/_<wbr>types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_index_.html">"space/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_operator_ref_.html">"space/operator/<wbr>Ref"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_operator_index_.html">"space/operator/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_space_.html">"space/space"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_types_.html">"space/types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_index_.html">"stack/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_operator_crud_.html">"stack/operator/<wbr>Crud"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_operator_index_.html">"stack/operator/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_types_.html">"stack/types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_types_.html">"types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_util_.html">"util"</a>
+						<a href="modules/_util_index_.html">"util/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/protopipe.html">protopipe</a>

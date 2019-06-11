@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;types&quot; | protopipe</title>
+	<title>&quot;util/index&quot; | protopipe</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_types_.html">&quot;types&quot;</a>
+					<a href="_util_index_.html">&quot;util/index&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;types&quot;</h1>
+			<h1>External module &quot;util/index&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -69,24 +69,17 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../interfaces/_types_.constructortype.html" class="tsd-kind-icon">Constructor<wbr>Type</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_types_.html#iany" class="tsd-kind-icon">IAny</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_types_.html#ianymap" class="tsd-kind-icon">IAny<wbr>Map</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_types_.html#ipredicate" class="tsd-kind-icon">IPredicate</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_types_.html#itypedvalue" class="tsd-kind-icon">ITyped<wbr>Value</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_util_index_.html#idecomposedpromise" class="tsd-kind-icon">IDecomposed<wbr>Promise</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_types_.html#staticimplements" class="tsd-kind-icon">static<wbr>Implements</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_util_index_.html#genid" class="tsd-kind-icon">gen<wbr>Id</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_util_index_.html#getdecomposedpromise" class="tsd-kind-icon">get<wbr>Decomposed<wbr>Promise</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_util_index_.html#promisify" class="tsd-kind-icon">promisify</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,71 +88,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="iany" class="tsd-anchor"></a>
-					<h3>IAny</h3>
-					<div class="tsd-signature tsd-kind-icon">IAny<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="idecomposedpromise" class="tsd-anchor"></a>
+					<h3>IDecomposed<wbr>Promise</h3>
+					<div class="tsd-signature tsd-kind-icon">IDecomposed<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/types.ts#L1">types.ts:1</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="ianymap" class="tsd-anchor"></a>
-					<h3>IAny<wbr>Map</h3>
-					<div class="tsd-signature tsd-kind-icon">IAny<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/types.ts#L3">types.ts:3</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_types_.html#iany" class="tsd-signature-type">IAny</a></h5>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="ipredicate" class="tsd-anchor"></a>
-					<h3>IPredicate</h3>
-					<div class="tsd-signature tsd-kind-icon">IPredicate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/types.ts#L16">types.ts:16</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="_types_.html#iany" class="tsd-signature-type">IAny</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <a href="_types_.html#iany" class="tsd-signature-type">IAny</a><span class="tsd-signature-symbol">[]</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-					<a name="itypedvalue" class="tsd-anchor"></a>
-					<h3>ITyped<wbr>Value</h3>
-					<div class="tsd-signature tsd-kind-icon">ITyped<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/types.ts#L7">types.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/bb0549e/src/main/ts/util/index.ts#L16">util/index.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -171,26 +105,71 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-					<a name="staticimplements" class="tsd-anchor"></a>
-					<h3>static<wbr>Implements</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">static<wbr>Implements&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="genid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> gen<wbr>Id</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">gen<wbr>Id<span class="tsd-signature-symbol">(</span>prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/93608c8/src/main/ts/types.ts#L19">types.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/bb0549e/src/main/ts/util/index.ts#L12">util/index.ts:12</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>TODO use nanoid?</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
 								<li>
-									<h4>T</h4>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> prefix: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="getdecomposedpromise" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Decomposed<wbr>Promise</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Decomposed<wbr>Promise<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_util_index_.html#idecomposedpromise" class="tsd-signature-type">IDecomposedPromise</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/bb0549e/src/main/ts/util/index.ts#L22">util/index.ts:22</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_util_index_.html#idecomposedpromise" class="tsd-signature-type">IDecomposedPromise</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="promisify" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> promisify</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">promisify<span class="tsd-signature-symbol">(</span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/qiwi/protopipe/blob/bb0549e/src/main/ts/util/index.ts#L14">util/index.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>result: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -209,64 +188,16 @@
 						<a href="_graph_operator_modificator_.html">"graph/operator/<wbr>Modificator"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_graph_operator_pathfinder_.html">"graph/operator/<wbr>Pathfinder"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_graph_operator_index_.html">"graph/operator/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="_processor_chain_.html">"processor/<wbr>Chain"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_processor_cycle_.html">"processor/<wbr>Cycle"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_processor_net_.html">"processor/<wbr>Net"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="_processor_tree_.html">"processor/<wbr>Tree"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_processor_index_.html">"processor/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_processor_types_.html">"processor/types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space__types_.html">"space/_<wbr>types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space_index_.html">"space/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space_operator_ref_.html">"space/operator/<wbr>Ref"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space_operator_index_.html">"space/operator/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space_space_.html">"space/space"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_space_types_.html">"space/types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_stack_index_.html">"stack/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_stack_operator_crud_.html">"stack/operator/<wbr>Crud"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_stack_operator_index_.html">"stack/operator/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_stack_types_.html">"stack/types"</a>
-					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_types_.html">"types"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_util_.html">"util"</a>
+						<a href="_util_index_.html">"util/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="protopipe.html">protopipe</a>
@@ -275,23 +206,17 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../interfaces/_types_.constructortype.html" class="tsd-kind-icon">Constructor<wbr>Type</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_types_.html#iany" class="tsd-kind-icon">IAny</a>
+						<a href="_util_index_.html#idecomposedpromise" class="tsd-kind-icon">IDecomposed<wbr>Promise</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_types_.html#ianymap" class="tsd-kind-icon">IAny<wbr>Map</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_util_index_.html#genid" class="tsd-kind-icon">gen<wbr>Id</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_types_.html#ipredicate" class="tsd-kind-icon">IPredicate</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_util_index_.html#getdecomposedpromise" class="tsd-kind-icon">get<wbr>Decomposed<wbr>Promise</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_types_.html#itypedvalue" class="tsd-kind-icon">ITyped<wbr>Value</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_types_.html#staticimplements" class="tsd-kind-icon">static<wbr>Implements</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_util_index_.html#promisify" class="tsd-kind-icon">promisify</a>
 					</li>
 				</ul>
 			</nav>
