@@ -4,12 +4,12 @@ import {
   IId,
   ISpaceElement,
   ISpaceOperator,
-  ISpace
+  ISpace,
 } from '../types'
 import {CrudStackOperator} from '../../stack/operator'
 import {
   IAny,
-  IPredicate
+  IPredicate,
 } from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
 import {IStack} from '../../stack'
