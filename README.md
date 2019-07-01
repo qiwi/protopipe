@@ -8,7 +8,7 @@
 [![devDependencyStatus](https://img.shields.io/david/dev/qiwi/protopipe.svg?maxAge=3600)](https://david-dm.org/qiwi/protopipe)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/maintainability)](https://codeclimate.com/github/qiwi/protopipe/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/test_coverage)](https://codeclimate.com/github/qiwi/protopipe/test_coverage)
-
+[![CodeStyle](https://img.shields.io/badge/code%20style-tslint--config--qiwi-brightgreen.svg)](https://github.com/qiwi/tslint-config-qiwi)
 
 ## Idea
 We often come across the problem of atomic data processing ([logwrap](https://github.com/qiwi/logwrap), [uniconfig](https://github.com/qiwi/uniconfig), [cyclone](https://github.com/qiwi/cyclone), etc), and it seems to be useful to make the _one pipeline to rule them all_.
