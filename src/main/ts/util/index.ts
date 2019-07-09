@@ -5,13 +5,14 @@
  */
 
 import {IAny} from '../types'
+import {cxt} from '../cxt'
 
 /**
  * TODO use nanoid?
  */
 export const genId = (prefix?: string) => `${prefix || ''}${Math.random()}`
 
-export const promisify = (result: any): Promise<any> => Promise.resolve(result)
+export const promisify = (result: any): Promise<any> => cxt.Promise.resolve(result)
 
 export type IDecomposedPromise = {
   promise: Promise<IAny>,
@@ -24,7 +25,7 @@ export const getDecomposedPromise = (): IDecomposedPromise => {
   let _reject: Function
   let done: boolean = false
 
-  const promise = new Promise((resolve, reject) => {
+  const promise = new cxt.Promise((resolve: Function, reject: Function) => {
     _resolve = resolve
     _reject = reject
   })

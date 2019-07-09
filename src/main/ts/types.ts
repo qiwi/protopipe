@@ -1,5 +1,7 @@
 /** @module protopipe */
 
+import {ILogger} from '@qiwi/substrate'
+
 export type IAny = any
 
 export type IAnyMap = {
@@ -23,3 +25,9 @@ export type IPredicate = (...args: IAny[]) => boolean
 export function staticImplements<T>() {
   return <U extends T>(constructor: U) => { constructor }
 }
+
+export interface ILibCxt {
+  Promise: any
+  logger: ILogger
+}
+
