@@ -48,3 +48,8 @@ typings
 # Temp
 temp
 *.tmp
+
+# Typescript
+*.tsbuildinfo
+.tsbuildinfo
+buildcache
