@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/qiwi/protopipe/compare/v2.1.2...v2.2.0) (2019-07-09)
+
+
+### Features
+
+* provide Promise and logger customization ([cf36457](https://github.com/qiwi/protopipe/commit/cf36457)), closes [#1](https://github.com/qiwi/protopipe/issues/1) [#2](https://github.com/qiwi/protopipe/issues/2)
+
 ## [2.1.2](https://github.com/qiwi/protopipe/compare/v2.1.1...v2.1.2) (2019-06-11)
 
 
