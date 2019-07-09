@@ -4,7 +4,7 @@
  * @internal
  */
 
-import {IAny} from '../types'
+import {IAny, IPromise} from '../types'
 import {cxt} from '../cxt'
 
 /**
@@ -12,10 +12,10 @@ import {cxt} from '../cxt'
  */
 export const genId = (prefix?: string) => `${prefix || ''}${Math.random()}`
 
-export const promisify = (result: any): Promise<any> => cxt.Promise.resolve(result)
+export const promisify = (result: any): IPromise<any> => cxt.Promise.resolve(result)
 
 export type IDecomposedPromise = {
-  promise: Promise<IAny>,
+  promise: IPromise<IAny>,
   resolve: Function,
   reject: Function
 }

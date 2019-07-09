@@ -2,6 +2,8 @@
 
 import {ILogger} from '@qiwi/substrate'
 
+export {IPromise} from '@qiwi/substrate'
+
 export type IAny = any
 
 export type IAnyMap = {
