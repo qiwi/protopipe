@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/qiwi/protopipe/compare/v2.2.0...v2.2.1) (2019-07-10)
+
+
+### Performance Improvements
+
+* uglify published files ([594df30](https://github.com/qiwi/protopipe/commit/594df30))
+
 # [2.2.0](https://github.com/qiwi/protopipe/compare/v2.1.2...v2.2.0) (2019-07-09)
 
 
