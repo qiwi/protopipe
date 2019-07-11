@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/qiwi/protopipe/compare/v2.2.2...v2.2.3) (2019-07-11)
+
+
+### Bug Fixes
+
+* **package:** fix missed dep ([2733933](https://github.com/qiwi/protopipe/commit/2733933))
+
 ## [2.2.2](https://github.com/qiwi/protopipe/compare/v2.2.1...v2.2.2) (2019-07-11)
 
 
