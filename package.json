@@ -2,6 +2,7 @@
   "name": "protopipe",
   "version": "2.2.1",
   "description": "Graph-based data processor",
+  "source": "src/main/ts/index.ts",
   "main": "lib/es5/index.js",
   "files": [
     "README.md",
@@ -15,8 +16,8 @@
     "test": "yarn lint && yarn jest",
     "clean": "rimraf lib typings",
     "build": "yarn clean && yarn build:es5 && yarn build:es6 && yarn build:ts && yarn libdef && yarn docs && yarn uglify",
-    "build:es5": "mkdir -p lib/es5 && tsc -p tsconfig.build.json --target ES5 --outDir lib/es5",
-    "build:es6": "mkdir -p lib/es6 && tsc -p tsconfig.build.json --target ES6 --outDir lib/es6",
+    "build:es5": "mkdir -p lib/es5 && tsc -p tsconfig.json --target ES5 --outDir lib/es5",
+    "build:es6": "mkdir -p lib/es6 && tsc -p tsconfig.json --target ES6 --outDir lib/es6",
     "build:ts": "cp -r src/main/ts/ lib/ts/",
     "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix protopipe/lib/es5 --name protopipe --main protopipe/lib/es5/index --moduleResolution node",
     "flowgen": "flowgen typings/index.d.ts --output-file typings/index.flow.js",
@@ -24,8 +25,9 @@
     "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
     "test:report": "yarn test && yarn coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
-    "docs": "typedoc --readme README.md --tsconfig tsconfig.build.json src/main --ignoreCompilerErrors || exit 0",
-    "uglify": "for f in $(find lib -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done"
+    "docs": "typedoc --readme README.md --tsconfig tsconfig.json src/main --ignoreCompilerErrors || exit 0",
+    "uglify": "for f in $(find lib -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done",
+    "build:bundle": "microbundle build src/main/ts/index.ts -o target/bundle"
   },
   "repository": {
     "type": "git",
@@ -68,6 +70,7 @@
     "flowgen": "1.9.2",
     "jest": "^24.8.0",
     "lodash": "^4.17.11",
+    "microbundle": "^0.11.0",
     "replace-in-file": "^4.1.1",
     "rimraf": "^2.6.3",
     "semantic-release": "^15.13.18",

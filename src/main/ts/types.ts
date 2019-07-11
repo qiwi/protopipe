@@ -2,7 +2,7 @@
 
 import {ILogger} from '@qiwi/substrate'
 
-export {IPromise, IConfigurable} from '@qiwi/substrate'
+export {IPromise, IConfigurable} from '@qiwi/substrate-types'
 
 export type IAny = any
 
