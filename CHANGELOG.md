@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/qiwi/protopipe/compare/v2.2.1...v2.2.2) (2019-07-11)
+
+
+### Performance Improvements
+
+* pack as bundle ([3c4e29a](https://github.com/qiwi/protopipe/commit/3c4e29a))
+
 ## [2.2.1](https://github.com/qiwi/protopipe/compare/v2.2.0...v2.2.1) (2019-07-10)
 
 
