@@ -54,11 +54,11 @@
   },
   "homepage": "https://github.com/qiwi/protopipe#readme",
   "dependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0",
+    "@qiwi/substrate": "^1.11.2"
   },
   "devDependencies": {
     "@qiwi/semantic-release-gh-pages-plugin": "^1.10.0",
-    "@qiwi/substrate": "^1.11.2",
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/git": "^7.0.16",
     "@semantic-release/github": "^5.4.2",
