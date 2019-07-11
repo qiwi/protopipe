@@ -1,4 +1,4 @@
-const {Graph} = require('../../../lib/bundle/protopipe.js')
+const {Graph} = require('../../../target/bundle/protopipe.js')
 
 describe('index', () => {
   it('exposes lib inners', () => {
