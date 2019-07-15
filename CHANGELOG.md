@@ -1,3 +1,10 @@
+## [2.2.4](https://github.com/qiwi/protopipe/compare/v2.2.3...v2.2.4) (2019-07-15)
+
+
+### Bug Fixes
+
+* **package:** fix nested vulnerabilities ([7d4f460](https://github.com/qiwi/protopipe/commit/7d4f460))
+
 ## [2.2.3](https://github.com/qiwi/protopipe/compare/v2.2.2...v2.2.3) (2019-07-11)
 
 
