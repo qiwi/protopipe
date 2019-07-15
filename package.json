@@ -6,11 +6,16 @@
   "main": "target/bundle/protopipe.js",
   "module": "target/bundle/protopipe.mjs",
   "unpkg": "target/bundle/protopipe.umd.js",
+  "types": "typings/index.d.ts",
+  "typescript": {
+    "definition": "typings/index.d.ts"
+  },
   "files": [
     "README.md",
     "CHANGELOG.md",
     "target",
-    "typings"
+    "typings",
+    "flow-typed"
   ],
   "scripts": {
     "jest": "jest -w 2 --config=jest.config.json",
@@ -19,12 +24,12 @@
     "test": "yarn lint && yarn jest",
     "clean": "rimraf target typings",
     "build": "yarn clean && yarn build:es5 && yarn build:es6 && yarn build:ts && yarn libdef && yarn docs && yarn uglify && yarn build:bundle",
-    "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.json --target ES5 --outDir target/es5",
-    "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.json --target ES6 --outDir target/es6",
+    "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
+    "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
     "build:ts": "cp -r src/main/ts/ target/ts/",
     "build:bundle": "microbundle build src/main/ts/index.ts -o target/bundle",
     "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix protopipe/target/es5 --name protopipe --main protopipe/target/es5/index --moduleResolution node",
-    "flowgen": "flowgen typings/index.d.ts --output-file typings/index.flow.js",
+    "flowgen": "flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
     "libdef": "yarn dtsgen && yarn libdeffix && yarn flowgen",
     "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
     "test:report": "yarn test && yarn coveralls:push",

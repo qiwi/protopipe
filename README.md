@@ -126,5 +126,8 @@ netProcessor.impact(false,'A').then((res) => {
 })
 ```
 
+### Bundles
+The lib exposes its inners as ES5, ES6 and TS formats.
+
 ### Customization
 You're able to override everything.
