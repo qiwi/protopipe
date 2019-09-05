@@ -120,8 +120,8 @@ export class NetProcessor {
     return RefOperator.find(item =>
       item.type === 'ANCHOR'
       && graph === item.value.graph
-      && (vertex ? item.value.vertex === vertex : item.value.vertex === undefined)
-      && (edge ? item.value.edge === edge : item.value.edge === undefined)
+      && item.value.vertex === vertex
+      && item.value.edge === edge
     , space) || RefOperator.create(space, 'ANCHOR', {graph, vertex, edge})
   }
 
