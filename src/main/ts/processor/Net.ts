@@ -24,9 +24,9 @@ import {
   Pathfinder,
 } from '../graph'
 import {
-  IDecomposedPromise,
+  TInsideOutPromise,
   promisify,
-  getDecomposedPromise,
+  getInsideOutPromise,
   genId,
 } from '../util'
 import {
@@ -52,7 +52,7 @@ export type ICxt = {
   queue: number,
   sync: boolean,
   override: boolean,
-  dp: IDecomposedPromise,
+  iop: TInsideOutPromise,
   before: Function
   after: Function
 }
@@ -153,7 +153,7 @@ export class NetProcessor {
     else {
       promisify(fn())
         .then(processResult)
-        .catch(e => cxt.dp.reject(e))
+        .catch(e => cxt.iop.reject(e))
     }
   }
 
@@ -254,7 +254,7 @@ export class NetProcessor {
 
     return sync
       ? space
-      : cxt.dp.promise
+      : cxt.iop.promise
 
   }
 
@@ -264,19 +264,19 @@ export class NetProcessor {
       throw new Error('There\'s no place for yet another one execution context')
     }
 
-    const dp: IDecomposedPromise = getDecomposedPromise()
+    const iop: TInsideOutPromise = getInsideOutPromise()
     const cxt = {
       sync,
       queue: 0,
       override: false,
-      dp,
+      iop,
       before() {
         this.queue++
       },
       after() {
         this.queue--
         if (this.queue === 0) {
-          dp.resolve(space)
+          iop.resolve(space)
         }
       },
     }
