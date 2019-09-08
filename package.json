@@ -36,7 +36,8 @@
     "push:report": "yarn coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
     "docs": "typedoc --readme README.md --tsconfig tsconfig.json src/main --ignoreCompilerErrors || exit 0",
-    "uglify": "for f in $(find target -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done"
+    "uglify": "for f in $(find target -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done",
+    "postupdate": "yarn && yarn build && yarn test"
   },
   "repository": {
     "type": "git",
@@ -84,7 +85,7 @@
     "replace-in-file": "^4.1.3",
     "rimraf": "^3.0.0",
     "semantic-release": "^15.13.24",
-    "terser": "^4.2.1",
+    "terser": "^4.3.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-qiwi": "^1.1.1",
