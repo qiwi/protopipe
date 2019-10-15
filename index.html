@@ -62,7 +62,9 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="protopipe">protopipe</h1>
+				<a href="#protopipe" id="protopipe" style="color: inherit; text-decoration: none;">
+					<h1>protopipe</h1>
+				</a>
 				<blockquote>
 					<p>Graph-driven data processor. <a href="https://qiwi.github.io/protopipe/">qiwi.github.io/protopipe</a></p>
 				</blockquote>
@@ -74,13 +76,21 @@
 					<a href="https://codeclimate.com/github/qiwi/protopipe/maintainability"><img src="https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/maintainability" alt="Maintainability"></a>
 					<a href="https://codeclimate.com/github/qiwi/protopipe/test_coverage"><img src="https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/test_coverage" alt="Test Coverage"></a>
 				<a href="https://github.com/qiwi/tslint-config-qiwi"><img src="https://img.shields.io/badge/code%20style-tslint--config--qiwi-brightgreen.svg" alt="CodeStyle"></a></p>
-				<h2 id="idea">Idea</h2>
+				<a href="#idea" id="idea" style="color: inherit; text-decoration: none;">
+					<h2>Idea</h2>
+				</a>
 				<p>We often come across the problem of atomic data processing (<a href="https://github.com/qiwi/logwrap">logwrap</a>, <a href="https://github.com/qiwi/uniconfig">uniconfig</a>, <a href="https://github.com/qiwi/cyclone">cyclone</a>, etc), and it seems to be useful to make the <em>one pipeline to rule them all</em>.
 				Not universal, not high-performance. But dumb and clear.</p>
-				<h2 id="tl-dr">TL;DR</h2>
-				<h4 id="install">Install</h4>
+				<a href="#tldr" id="tldr" style="color: inherit; text-decoration: none;">
+					<h2>TL;DR</h2>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h4>Install</h4>
+				</a>
 				<pre><code class="language-bash">  yarn add protopipe</code></pre>
-				<h4 id="usage">Usage</h4>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h4>Usage</h4>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {Graph, IAny, ISpace, NetProcessor} <span class="hljs-keyword">from</span> <span class="hljs-string">'protopipe'</span>
 
 <span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph({
@@ -109,20 +119,26 @@
 <span class="hljs-keyword">const</span> space = protopipe.impact(<span class="hljs-literal">true</span>, [<span class="hljs-string">'A'</span>, <span class="hljs-number">1</span>]) <span class="hljs-keyword">as</span> ISpace
 
 <span class="hljs-built_in">console</span>.log(NetProcessor.getData(space, <span class="hljs-string">'C'</span>).value) <span class="hljs-comment">// 6</span></code></pre>
-				<h5 id="features">Features</h5>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h5>Features</h5>
+				</a>
 				<ul>
 					<li>Sync / async execution modes.</li>
 					<li>Stateful and stateless contracts.</li>
 					<li>Deep customization.</li>
 					<li>Typings for both worlds — TS and flow.</li>
 				</ul>
-				<h5 id="limitations-of-default-executor-traverser-etc-">Limitations (of default executor, traverser, etc)</h5>
+				<a href="#limitations-of-default-executor-traverser-etc" id="limitations-of-default-executor-traverser-etc" style="color: inherit; text-decoration: none;">
+					<h5>Limitations (of default executor, traverser, etc)</h5>
+				</a>
 				<ul>
 					<li>Protopipe supports digraphs only.</li>
 					<li>The lib does not solve the declaration problem (you know, <em>adjacency/incidence matrix</em>, <em>adjacency list</em>, DSL).</li>
 					<li>No consistency checks out of box: graph is being processed as is. But you&#39;re able to add custom assertions (for example, BFS-based check).</li>
 				</ul>
-				<h2 id="definitions-and-contracts">Definitions and contracts</h2>
+				<a href="#definitions-and-contracts" id="definitions-and-contracts" style="color: inherit; text-decoration: none;">
+					<h2>Definitions and contracts</h2>
+				</a>
 				<ul>
 					<li>Space is a set with some added structure.</li>
 					<li>Vertex is a graph atom.</li>
@@ -140,7 +156,9 @@
 					<li>Pipe is an executable segment of pipeline, any directed sequence with attached handler(s)</li>
 					<li>Handler — lambda-function, which implements <a href="./src/main/ts/interface.ts"><code>IHandler</code></a> iface.</li>
 				</ul>
-				<h3 id="igraph">IGraph</h3>
+				<a href="#igraph" id="igraph" style="color: inherit; text-decoration: none;">
+					<h3>IGraph</h3>
+				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">export</span> type IGraph = {
   <span class="hljs-attr">vertexes</span>: <span class="hljs-built_in">Array</span>&lt;IVertex&gt;,
   <span class="hljs-attr">edges</span>: <span class="hljs-built_in">Array</span>&lt;IEdge&gt;,
@@ -153,7 +171,9 @@
   <span class="hljs-attr">type</span>: IGraphIncidentorType,
   <span class="hljs-attr">value</span>: IGraphRepresentation
 }</code></pre>
-				<h3 id="sync-async">Sync / async</h3>
+				<a href="#sync--async" id="sync--async" style="color: inherit; text-decoration: none;">
+					<h3>Sync / async</h3>
+				</a>
 				<p>Pass <code>mode</code> flag as the first <code>.impact()</code> argument to get result or promise.</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph({
   <span class="hljs-attr">edges</span>: [<span class="hljs-string">'AB'</span>, <span class="hljs-string">'AC'</span>, <span class="hljs-string">'BC'</span>, <span class="hljs-string">'BD'</span>, <span class="hljs-string">'CD'</span>, <span class="hljs-string">'AD'</span>],
@@ -181,9 +201,13 @@ NetProcessor.getData(res1, <span class="hljs-string">'D'</span>) <span class="hl
 netProcessor.impact(<span class="hljs-literal">false</span>,<span class="hljs-string">'A'</span>).then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
   NetProcessor.getData(res, <span class="hljs-string">'D'</span>) <span class="hljs-comment">// 'D'</span>
 })</code></pre>
-				<h3 id="bundles">Bundles</h3>
+				<a href="#bundles" id="bundles" style="color: inherit; text-decoration: none;">
+					<h3>Bundles</h3>
+				</a>
 				<p>The lib exposes its inners as ES5, ES6 and TS formats.</p>
-				<h3 id="customization">Customization</h3>
+				<a href="#customization" id="customization" style="color: inherit; text-decoration: none;">
+					<h3>Customization</h3>
+				</a>
 				<p>You&#39;re able to override everything.</p>
 			</div>
 		</div>
@@ -197,10 +221,25 @@ netProcessor.impact(<span class="hljs-literal">false</span>,<span class="hljs-st
 						<a href="modules/_cxt_.html">"cxt"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_graph_index_.html">"graph/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_graph_operator_detector_.html">"graph/operator/<wbr>Detector"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_graph_operator_modificator_.html">"graph/operator/<wbr>Modificator"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_graph_operator_pathfinder_.html">"graph/operator/<wbr>Pathfinder"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_graph_operator_index_.html">"graph/operator/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_graph_types_.html">"graph/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_processor_chain_.html">"processor/<wbr>Chain"</a>
@@ -209,13 +248,52 @@ netProcessor.impact(<span class="hljs-literal">false</span>,<span class="hljs-st
 						<a href="modules/_processor_cycle_.html">"processor/<wbr>Cycle"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_processor_net_.html">"processor/<wbr>Net"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_processor_tree_.html">"processor/<wbr>Tree"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_util_index_.html">"util/index"</a>
+						<a href="modules/_processor_index_.html">"processor/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/protopipe.html">protopipe</a>
+						<a href="modules/_processor_types_.html">"processor/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_space_index_.html">"space/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_space_operator_ref_.html">"space/operator/<wbr>Ref"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_space_operator_index_.html">"space/operator/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_space_space_.html">"space/space"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_space_types_.html">"space/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_stack_index_.html">"stack/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_stack_operator_crud_.html">"stack/operator/<wbr>Crud"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_stack_operator_index_.html">"stack/operator/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_stack_stack_.html">"stack/stack"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_stack_types_.html">"stack/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_types_.html">"types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_util_index_.html">"util/index"</a>
 					</li>
 				</ul>
 			</nav>
@@ -238,6 +316,7 @@ netProcessor.impact(<span class="hljs-literal">false</span>,<span class="hljs-st
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
