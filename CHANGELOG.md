@@ -1,3 +1,10 @@
+## [2.2.6](https://github.com/qiwi/protopipe/compare/v2.2.5...v2.2.6) (2019-11-01)
+
+
+### Performance Improvements
+
+* **package:** up deps & tech release ([6bbff11](https://github.com/qiwi/protopipe/commit/6bbff11))
+
 ## [2.2.5](https://github.com/qiwi/protopipe/compare/v2.2.4...v2.2.5) (2019-10-15)
 
 
