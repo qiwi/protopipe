@@ -13,14 +13,14 @@ export class Stack implements IStack<any> {
     this._storage = [...args]
   }
 
-  get(index: number): any {
-    return this._storage[index]
+  get(index: number | string): any {
+    return this._storage[+index]
   }
 
   push(...items: Array<any>): any {
     this._storage.push(...items)
 
-    return this.get(this.size() - 1)
+    return this.get(this.size - 1)
   }
 
   pop(): any {
@@ -37,8 +37,17 @@ export class Stack implements IStack<any> {
     return items[0]
   }
 
-  size(): number {
+  get size(): number {
     return this._storage.length
+  }
+
+  remove(index: number | string): any {
+    const idx = +index
+    const found = this._storage[+idx]
+
+    this._storage.splice(idx, 1)
+
+    return found
   }
 
   filter(cb: (...args: Array<any>) => boolean): Array<any> {
@@ -46,7 +55,7 @@ export class Stack implements IStack<any> {
   }
 
   last(): any {
-    return this._storage[this.size() - 1]
+    return this._storage[this.size - 1]
   }
 
   first(): any {
@@ -65,10 +74,14 @@ export class Stack implements IStack<any> {
     return this._storage.indexOf(item)
   }
 
-  add(index: number, item: any): any {
-    this._storage[index] = item
+  add(index: number | string, item: any): any {
+    this._storage[+index] = item
 
     return item
+  }
+
+  isEmpty(): boolean {
+    return this.size !== 0
   }
 
 }
