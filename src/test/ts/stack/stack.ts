@@ -76,7 +76,7 @@ describe('stack', () => {
 
     describe('#size', () => {
       it('returns current stack size', () => {
-        expect(stack.size()).toBe(3)
+        expect(stack.size).toBe(3)
       })
     })
   })
