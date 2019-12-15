@@ -62,12 +62,12 @@
   },
   "homepage": "https://github.com/qiwi/protopipe#readme",
   "dependencies": {
-    "@qiwi/substrate": "^1.16.5",
+    "@qiwi/substrate": "^1.17.11",
     "inside-out-promise": "^1.4.2",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@qiwi/semantic-release-gh-pages-plugin": "^1.14.2",
+    "@qiwi/semantic-release-gh-pages-plugin": "^1.15.6",
     "@semantic-release/changelog": "^3.0.6",
     "@semantic-release/git": "^7.0.18",
     "@semantic-release/github": "^5.5.5",
@@ -82,16 +82,16 @@
     "jest": "^24.9.0",
     "lodash": "^4.17.15",
     "microbundle": "^0.12.0-next.3",
-    "replace-in-file": "^4.2.0",
+    "replace-in-file": "^5.0.2",
     "rimraf": "^3.0.0",
     "semantic-release": "^15.13.31",
-    "terser": "^4.4.0",
+    "terser": "^4.4.2",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
     "tslint-config-qiwi": "^1.3.1",
-    "typedoc": "^0.15.3",
+    "typedoc": "^0.15.4",
     "typedoc-plugin-external-module-name": "^2.1.0",
-    "typescript": "^3.7.2",
+    "typescript": "^3.7.3",
     "typescript-eslint-parser": "^22.0.0"
   },
   "release": {
