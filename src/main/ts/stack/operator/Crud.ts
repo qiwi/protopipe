@@ -46,7 +46,7 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
       return found ? [found] : []
     }
 
-    return stack.filter(predicate)
+    return stack.toArray().filter(predicate)
   }
 
   static update(stack: IStack<any>, predicate: IStackFilterPredicate<any> | INil, value: any, upsert?: boolean, reducer?: IStackValueUpdateReducer): any {
@@ -70,7 +70,7 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
 
   static del(stack: IStack<any>, predicate: IStackFilterPredicate<any>): any[] {
     const removed: any[] = []
-    const filtered = stack.filter((item: any, index: number, arr: any[]) => {
+    const filtered = stack.toArray().filter((item: any, index: number, arr: any[]) => {
       if (predicate(item, index, arr)) {
         removed.push(item)
 

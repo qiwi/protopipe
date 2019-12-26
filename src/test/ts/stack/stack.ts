@@ -46,11 +46,11 @@ describe('stack', () => {
 
     describe('#filter', () => {
       it('returns items corresponding the predicate', () => {
-        expect(stack.filter(() => true)).toEqual(['bar', 'baz', 'qux'])
+        expect(stack.toArray().filter(() => true)).toEqual(['bar', 'baz', 'qux'])
       })
 
       it('returns empty array if no element found', () => {
-        expect(stack.filter(() => false)).toEqual([])
+        expect(stack.toArray().filter(() => false)).toEqual([])
       })
     })
 

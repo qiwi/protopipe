@@ -294,7 +294,7 @@ export class NetProcessor {
   static parser({graph, handler}: INetProcessorParams): ISpace {
     const space: ISpace = {
       type: 'SPACE',
-      value: new Stack(),
+      value: new Stack<ISpaceElement>(),
     }
 
     RefOperator.create(space, 'GRAPH', graph)
