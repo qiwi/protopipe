@@ -1,6 +1,6 @@
 {
   "name": "protopipe",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "Graph-driven data processor",
   "source": "src/main/ts/index.ts",
   "main": "target/bundle/protopipe.js",
