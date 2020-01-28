@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> protopipe</h1>
+			<h1>protopipe</h1>
 		</div>
 	</div>
 </header>
@@ -106,9 +106,9 @@
 })
 <span class="hljs-keyword">const</span> handler = {
   <span class="hljs-comment">// Default handler</span>
-  graph: (space: ISpace): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> (NetProcessor.getData(space) || {<span class="hljs-attr">value</span>: <span class="hljs-number">0</span>}).value * <span class="hljs-number">2</span>,
+  <span class="hljs-attr">graph</span>: (space: ISpace): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> (NetProcessor.getData(space) || {<span class="hljs-attr">value</span>: <span class="hljs-number">0</span>}).value * <span class="hljs-number">2</span>,
   <span class="hljs-comment">// Vertex specific handlers</span>
-  vertexes: {
+  <span class="hljs-attr">vertexes</span>: {
     <span class="hljs-string">'B'</span>: (space: ISpace): <span class="hljs-function"><span class="hljs-params">IAny</span> =&gt;</span> (NetProcessor.getData(space, <span class="hljs-string">'A'</span>) || {<span class="hljs-attr">value</span>: <span class="hljs-number">10</span>}).value * <span class="hljs-number">3</span>,
   },
 }
@@ -218,82 +218,82 @@ netProcessor.impact(<span class="hljs-literal">false</span>,<span class="hljs-st
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_cxt_.html">"cxt"</a>
+						<a href="modules/_cxt_.html">&quot;cxt&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_index_.html">"graph/index"</a>
+						<a href="modules/_graph_index_.html">&quot;graph/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_operator_detector_.html">"graph/operator/<wbr>Detector"</a>
+						<a href="modules/_graph_operator_detector_.html">&quot;graph/operator/<wbr>Detector&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_operator_modificator_.html">"graph/operator/<wbr>Modificator"</a>
+						<a href="modules/_graph_operator_modificator_.html">&quot;graph/operator/<wbr>Modificator&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_operator_pathfinder_.html">"graph/operator/<wbr>Pathfinder"</a>
+						<a href="modules/_graph_operator_pathfinder_.html">&quot;graph/operator/<wbr>Pathfinder&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_operator_index_.html">"graph/operator/index"</a>
+						<a href="modules/_graph_operator_index_.html">&quot;graph/operator/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_graph_types_.html">"graph/types"</a>
+						<a href="modules/_graph_types_.html">&quot;graph/types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_chain_.html">"processor/<wbr>Chain"</a>
+						<a href="modules/_processor_chain_.html">&quot;processor/<wbr>Chain&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_cycle_.html">"processor/<wbr>Cycle"</a>
+						<a href="modules/_processor_cycle_.html">&quot;processor/<wbr>Cycle&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_net_.html">"processor/<wbr>Net"</a>
+						<a href="modules/_processor_net_.html">&quot;processor/<wbr>Net&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_tree_.html">"processor/<wbr>Tree"</a>
+						<a href="modules/_processor_tree_.html">&quot;processor/<wbr>Tree&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_index_.html">"processor/index"</a>
+						<a href="modules/_processor_index_.html">&quot;processor/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_processor_types_.html">"processor/types"</a>
+						<a href="modules/_processor_types_.html">&quot;processor/types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_index_.html">"space/index"</a>
+						<a href="modules/_space_index_.html">&quot;space/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_operator_ref_.html">"space/operator/<wbr>Ref"</a>
+						<a href="modules/_space_operator_ref_.html">&quot;space/operator/<wbr>Ref&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_operator_index_.html">"space/operator/index"</a>
+						<a href="modules/_space_operator_index_.html">&quot;space/operator/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_space_.html">"space/space"</a>
+						<a href="modules/_space_space_.html">&quot;space/space&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_space_types_.html">"space/types"</a>
+						<a href="modules/_space_types_.html">&quot;space/types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_index_.html">"stack/index"</a>
+						<a href="modules/_stack_index_.html">&quot;stack/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_operator_crud_.html">"stack/operator/<wbr>Crud"</a>
+						<a href="modules/_stack_operator_crud_.html">&quot;stack/operator/<wbr>Crud&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_operator_index_.html">"stack/operator/index"</a>
+						<a href="modules/_stack_operator_index_.html">&quot;stack/operator/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_stack_.html">"stack/stack"</a>
+						<a href="modules/_stack_stack_.html">&quot;stack/stack&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_stack_types_.html">"stack/types"</a>
+						<a href="modules/_stack_types_.html">&quot;stack/types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_types_.html">"types"</a>
+						<a href="modules/_types_.html">&quot;types&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_util_index_.html">"util/index"</a>
+						<a href="modules/_util_index_.html">&quot;util/index&quot;</a>
 					</li>
 				</ul>
 			</nav>
