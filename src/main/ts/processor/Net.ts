@@ -3,7 +3,7 @@
 import {
   IAny,
   staticImplements,
-  IPredicate,
+  TPredicate,
 } from '../types'
 import {
   IProcessorStaticOperator,
@@ -205,7 +205,7 @@ export class NetProcessor {
   }
 
   static getElt(type: string, space: ISpace, vertex?: IVertex): ISpaceElement | undefined {
-    const typePredicate: IPredicate = ({type: _type}) => type === _type
+    const typePredicate: TPredicate = ({type: _type}) => type === _type
 
     if (vertex) {
       return this.getRelsByVertex(space, vertex).find(typePredicate)

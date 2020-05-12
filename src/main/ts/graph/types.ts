@@ -1,7 +1,7 @@
 /** @module protopipe */
 
 import {
-  ConstructorType,
+  IConstructor,
   IAny,
   ITypedValue,
 } from '../types'
@@ -50,7 +50,7 @@ export type IGraphOperator = {
 
 export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
 
-export interface IGraphStaticOperator extends ConstructorType<IGraphOperator> {
+export interface IGraphStaticOperator extends IConstructor<IGraphOperator> {
   // [key: string]: IGraphStaticOperation
 }
 

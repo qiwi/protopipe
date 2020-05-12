@@ -2,7 +2,13 @@
 
 import {ILogger} from '@qiwi/substrate'
 
-export {IPromise, IConfigurable} from '@qiwi/substrate'
+export {
+  IPromise,
+  TPredicate,
+  IConfigurable,
+  IConstructor,
+  ITypedValue,
+} from '@qiwi/substrate'
 
 export type IAny = any
 
@@ -16,12 +22,6 @@ export type ITypedValue<T, V> = {
   type: T,
   value: V
 }
-
-export interface ConstructorType<T> {
-  new (...args: any[]): T
-}
-
-export type IPredicate = (...args: IAny[]) => boolean
 
 /* tslint:disable */
 export function staticImplements<T>() {

@@ -2,7 +2,7 @@
 
 import {
   IAny,
-  ConstructorType,
+  IConstructor,
 } from '../types'
 
 import {ISpace} from '../space'
@@ -18,6 +18,6 @@ export type IProcessor = {
   space: ISpace
 }
 
-export interface IProcessorStaticOperator extends ConstructorType<IProcessor> {
+export interface IProcessorStaticOperator extends IConstructor<IProcessor> {
   parser: ISpaceParser
 }

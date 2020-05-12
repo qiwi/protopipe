@@ -9,7 +9,7 @@ import {
 import {CrudStackOperator} from '../../stack/operator'
 import {
   IAny,
-  IPredicate,
+  TPredicate,
 } from '../../types'
 import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
 import {IStack} from '../../stack'
@@ -44,7 +44,7 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     return CrudStackOperator.create(stack, elt)
   }
 
-  static upsert(space: ISpace, type: string, value: IAny, predicate?: IPredicate): ISpaceElement {
+  static upsert(space: ISpace, type: string, value: IAny, predicate?: TPredicate): ISpaceElement {
     const stack = space.value
     const elt: ISpaceElement = {
       id: genId(type),
@@ -93,11 +93,11 @@ export class RefOperator implements ISpaceOperator<ISpace> {
     return this.upsert(space, type, value, (item: ISpaceElement) => item.type === type && item.value.from === from && item.value.to === to)
   }
 
-  static read(predicate: IPredicate, space: ISpace, limit?: number): ISpaceElement[] {
+  static read(predicate: TPredicate, space: ISpace, limit?: number): ISpaceElement[] {
     return CrudStackOperator.read(space.value, predicate, limit)
   }
 
-  static find(predicate: IPredicate, space: ISpace): ISpaceElement | undefined {
+  static find(predicate: TPredicate, space: ISpace): ISpaceElement | undefined {
     return this.read(predicate, space, 1)[0]
   }
 
