@@ -14,11 +14,11 @@ export type IGraphIncidentorType = string
 
 export type IGraphRepresentation = any
 
-export type IEdgeListIncidentor = ITypedValue<'EDGE_LIST_INCDR', {
+export type IEdgeListIncidentor = ITypedValue<{
   [key: string]: [IVertex, IVertex]
-}>
+}, 'EDGE_LIST_INCDR'>
 
-export type IGraphIncidentor = ITypedValue<IGraphIncidentorType, IGraphRepresentation>
+export type IGraphIncidentor = ITypedValue<IGraphRepresentation, IGraphIncidentorType>
 
 export type IVertex = string
 

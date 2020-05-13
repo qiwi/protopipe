@@ -8,20 +8,11 @@ export {
   IConfigurable,
   IConstructor,
   ITypedValue,
+  INil,
+  IAnyMap,
 } from '@qiwi/substrate'
 
 export type IAny = any
-
-export type IAnyMap = {
-  [key: string]: IAny
-}
-
-export type INil = null | undefined
-
-export type ITypedValue<T, V> = {
-  type: T,
-  value: V
-}
 
 /* tslint:disable */
 export function staticImplements<T>() {
