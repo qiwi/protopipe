@@ -60,7 +60,7 @@
   "homepage": "https://github.com/qiwi/protopipe#readme",
   "dependencies": {
     "@qiwi/substrate": "^1.18.28",
-    "inside-out-promise": "^1.4.3",
+    "inside-out-promise": "^2.0.0",
     "tslib": "^1.12.0"
   },
   "devDependencies": {
