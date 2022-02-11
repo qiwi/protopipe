@@ -1,3 +1,10 @@
+## [2.2.8](https://github.com/qiwi/protopipe/compare/v2.2.7...v2.2.8) (2022-02-11)
+
+
+### Bug Fixes
+
+* update deps, fix vuls ([d2507d1](https://github.com/qiwi/protopipe/commit/d2507d1ed069a44adcd534ed06fe55ad7134634f))
+
 ## [2.2.7](https://github.com/qiwi/protopipe/compare/v2.2.6...v2.2.7) (2020-01-28)
 
 
