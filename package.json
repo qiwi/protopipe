@@ -71,7 +71,7 @@
     "@semantic-release/github": "^7.0.5",
     "@semantic-release/npm": "^7.0.5",
     "@types/jest": "^25.2.1",
-    "@types/jest-json-schema": "^2.1.2",
+    "@types/jest-json-schema": "2.1.4",
     "coveralls": "^3.1.0",
     "eslint-plugin-typescript": "^0.14.0",
     "esm": "^3.2.25",
