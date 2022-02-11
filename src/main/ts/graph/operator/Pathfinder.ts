@@ -107,7 +107,16 @@ export class Pathfinder {
 
   }
 
-  static getOutVertexes = Pathfinder.getAdjunctiveVertexes.bind(null, 'HEAD')
-  static getInVertexes = Pathfinder.getAdjunctiveVertexes.bind(null, 'TAIL')
+  // seems like a microbundle issue, so we have to disable this syntax
+  // static getOutVertexes = Pathfinder.getAdjunctiveVertexes.bind(null, 'HEAD')
+  // static getInVertexes = Pathfinder.getAdjunctiveVertexes.bind(null, 'TAIL')
+
+  static getOutVertexes(graph: IGraph, vertex: IVertex): IVertex[] {
+    return Pathfinder.getAdjunctiveVertexes('HEAD', graph, vertex)
+  }
+
+  static getInVertexes(graph: IGraph, vertex: IVertex): IVertex[] {
+    return Pathfinder.getAdjunctiveVertexes('TAIL', graph, vertex)
+  }
 
 }

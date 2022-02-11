@@ -1,4 +1,5 @@
 const {Graph} = require('../../../target/bundle/protopipe.js')
+// const {Graph} = require('../../../target/es5/index.js')
 
 describe('index', () => {
   it('exposes lib inners', () => {
