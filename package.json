@@ -69,7 +69,7 @@
     "@types/jest-json-schema": "^6.1.0",
     "jest": "^28.0.0-alpha.0",
     "lodash": "^4.17.21",
-    "microbundle": "^0.14.2",
+    "microbundle": "^0.15.0",
     "replace-in-file": "^6.3.2",
     "rimraf": "^3.0.2",
     "terser": "^5.10.0",
