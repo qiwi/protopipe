@@ -57,3 +57,16 @@ buildcache
 .rts2_cache_cjs
 .rts2_cache_es
 .rts2_cache_umd
+.rpt2_cache/
+
+# Coverage
+cc-reporter
+cc-reporter.*
+codeclimate.*
+coverage.*
+
+# Creds
+*.asc
+*.key
+*.pem
+*.cert

@@ -1,10 +1,9 @@
 import {
   facade,
   Graph,
-  RefOperator,
   NetProcessor,
+  RefOperator,
 } from '../../main/ts'
-
 import {cxt, DEFAULT_CONTEXT} from '../../main/ts/cxt'
 
 describe('index', () => {

@@ -1,19 +1,19 @@
 /** @module protopipe */
 
-import {
-  IId,
-  ISpaceElement,
-  ISpaceOperator,
-  ISpace,
-} from '../types'
+import {IStack} from '../../stack'
 import {CrudStackOperator} from '../../stack/operator'
+import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
 import {
   IAny,
   TPredicate,
 } from '../../types'
-import {IStackValueUpdateReducer} from '../../stack/operator/Crud'
-import {IStack} from '../../stack'
 import {genId} from '../../util'
+import {
+  IId,
+  ISpace,
+  ISpaceElement,
+  ISpaceOperator,
+} from '../types'
 
 export interface IReference extends ISpaceElement {
   type: 'REF',

@@ -1,4 +1,7 @@
-const {Graph} = require('../../../target/bundle/protopipe.js')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const {
+  Graph
+} = require('../../../target/bundle/protopipe.js')
 // const {Graph} = require('../../../target/es5/index.js')
 
 describe('index', () => {

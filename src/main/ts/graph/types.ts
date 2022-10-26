@@ -1,8 +1,8 @@
 /** @module protopipe */
 
 import {
-  IConstructor,
   IAny,
+  IConstructor,
   ITypedValue,
 } from '../types'
 
@@ -14,13 +14,13 @@ export type IGraphIncidentorType = string
 
 export type IGraphRepresentation = any
 
+export type IVertex = string
+
 export type IEdgeListIncidentor = ITypedValue<{
   [key: string]: [IVertex, IVertex]
 }, 'EDGE_LIST_INCDR'>
 
 export type IGraphIncidentor = ITypedValue<IGraphRepresentation, IGraphIncidentorType>
-
-export type IVertex = string
 
 export type IEdge = string
 
@@ -50,9 +50,7 @@ export type IGraphOperator = {
 
 export type IGraphStaticOperation = (graph: IGraph, ...params: IAny[]) => IAny
 
-export interface IGraphStaticOperator extends IConstructor<IGraphOperator> {
-  // [key: string]: IGraphStaticOperation
-}
+export type IGraphStaticOperator = IConstructor<IGraphOperator>
 
 export type IPointer = {
   graph: IGraph,

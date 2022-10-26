@@ -4,8 +4,8 @@
  * @internal
  */
 
-import {IPromise} from '../types'
 import {cxt} from '../cxt'
+import {IPromise} from '../types'
 export {factory as getInsideOutPromise, TInsideOutPromise} from 'inside-out-promise'
 
 /**

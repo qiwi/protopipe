@@ -2,11 +2,11 @@
 
 import {
   IEdge,
-  IGraphParams,
   IGraph,
-  IVertex,
-  IGraphIncidentor,
   IGraphFeatures,
+  IGraphIncidentor,
+  IGraphParams,
+  IVertex,
 } from './types'
 
 export * from './types'

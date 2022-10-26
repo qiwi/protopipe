@@ -1,11 +1,10 @@
 /** @module protopipe */
 
+import {ISpace} from '../space'
 import {
   IAny,
   IConstructor,
 } from '../types'
-
-import {ISpace} from '../space'
 
 export type ISpaceParser = (...args: IAny[]) => ISpace
 

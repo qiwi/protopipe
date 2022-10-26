@@ -2,7 +2,7 @@
 > Graph-driven data processor. [qiwi.github.io/protopipe](https://qiwi.github.io/protopipe/)
 
 ![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
-[![buildStatus](https://img.shields.io/travis/com/qiwi/protopipe.svg?maxAge=3600&branch=master)](https://travis-ci.com/qiwi/protopipe)
+[![CI](https://github.com/qiwi/buildstamp/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/qiwi/buildstamp/actions/workflows/ci.yaml)
 [![npm (tag)](https://img.shields.io/npm/v/protopipe/latest.svg)](https://www.npmjs.com/package/protopipe)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/maintainability)](https://codeclimate.com/github/qiwi/protopipe/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c92ca2ab30d16e8cdec7/test_coverage)](https://codeclimate.com/github/qiwi/protopipe/test_coverage)
