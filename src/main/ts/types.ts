@@ -1,6 +1,6 @@
 /** @module protopipe */
 
-import {ILogger} from '@qiwi/substrate'
+import { ILogger } from '@qiwi/substrate'
 
 export {
   IPromise,
@@ -14,8 +14,8 @@ export {
 
 export type IAny = any
 
-/* tslint:disable */
 export function staticImplements<T>() {
+  /* eslint-disable-next-line no-unused-expressions */
   return <U extends T>(constructor: U) => { constructor }
 }
 
@@ -23,4 +23,3 @@ export interface ILibCxt {
   Promise: any
   logger: ILogger
 }
-

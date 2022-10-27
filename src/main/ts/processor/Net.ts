@@ -1,22 +1,6 @@
 /** @module protopipe */
 
 import {
-  IAny,
-  staticImplements,
-  TPredicate,
-} from '../types'
-import {
-  IProcessorStaticOperator,
-} from './types'
-import {
-  ISpaceElement,
-  RefOperator,
-  ISpace,
-  Space,
-  IId,
-  IReference,
-} from '../space/'
-import {
   IEdge,
   IGraph,
   IPointer,
@@ -24,14 +8,32 @@ import {
   Pathfinder,
 } from '../graph'
 import {
-  TInsideOutPromise,
-  promisify,
-  getInsideOutPromise,
-  genId,
-} from '../util'
+  IId,
+  IReference,
+  ISpace,
+  ISpaceElement,
+  RefOperator,
+  Space,
+} from '../space/'
 import {
   Stack,
 } from '../stack'
+import {
+  IAny,
+  staticImplements,
+  TPredicate,
+} from '../types'
+import {
+  genId,
+  getInsideOutPromise,
+  promisify,
+  TInsideOutPromise,
+} from '../util'
+import {
+  IProcessorStaticOperator,
+} from './types'
+
+export type ISpaceReducer = (space: ISpace) => IAny
 
 export type ISpaceReducerMap = {
   [key: string]: ISpaceReducer
@@ -63,8 +65,6 @@ export type INormalizedImpactTarget = {
   vertex: IVertex,
   data?: IAny
 }
-
-export type ISpaceReducer = (space: ISpace) => IAny
 
 export interface IAnchor extends ISpaceElement {
   type: 'ANCHOR',
@@ -122,11 +122,11 @@ export class NetProcessor {
       && graph === item.value.graph
       && item.value.vertex === vertex
       && item.value.edge === edge
-    , space) || RefOperator.create(space, 'ANCHOR', {graph, vertex, edge})
+      , space) || RefOperator.create(space, 'ANCHOR', { graph, vertex, edge })
   }
 
   static getLinkedData(space: ISpace, anchorId: IId) {
-    return RefOperator.getRels(space, anchorId).filter(({type}) => type === 'DATA')[0]
+    return RefOperator.getRels(space, anchorId).find(({ type }) => type === 'DATA')
   }
 
   private static _process(cxt: ICxt, space: ISpace, graph: IGraph, vertex: IVertex, fn: Function) {
@@ -136,7 +136,7 @@ export class NetProcessor {
     const processResult = (res: IAny) => {
       const anchor = this.getAnchor(space, graph, vertex)
       const dataRef = this.getLinkedData(space, anchor.id)
-      const data = RefOperator.upsert(space, 'DATA', res, dataRef ? ({id}) => dataRef.id === id : undefined)
+      const data = RefOperator.upsert(space, 'DATA', res, dataRef ? ({ id }) => dataRef.id === id : undefined)
 
       if (!dataRef) {
         RefOperator.link(space, anchor.id, data.id)
@@ -160,7 +160,7 @@ export class NetProcessor {
   private static _impactSingle(space: ISpace, target: IImpactTarget): void {
     const cxt: ICxt = this.getContext(space)
     const graph: IGraph = this.getGraph(space)
-    const {vertex, data} = this._normalizeImpactTarget(target)
+    const { vertex, data } = this._normalizeImpactTarget(target)
 
     if (data !== undefined) {
       this._process(cxt, space, graph, vertex, () => data)
@@ -176,10 +176,10 @@ export class NetProcessor {
     const handler: ISpaceReducer = this.getHandler(space, vertex)
     const sourceVertexes: IVertex[] = Pathfinder.getInVertexes(graph, vertex)
     const anchors: IAnchor[] = sourceVertexes.map(vertex => this.getAnchor(space, graph, vertex))
-    const anchorsIds: IId[] = anchors.map(({id}) => id)
+    const anchorsIds: IId[] = anchors.map(({ id }) => id)
     const refs: IReference[] = RefOperator.getRefs(space, anchorsIds)
     const sources = refs
-      .map(({value: {to}}) => this.getData(space, undefined, to))
+      .map(({ value: { to } }) => this.getData(space, undefined, to))
       .filter(elt => elt !== undefined) as IData[]
 
     if (sources.length === sourceVertexes.length) {
@@ -205,7 +205,7 @@ export class NetProcessor {
   }
 
   static getElt(type: string, space: ISpace, vertex?: IVertex): ISpaceElement | undefined {
-    const typePredicate: TPredicate = ({type: _type}) => type === _type
+    const typePredicate: TPredicate = ({ type: _type }) => type === _type
 
     if (vertex) {
       return this.getRelsByVertex(space, vertex).find(typePredicate)
@@ -291,7 +291,7 @@ export class NetProcessor {
 
   }
 
-  static parser({graph, handler}: INetProcessorParams): ISpace {
+  static parser({ graph, handler }: INetProcessorParams): ISpace {
     const space: ISpace = {
       type: 'SPACE',
       value: new Stack<ISpaceElement>(),
@@ -305,14 +305,14 @@ export class NetProcessor {
   }
 
   static injectHandlers(space: ISpace, handler: IHandlerParamDeclaration, graph: IGraph): void {
-    const attachHandler = ({vertex, edge}: {vertex?: IVertex, edge?: IEdge}, handler: ISpaceReducer): void => {
+    const attachHandler = ({ vertex, edge }: { vertex?: IVertex, edge?: IEdge }, handler: ISpaceReducer): void => {
       const anchor = this.getAnchor(space, graph, vertex, edge)
       const _handler: IHandler = RefOperator.create(space, 'HANDLER', handler)
 
       RefOperator.link(space, anchor.id, _handler.id)
     }
     const createHandlerRefsByMap = (type: 'vertex' | 'edge', map: ISpaceReducerMap = {}) =>
-      Object.keys(map).forEach(key => attachHandler({[type]: key}, map[key]))
+      Object.keys(map).forEach(key => attachHandler({ [type]: key }, map[key]))
 
     if (typeof handler === 'function') {
       attachHandler({}, handler)

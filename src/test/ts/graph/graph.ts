@@ -1,11 +1,11 @@
 import {
   Graph,
-  IGraph,
-  IGraphParams,
-  IVertex,
   IEdge,
   IEdgeListIncidentor,
+  IGraph,
   IGraphFeatures,
+  IGraphParams,
+  IVertex,
 } from '../../../main/ts/'
 
 describe('graph', () => {

@@ -1,7 +1,7 @@
 /** @module protopipe */
 
-import {IConfigurable} from './types'
 import cxt from './cxt'
+import {IConfigurable} from './types'
 
 export * from './types'
 export * from './graph'

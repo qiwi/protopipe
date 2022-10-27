@@ -1,10 +1,9 @@
 /** @module protopipe */
 
 import {INil} from '../../types'
-
 import {
-  IStackOperator,
   IStack,
+  IStackOperator,
 } from '../types'
 
 export type IStackFilterPredicate<T> = (item: T, index: number, arr: T[]) => boolean
@@ -55,7 +54,7 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
 
       if (index !== -1) {
         const prev: any = stack.get(index)
-        const _reducer: IStackValueUpdateReducer = reducer ? reducer : (...args) => args[args.length - 1]
+        const _reducer: IStackValueUpdateReducer = reducer || ((...args) => args[args.length - 1])
         const next = _reducer(prev, value)
 
         return stack.add(index, next)
@@ -80,7 +79,7 @@ export class CrudStackOperator implements IStackOperator<IStack<any>> {
       return true
     })
 
-    if (removed.length) {
+    if (removed.length > 0) {
       stack.clear()
       stack.push(...filtered)
     }

@@ -1,12 +1,11 @@
 /** @module protopipe */
 
 import {
-  IAny,
-} from '../types'
-
-import {
   IStack,
 } from '../stack'
+import {
+  IAny,
+} from '../types'
 
 export type IId = string
 

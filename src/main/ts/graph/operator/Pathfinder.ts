@@ -4,12 +4,11 @@ import {
   IAny,
   staticImplements,
 } from '../../types'
-
 import {
-  IVertex,
   IEdge,
   IGraph,
   IGraphStaticOperator,
+  IVertex,
 } from '../types'
 
 /**
@@ -61,6 +60,7 @@ export class Pathfinder {
   static getInDegree(graph: IGraph, vertex: IVertex): number {
     return this.getInEdgesOf(graph, vertex).length
   }
+
   static getOutDegree(graph: IGraph, vertex: IVertex): number {
     return this.getOutEdgesOf(graph, vertex).length
   }

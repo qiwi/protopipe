@@ -1,7 +1,7 @@
 /** @module protopipe */
 
-import {ISpace, ISpaceElement} from './types'
 import {IStack, Stack} from '../stack'
+import {ISpace, ISpaceElement} from './types'
 
 export class Space implements ISpace {
 
