@@ -1,3 +1,8 @@
+## [2.2.9](https://github.com/qiwi/protopipe/compare/v2.2.8...v2.2.9) (2022-10-27)
+
+### Fixes & improvements
+* perf: migrate to gh actions, update deps (#95) ([3c05f7d](https://github.com/qiwi/protopipe/commit/3c05f7d797b65a49c048e498296b7bde468f0453))
+
 ## [2.2.8](https://github.com/qiwi/protopipe/compare/v2.2.7...v2.2.8) (2022-02-11)
 
 
