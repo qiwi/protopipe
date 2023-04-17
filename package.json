@@ -59,7 +59,7 @@
   },
   "homepage": "https://github.com/qiwi/protopipe#readme",
   "dependencies": {
-    "@qiwi/substrate": "^1.20.15",
+    "@qiwi/substrate": "^2.0.0",
     "inside-out-promise": "^2.1.4",
     "tslib": "^2.4.0"
   },
