@@ -1731,20 +1731,12 @@
   dependencies:
     "@qiwi/substrate-types" "1.52.2"
 
-"@qiwi/substrate-abstract@1.20.9":
-  version "1.20.9"
-  resolved "https://registry.yarnpkg.com/@qiwi/substrate-abstract/-/substrate-abstract-1.20.9.tgz#43364e3e34c59734dcda5d5d091da0e17671723d"
-  integrity sha512-100OzOYxs6PQ1bCVVGmalaUISut6PdsbJZFeMt6BzP9Bijst5T/mUbHzF4JcycsYhtsTp9IGNZgIP11vmOpUJw==
+"@qiwi/substrate-abstract@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate-abstract/-/substrate-abstract-2.0.3.tgz#449319c29fd727bf79c9e10ab3bb4ef7bea08548"
+  integrity sha512-MGhuGCLfoJYY6SFrmTdvVcvX8n+Gn5e9Xlsdnmza8PhpoohOeOV6CxtJOeItoWwC35sSMmJOLUh2dvxTdHD/iQ==
   dependencies:
-    "@qiwi/substrate-types" "1.55.0"
-
-"@qiwi/substrate-std@1.3.10":
-  version "1.3.10"
-  resolved "https://registry.yarnpkg.com/@qiwi/substrate-std/-/substrate-std-1.3.10.tgz#24b4cade361115b866cb9914a6224d93f7688614"
-  integrity sha512-1EXkFj4Sqt0sLTkMprhJrIHA7/3oq0VvlsWefqlpB5akOrSbwWrARYWd5k4xFQJKmry6u0PHz6ke2JJUTJ9jAg==
-  dependencies:
-    "@qiwi/substrate-types" "1.55.0"
-    tslib "^2.4.0"
+    "@qiwi/substrate-types" "2.0.3"
 
 "@qiwi/substrate-std@1.3.5":
   version "1.3.5"
@@ -1753,6 +1745,14 @@
   dependencies:
     "@qiwi/substrate-types" "1.52.2"
     tslib "^2.3.1"
+
+"@qiwi/substrate-std@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate-std/-/substrate-std-2.0.3.tgz#dac53a8b1229161eaeb0028ba56fb6c534ae9075"
+  integrity sha512-gGU1laT/qbEoY1bTKZvV2iIWfN2bbWGmyuXzDo87Xjz2+0jvCLpKy3hr0IElC7VtJhcPI1jkgE3BkIk21qR9IQ==
+  dependencies:
+    "@qiwi/substrate-types" "2.0.3"
+    tslib "^2.5.0"
 
 "@qiwi/substrate-types@1.52.2":
   version "1.52.2"
@@ -1764,10 +1764,10 @@
   resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-1.53.0.tgz#7534e9657ba0075f6266d0d1b263b9ce5b819be5"
   integrity sha512-8wxFGJFeMo5nWcz0ywtuE6Dl9YwkmjgJs+4y3B3Iq6z8P7Pe1ZUlcMQJxFSq2daxp6B0cPUKTS8+hYeRqk730g==
 
-"@qiwi/substrate-types@1.55.0":
-  version "1.55.0"
-  resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-1.55.0.tgz#444f65271c4dbc6e7c37c6a4686d0a6627f82d69"
-  integrity sha512-zdm6XdKWA++W22X/KrB11dIlBg9eD5JZ7zzxfIxDM8PG65wcd+7tGBvORukWfsP1sPFcqgqKUry+NSOcv3b8pA==
+"@qiwi/substrate-types@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-2.0.3.tgz#c6a4d3e76b34a73f3ec61d6f9860d566ca7f6b02"
+  integrity sha512-72THnWXH/ce2pHUKQiQp+jOHVBrAzGaWwOQ/4fYVhXAP5bCxyOCj8SCL0gB/SZ8vtCuCzOs8GHAb1UR9/FLH/g==
 
 "@qiwi/substrate@^1.20.10":
   version "1.20.11"
@@ -1779,15 +1779,15 @@
     "@qiwi/substrate-types" "1.53.0"
     tslib "^2.3.1"
 
-"@qiwi/substrate@^1.20.15":
-  version "1.20.15"
-  resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-1.20.15.tgz#d7cacefbd819a7db78214db40c4f856452c9cd30"
-  integrity sha512-nU8PyvwUHIjNt4GyqE778i5gHhWopl4Oy07P6CjjEVKAt1DkyquCc3WTqPvR2Kp7d+P/NjTa4quth8ZVqv1+Ag==
+"@qiwi/substrate@^2.0.0":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-2.0.3.tgz#5081c1ca4ab7dfc8d4a3c08a98855a7b5f803588"
+  integrity sha512-agjwPuyotfP83AQGP9nmIQwwhTSfwfLH0dcFmafIbcWcWPAP7SNN38W9LDAW5li64Hlo+T4jNSAjPtHKq6nrxg==
   dependencies:
-    "@qiwi/substrate-abstract" "1.20.9"
-    "@qiwi/substrate-std" "1.3.10"
-    "@qiwi/substrate-types" "1.55.0"
-    tslib "^2.4.0"
+    "@qiwi/substrate-abstract" "2.0.3"
+    "@qiwi/substrate-std" "2.0.3"
+    "@qiwi/substrate-types" "2.0.3"
+    tslib "^2.5.0"
 
 "@rollup/plugin-alias@^3.1.1":
   version "3.1.9"
@@ -6862,6 +6862,11 @@ tslib@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+
+tslib@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
+  integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
 
 tsutils@^3.21.0:
   version "3.21.0"
