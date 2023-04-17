@@ -1,3 +1,8 @@
+## [2.2.10](https://github.com/qiwi/protopipe/compare/v2.2.9...v2.2.10) (2023-04-17)
+
+### Fixes & improvements
+* fix(deps): update dependency @qiwi/substrate to v2 ([c83ff39](https://github.com/qiwi/protopipe/commit/c83ff39c2250434ef2790f8ddf7f2370d44b4e51))
+
 ## [2.2.9](https://github.com/qiwi/protopipe/compare/v2.2.8...v2.2.9) (2022-10-27)
 
 ### Fixes & improvements
