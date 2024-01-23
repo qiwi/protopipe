@@ -64,7 +64,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@qiwi/libdefkit": "^5.0.0",
+    "@qiwi/libdefkit": "^6.0.0",
     "@types/jest": "^29.2.0",
     "@types/jest-json-schema": "^6.1.1",
     "eslint": "^8.26.0",
