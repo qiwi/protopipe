@@ -67,7 +67,7 @@
     "@qiwi/libdefkit": "^6.0.0",
     "@types/jest": "^29.2.0",
     "@types/jest-json-schema": "^6.1.1",
-    "eslint": "^8.26.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-qiwi": "^1.17.8",
     "jest": "^29.2.2",
