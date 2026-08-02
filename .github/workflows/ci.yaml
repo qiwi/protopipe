@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 18
 
@@ -47,7 +47,7 @@ jobs:
         with:
           name: artifact-${{ github.run_id }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 18
 
@@ -87,7 +87,7 @@ jobs:
         with:
           name: artifact-${{ github.run_id }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
@@ -117,7 +117,7 @@ jobs:
         with:
           name: artifact-${{ github.run_id }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 18
 
